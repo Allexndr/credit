@@ -82,7 +82,7 @@ body {
 
 /* Компенсация фиксированного хедера для якорных ссылок */
 section[id] {
-    scroll-margin-top: 8rem;
+    scroll-margin-top: 12rem;
 }
 
 body.loaded {
@@ -229,13 +229,13 @@ a:hover {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1.5rem 0;
+    padding: 2rem 0;
     gap: 2rem;
 }
 
 @media (min-width: 768px) {
     .header__inner {
-        padding: 1.8rem 0;
+        padding: 2.5rem 0;
     }
 }
 
@@ -252,7 +252,7 @@ a:hover {
 }
 
 .logo__image {
-    height: 60px;
+    height: 120px;
     width: auto;
     object-fit: contain;
     filter: brightness(1.1) contrast(1.1);
@@ -267,13 +267,13 @@ a:hover {
 /* Адаптивность логотипа */
 @media (min-width: 768px) {
     .logo__image {
-        height: 70px;
+        height: 140px;
     }
 }
 
 @media (min-width: 1024px) {
     .logo__image {
-        height: 80px;
+        height: 160px;
     }
 }
 
@@ -391,7 +391,7 @@ a:hover {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding-top: 8rem;
+    padding-top: 12rem;
     position: relative;
     overflow: hidden;
 }
@@ -763,11 +763,11 @@ section {
 @media (max-width: 1023px) {
     /* Компенсация для мобильных */
     section[id] {
-        scroll-margin-top: 6rem;
+        scroll-margin-top: 10rem;
     }
     
     .hero {
-        padding-top: 7rem;
+        padding-top: 10rem;
     }
     
     .header__nav {
