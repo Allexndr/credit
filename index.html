@@ -62,6 +62,9 @@
                             <a href="#tariffs" class="nav__link">Тарифы и Услуги</a>
                         </li>
                         <li class="nav__item">
+                            <a href="#partnership" class="nav__link">Стать партнёром</a>
+                        </li>
+                        <li class="nav__item">
                             <a href="#about" class="nav__link">О нас</a>
                         </li>
                         <li class="nav__item">
@@ -323,6 +326,243 @@
                         <button class="btn btn--primary btn--full" onclick="openModal('application')">
                             Подать заявку с этими условиями
                         </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Расчёт возможностей -->
+    <section class="credit-assessment" id="credit-assessment">
+        <div class="container">
+            <div class="section__header">
+                <h2 class="section__title">Узнайте, на какую сумму кредита вы можете рассчитывать</h2>
+                <p class="section__description">
+                    Быстрый предварительный расчет кредитоспособности — без звонков и заявок
+                </p>
+            </div>
+            
+            <div class="assessment__content">
+                <div class="assessment__form">
+                    <div class="form-group">
+                        <label class="form-label">Выберите тип желаемого кредита</label>
+                        <select class="form-select" id="credit-type">
+                            <option value="refinancing">Рефинансирование + экспресс-кредит</option>
+                            <option value="express">Экспресс-кредит (беззалоговый)</option>
+                            <option value="mortgage">Ипотечный кредит</option>
+                            <option value="auto">Автокредит</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Текущий среднемесячный доход клиента</label>
+                        <input type="number" class="form-input" id="monthly-income" placeholder="Введите значение">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Остаток долга по текущим займам</label>
+                        <input type="number" class="form-input" id="current-debt" placeholder="Введите значение">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Платежи по всем текущим кредитам</label>
+                        <input type="number" class="form-input" id="current-payments" placeholder="Введите значение">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Наличие/отсутствие просрочек по текущим займам</label>
+                        <select class="form-select" id="overdue-status">
+                            <option value="none">Нет просрочек</option>
+                            <option value="minor">Незначительные просрочки (до 30 дней)</option>
+                            <option value="major">Серьезные просрочки (более 30 дней)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Кредитная история за 5 лет (по закрытым кредитам)</label>
+                        <select class="form-select" id="credit-history">
+                            <option value="excellent">Отличная</option>
+                            <option value="good">Хорошая</option>
+                            <option value="fair">Удовлетворительная</option>
+                            <option value="poor">Плохая</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Подтверждение доходов</label>
+                        <select class="form-select" id="income-confirmation">
+                            <option value="official">Официальное подтверждение</option>
+                            <option value="bank-statement">Справка из банка</option>
+                            <option value="none">Без подтверждения</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Необходимая сумма кредита</label>
+                        <div class="range-input">
+                            <input type="range" id="desired-amount" min="100000" max="10000000" value="1000000" step="100000">
+                            <div class="range-value">
+                                <span id="desired-amount-value">1 000 000</span> ₸
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="refinancing-fields" style="display: none;">
+                        <div class="form-group">
+                            <label class="form-label">Сумма текущих займов под рефинансирование</label>
+                            <input type="number" class="form-input" id="refinancing-amount" placeholder="Введите значение">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Сумма дополнительного кредита к рефинансированию</label>
+                            <input type="number" class="form-input" id="additional-amount" placeholder="Введите значение">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Желаемый срок займа (мес)</label>
+                        <div class="range-input">
+                            <input type="range" id="desired-term" min="6" max="84" value="60" step="6">
+                            <div class="range-value">
+                                <span id="desired-term-value">60</span> месяцев
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Средняя % ставка (годовых)</label>
+                        <div class="range-input">
+                            <input type="range" id="average-rate" min="15" max="45" value="30" step="0.5">
+                            <div class="range-value">
+                                <span id="average-rate-value">30</span>% годовых
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="assessment__results">
+                    <div class="result-card">
+                        <h3 class="result-card__title">Расчеты по платежеспособности</h3>
+                        <div class="result-items">
+                            <div class="result-item">
+                                <span class="result-label">Ежемесячный платёж по запрошенной сумме кредита</span>
+                                <span class="result-value" id="monthly-payment-assessment">0 ₸</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">Переплата в день по желаемому платежу</span>
+                                <span class="result-value" id="daily-overpayment">0 ₸</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">Необходимый уровень дохода для получения запрошенной суммы</span>
+                                <span class="result-value" id="required-income">0 ₸</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">Максимальная доступная сумма</span>
+                                <span class="result-value" id="max-available-amount">0 ₸</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">Платеж по максимальному займу</span>
+                                <span class="result-value" id="max-payment">0 ₸</span>
+                            </div>
+                        </div>
+                        <div class="assessment-status" id="assessment-status">
+                            <p>Для расчета заполните все поля</p>
+                        </div>
+                        <button class="btn btn--primary btn--full" onclick="openModal('application')">
+                            Получить предварительное одобрение
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Тарифы и услуги -->
+    <section class="tariffs" id="tariffs">
+        <div class="container">
+            <div class="section__header">
+                <h2 class="section__title">Наши услуги — это инвестиция в ваш успех</h2>
+                <p class="section__description">
+                    Компания Komek damu берет комиссию только после получения клиентом кредита.<br>
+                    Размер комиссии составляет 10% от одобренной суммы.
+                </p>
+            </div>
+            
+            <div class="tariffs__content">
+                <div class="tariff-info">
+                    <div class="tariff-card">
+                        <div class="tariff-card__icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="currentColor" stroke-width="2"/>
+                                <path d="M2 17l10 5 10-5" stroke="currentColor" stroke-width="2"/>
+                                <path d="M2 12l10 5 10-5" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3>Как происходит оплата?</h3>
+                        <div class="payment-process">
+                            <div class="process-step">
+                                <div class="step-icon">🛡️</div>
+                                <div class="step-content">
+                                    <h4>Безопасность и прозрачность</h4>
+                                    <p>Оплата услуг производится только из ваших собственных средств, после получения займа.</p>
+                                </div>
+                            </div>
+                            <div class="process-step">
+                                <div class="step-icon">⚠️</div>
+                                <div class="step-content">
+                                    <h4>Важное условие</h4>
+                                    <p>Использование кредитных средств для оплаты услуг запрещено, так как это может нарушить целевое назначение займа.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tariff-card">
+                        <div class="tariff-card__icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                                <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3>Почему нельзя платить из суммы кредита?</h3>
+                        <div class="warning-info">
+                            <p>Согласно банковским требованиям, кредит должен использоваться строго по назначению.</p>
+                            <p>Если оплатить услуги из суммы кредита, это может считаться нецелевым использованием и привести к отказу в выдаче, проблемам с оформлением и штрафным последствиям.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="advantages-grid">
+                    <h3 class="advantages-title">Почему выбирают Komek damu?</h3>
+                    <div class="advantages-list">
+                        <div class="advantage-item">
+                            <div class="advantage-icon">💰</div>
+                            <div class="advantage-text">
+                                <h4>Оплата только за результат</h4>
+                                <p>Комиссия взимается только после успешного получения кредита</p>
+                            </div>
+                        </div>
+                        <div class="advantage-item">
+                            <div class="advantage-icon">🏦</div>
+                            <div class="advantage-text">
+                                <h4>Работаем с десятками банков</h4>
+                                <p>Партнерство с ведущими финансовыми организациями</p>
+                            </div>
+                        </div>
+                        <div class="advantage-item">
+                            <div class="advantage-icon">🔒</div>
+                            <div class="advantage-text">
+                                <h4>Прозрачность и доверие</h4>
+                                <p>Честные условия без скрытых комиссий</p>
+                            </div>
+                        </div>
+                        <div class="advantage-item">
+                            <div class="advantage-icon">👥</div>
+                            <div class="advantage-text">
+                                <h4>Более 15 000 клиентов</h4>
+                                <p>Довольные клиенты по всему Казахстану</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

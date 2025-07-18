@@ -216,6 +216,239 @@ class Calculator {
     }
 }
 
+// ===== РАСЧЁТ ВОЗМОЖНОСТЕЙ =====
+class CreditAssessment {
+    constructor() {
+        this.init();
+    }
+    
+    init() {
+        this.setupEventListeners();
+        this.updateCalculations();
+    }
+    
+    setupEventListeners() {
+        // Обработчики для слайдеров
+        const sliders = ['desired-amount', 'desired-term', 'average-rate'];
+        sliders.forEach(id => {
+            const slider = document.getElementById(id);
+            if (slider) {
+                slider.addEventListener('input', () => {
+                    this.updateSliderValue(id);
+                    this.updateCalculations();
+                });
+            }
+        });
+        
+        // Обработчики для инпутов
+        const inputs = ['monthly-income', 'current-debt', 'current-payments', 'refinancing-amount', 'additional-amount'];
+        inputs.forEach(id => {
+            const input = document.getElementById(id);
+            if (input) {
+                input.addEventListener('input', () => this.updateCalculations());
+            }
+        });
+        
+        // Обработчики для селектов
+        const selects = ['credit-type', 'overdue-status', 'credit-history', 'income-confirmation'];
+        selects.forEach(id => {
+            const select = document.getElementById(id);
+            if (select) {
+                select.addEventListener('change', () => {
+                    if (id === 'credit-type') {
+                        this.toggleRefinancingFields();
+                    }
+                    this.updateCalculations();
+                });
+            }
+        });
+        
+        this.toggleRefinancingFields();
+    }
+    
+    updateSliderValue(sliderId) {
+        const slider = document.getElementById(sliderId);
+        const valueSpan = document.getElementById(sliderId + '-value');
+        
+        if (slider && valueSpan) {
+            let value = parseInt(slider.value);
+            
+            if (sliderId === 'desired-amount') {
+                valueSpan.textContent = formatNumber(value);
+            } else if (sliderId === 'desired-term') {
+                valueSpan.textContent = value;
+            } else if (sliderId === 'average-rate') {
+                valueSpan.textContent = parseFloat(slider.value).toFixed(1);
+            }
+        }
+    }
+    
+    toggleRefinancingFields() {
+        const creditType = document.getElementById('credit-type');
+        const refinancingFields = document.querySelector('.refinancing-fields');
+        
+        if (creditType && refinancingFields) {
+            if (creditType.value === 'refinancing') {
+                refinancingFields.style.display = 'block';
+            } else {
+                refinancingFields.style.display = 'none';
+            }
+        }
+    }
+    
+    updateCalculations() {
+        const data = this.getFormData();
+        const results = this.calculateCreditAssessment(data);
+        this.displayResults(results);
+    }
+    
+    getFormData() {
+        return {
+            creditType: document.getElementById('credit-type')?.value || '',
+            monthlyIncome: parseFloat(document.getElementById('monthly-income')?.value) || 0,
+            currentDebt: parseFloat(document.getElementById('current-debt')?.value) || 0,
+            currentPayments: parseFloat(document.getElementById('current-payments')?.value) || 0,
+            overdueStatus: document.getElementById('overdue-status')?.value || '',
+            creditHistory: document.getElementById('credit-history')?.value || '',
+            incomeConfirmation: document.getElementById('income-confirmation')?.value || '',
+            desiredAmount: parseFloat(document.getElementById('desired-amount')?.value) || 0,
+            refinancingAmount: parseFloat(document.getElementById('refinancing-amount')?.value) || 0,
+            additionalAmount: parseFloat(document.getElementById('additional-amount')?.value) || 0,
+            desiredTerm: parseInt(document.getElementById('desired-term')?.value) || 0,
+            averageRate: parseFloat(document.getElementById('average-rate')?.value) || 0
+        };
+    }
+    
+    calculateCreditAssessment(data) {
+        if (!data.monthlyIncome || !data.desiredAmount || !data.desiredTerm || !data.averageRate) {
+            return {
+                status: 'incomplete',
+                message: 'Для расчета заполните все поля'
+            };
+        }
+        
+        // Базовые расчеты
+        const monthlyRate = data.averageRate / 100 / 12;
+        const monthlyPayment = this.calculateMonthlyPayment(data.desiredAmount, monthlyRate, data.desiredTerm);
+        const totalAmount = monthlyPayment * data.desiredTerm;
+        const overpayment = totalAmount - data.desiredAmount;
+        const dailyOverpayment = overpayment / (data.desiredTerm * 30);
+        
+        // Коэффициенты риска
+        let riskMultiplier = 1;
+        
+        // Кредитная история
+        switch (data.creditHistory) {
+            case 'excellent': riskMultiplier *= 0.8; break;
+            case 'good': riskMultiplier *= 0.9; break;
+            case 'fair': riskMultiplier *= 1.1; break;
+            case 'poor': riskMultiplier *= 1.3; break;
+        }
+        
+        // Просрочки
+        switch (data.overdueStatus) {
+            case 'none': riskMultiplier *= 0.9; break;
+            case 'minor': riskMultiplier *= 1.2; break;
+            case 'major': riskMultiplier *= 1.5; break;
+        }
+        
+        // Подтверждение доходов
+        switch (data.incomeConfirmation) {
+            case 'official': riskMultiplier *= 0.8; break;
+            case 'bank-statement': riskMultiplier *= 0.9; break;
+            case 'none': riskMultiplier *= 1.3; break;
+        }
+        
+        // Расчет необходимого дохода (DTI = 40%)
+        const totalMonthlyPayments = data.currentPayments + monthlyPayment;
+        const requiredIncome = totalMonthlyPayments / 0.4;
+        
+        // Максимальная доступная сумма
+        const maxMonthlyPayment = (data.monthlyIncome * 0.4) - data.currentPayments;
+        const maxAvailableAmount = maxMonthlyPayment > 0 ? 
+            this.calculateLoanAmount(maxMonthlyPayment, monthlyRate, data.desiredTerm) / riskMultiplier : 0;
+        
+        const maxPayment = this.calculateMonthlyPayment(maxAvailableAmount, monthlyRate, data.desiredTerm);
+        
+        // Определение статуса
+        let status, message;
+        if (data.monthlyIncome >= requiredIncome) {
+            status = 'success';
+            message = 'Отличные шансы на одобрение! Ваш доход позволяет получить запрашиваемую сумму.';
+        } else if (data.monthlyIncome >= requiredIncome * 0.8) {
+            status = 'warning';
+            message = 'Средние шансы на одобрение. Рекомендуем уменьшить сумму или увеличить срок кредита.';
+        } else {
+            status = 'error';
+            message = 'Низкие шансы на одобрение с текущими параметрами. Обратитесь за консультацией.';
+        }
+        
+        return {
+            status,
+            message,
+            monthlyPayment,
+            dailyOverpayment,
+            requiredIncome,
+            maxAvailableAmount,
+            maxPayment
+        };
+    }
+    
+    calculateMonthlyPayment(principal, monthlyRate, term) {
+        if (monthlyRate === 0) return principal / term;
+        return principal * (monthlyRate * Math.pow(1 + monthlyRate, term)) / (Math.pow(1 + monthlyRate, term) - 1);
+    }
+    
+    calculateLoanAmount(monthlyPayment, monthlyRate, term) {
+        if (monthlyRate === 0) return monthlyPayment * term;
+        return monthlyPayment * (Math.pow(1 + monthlyRate, term) - 1) / (monthlyRate * Math.pow(1 + monthlyRate, term));
+    }
+    
+    displayResults(results) {
+        const statusElement = document.getElementById('assessment-status');
+        const monthlyPaymentElement = document.getElementById('monthly-payment-assessment');
+        const dailyOverpaymentElement = document.getElementById('daily-overpayment');
+        const requiredIncomeElement = document.getElementById('required-income');
+        const maxAvailableAmountElement = document.getElementById('max-available-amount');
+        const maxPaymentElement = document.getElementById('max-payment');
+        
+        if (results.status === 'incomplete') {
+            if (statusElement) {
+                statusElement.className = 'assessment-status';
+                statusElement.innerHTML = `<p>${results.message}</p>`;
+            }
+            return;
+        }
+        
+        // Обновление статуса
+        if (statusElement) {
+            statusElement.className = `assessment-status ${results.status}`;
+            statusElement.innerHTML = `<p>${results.message}</p>`;
+        }
+        
+        // Обновление результатов
+        if (monthlyPaymentElement) {
+            monthlyPaymentElement.textContent = `${formatNumber(Math.round(results.monthlyPayment))} ₸`;
+        }
+        
+        if (dailyOverpaymentElement) {
+            dailyOverpaymentElement.textContent = `${formatNumber(Math.round(results.dailyOverpayment))} ₸`;
+        }
+        
+        if (requiredIncomeElement) {
+            requiredIncomeElement.textContent = `${formatNumber(Math.round(results.requiredIncome))} ₸`;
+        }
+        
+        if (maxAvailableAmountElement) {
+            maxAvailableAmountElement.textContent = `${formatNumber(Math.round(results.maxAvailableAmount))} ₸`;
+        }
+        
+        if (maxPaymentElement) {
+            maxPaymentElement.textContent = `${formatNumber(Math.round(results.maxPayment))} ₸`;
+        }
+    }
+}
+
 // ===== МОДАЛЬНЫЕ ОКНА =====
 class Modal {
     constructor() {
@@ -599,6 +832,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Инициализация всех компонентов
     new Header();
     new Calculator();
+    new CreditAssessment();
     new Modal();
     new Forms();
     new ScrollAnimations();
@@ -608,7 +842,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.classList.add('loaded');
     }, 100);
     
-    console.log('CreditHub KZ - Сайт загружен успешно!');
+    console.log('Komek damu - Сайт загружен успешно!');
 });
 
 // ===== ГЛОБАЛЬНЫЕ ФУНКЦИИ =====
