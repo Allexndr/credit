@@ -1,0 +1,49 @@
+<svg width="240" height="80" viewBox="0 0 240 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+<!-- Рука с домиком -->
+<g transform="translate(10, 10)">
+  <!-- Запястье -->
+  <rect x="5" y="45" width="8" height="15" rx="4" stroke="#4F7EF7" stroke-width="2" fill="none"/>
+  
+  <!-- Ладонь -->
+  <ellipse cx="30" cy="40" rx="20" ry="12" stroke="#4F7EF7" stroke-width="2" fill="none"/>
+  
+  <!-- Пальцы -->
+  <!-- Большой палец -->
+  <path d="M15 35 Q12 30 15 25 Q18 28 15 35" stroke="#4F7EF7" stroke-width="2" fill="none"/>
+  
+  <!-- Указательный палец -->
+  <path d="M25 28 Q23 20 25 15 Q27 20 25 28" stroke="#4F7EF7" stroke-width="2" fill="none"/>
+  
+  <!-- Средний палец -->
+  <path d="M30 26 Q28 18 30 12 Q32 18 30 26" stroke="#4F7EF7" stroke-width="2" fill="none"/>
+  
+  <!-- Безымянный палец -->
+  <path d="M35 28 Q33 20 35 15 Q37 20 35 28" stroke="#4F7EF7" stroke-width="2" fill="none"/>
+  
+  <!-- Мизинец -->
+  <path d="M40 32 Q38 25 40 20 Q42 25 40 32" stroke="#4F7EF7" stroke-width="2" fill="none"/>
+  
+  <!-- Домик на ладони -->
+  <g transform="translate(22, 25)">
+    <!-- Основание дома -->
+    <rect x="0" y="8" width="16" height="12" stroke="#4F7EF7" stroke-width="2" fill="none"/>
+    
+    <!-- Крыша -->
+    <path d="M-2 8 L8 0 L18 8" stroke="#4F7EF7" stroke-width="2" fill="none"/>
+    
+    <!-- Дверь -->
+    <rect x="6" y="14" width="4" height="6" stroke="#4F7EF7" stroke-width="1.5" fill="none"/>
+    
+    <!-- Окна -->
+    <rect x="2" y="11" width="2.5" height="2.5" stroke="#4F7EF7" stroke-width="1.5" fill="none"/>
+    <rect x="11.5" y="11" width="2.5" height="2.5" stroke="#4F7EF7" stroke-width="1.5" fill="none"/>
+    
+    <!-- Труба -->
+    <rect x="12" y="2" width="2" height="4" stroke="#4F7EF7" stroke-width="1.5" fill="none"/>
+  </g>
+</g>
+
+<!-- Текст KOMEK DAMU -->
+<text x="80" y="35" fill="#4F7EF7" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="20" font-weight="700" letter-spacing="0.5px">KOMEK</text>
+<text x="80" y="55" fill="#4F7EF7" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="20" font-weight="400" letter-spacing="0.5px">DAMU</text>
+</svg>

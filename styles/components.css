@@ -835,12 +835,12 @@
 }
 
 .footer__brand .logo__image {
-    height: 40px;
+    height: 45px;
 }
 
 @media (min-width: 768px) {
     .footer__brand .logo__image {
-        height: 45px;
+        height: 50px;
     }
 }
 
