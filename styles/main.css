@@ -78,8 +78,11 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
+}
+
+/* Компенсация фиксированного хедера для якорных ссылок */
+section[id] {
+    scroll-margin-top: 6rem;
 }
 
 body.loaded {
@@ -396,7 +399,7 @@ a:hover {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding-top: 5rem;
+    padding-top: 7rem;
     position: relative;
     overflow: hidden;
 }
@@ -766,6 +769,15 @@ section {
 
 /* ===== АДАПТИВНОСТЬ ===== */
 @media (max-width: 1023px) {
+    /* Компенсация для мобильных */
+    section[id] {
+        scroll-margin-top: 5rem;
+    }
+    
+    .hero {
+        padding-top: 6rem;
+    }
+    
     .header__nav {
         position: fixed;
         top: 0;

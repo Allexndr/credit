@@ -24,6 +24,65 @@ function scrollToSection(sectionId) {
     }
 }
 
+// ===== FAQ ФУНКЦИОНАЛЬНОСТЬ =====
+function toggleFAQ(button) {
+    const faqItem = button.parentElement;
+    const answer = faqItem.querySelector('.faq-item__answer');
+    const icon = button.querySelector('.faq-icon');
+    
+    // Закрываем все другие FAQ
+    document.querySelectorAll('.faq-item').forEach(item => {
+        if (item !== faqItem) {
+            item.classList.remove('active');
+            const otherAnswer = item.querySelector('.faq-item__answer');
+            const otherIcon = item.querySelector('.faq-icon');
+            otherAnswer.style.maxHeight = null;
+            otherIcon.style.transform = 'rotate(0deg)';
+        }
+    });
+    
+    // Переключаем текущий FAQ
+    faqItem.classList.toggle('active');
+    
+    if (faqItem.classList.contains('active')) {
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+        icon.style.transform = 'rotate(180deg)';
+    } else {
+        answer.style.maxHeight = null;
+        icon.style.transform = 'rotate(0deg)';
+    }
+}
+
+// ===== ВАЛИДАЦИЯ ФОРМ =====
+function validateIIN(iin) {
+    if (!/^\d{12}$/.test(iin)) {
+        return false;
+    }
+    
+    // Простая проверка контрольной суммы ИИН
+    const weights = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+    let sum = 0;
+    
+    for (let i = 0; i < 11; i++) {
+        sum += parseInt(iin[i]) * weights[i];
+    }
+    
+    const remainder = sum % 11;
+    const checksum = remainder < 10 ? remainder : sum % 11;
+    
+    return parseInt(iin[11]) === checksum;
+}
+
+function validatePhone(phone) {
+    const phoneRegex = /^\+7\s?\(?[0-9]{3}\)?\s?[0-9]{3}-?[0-9]{2}-?[0-9]{2}$/;
+    return phoneRegex.test(phone);
+}
+
+function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
 // ===== ШАПКА САЙТА =====
 class Header {
     constructor() {
@@ -214,6 +273,9 @@ class Forms {
         
         // Маска для телефона
         this.initPhoneMask();
+        
+        // Маска для ИИН
+        this.initIINMask();
     }
     
     handleSubmit(e) {
@@ -221,6 +283,11 @@ class Forms {
         
         const form = e.target;
         const formData = new FormData(form);
+        
+        // Валидация формы
+        if (!this.validateForm(form)) {
+            return;
+        }
         
         // Показать уведомление об успешной отправке
         this.showNotification('Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в течение 5 минут.', 'success');
@@ -239,6 +306,73 @@ class Forms {
         console.log('Form data:', Object.fromEntries(formData));
     }
     
+    validateForm(form) {
+        let isValid = true;
+        
+        // Проверка телефона
+        const phoneInputs = form.querySelectorAll('input[type="tel"]');
+        phoneInputs.forEach(input => {
+            if (input.value && !validatePhone(input.value)) {
+                this.showFieldError(input, 'Введите корректный номер телефона');
+                isValid = false;
+            } else {
+                this.clearFieldError(input);
+            }
+        });
+        
+        // Проверка email
+        const emailInputs = form.querySelectorAll('input[type="email"]');
+        emailInputs.forEach(input => {
+            if (input.value && !validateEmail(input.value)) {
+                this.showFieldError(input, 'Введите корректный email');
+                isValid = false;
+            } else {
+                this.clearFieldError(input);
+            }
+        });
+        
+        // Проверка ИИН
+        const iinInputs = form.querySelectorAll('input[placeholder="ИИН"]');
+        iinInputs.forEach(input => {
+            if (input.value && !validateIIN(input.value)) {
+                this.showFieldError(input, 'Введите корректный ИИН (12 цифр)');
+                isValid = false;
+            } else {
+                this.clearFieldError(input);
+            }
+        });
+        
+        // Проверка обязательных полей
+        const requiredInputs = form.querySelectorAll('[required]');
+        requiredInputs.forEach(input => {
+            if (!input.value.trim()) {
+                this.showFieldError(input, 'Это поле обязательно для заполнения');
+                isValid = false;
+            }
+        });
+        
+        return isValid;
+    }
+    
+    showFieldError(input, message) {
+        this.clearFieldError(input);
+        
+        input.classList.add('error');
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'field-error';
+        errorDiv.textContent = message;
+        
+        input.parentNode.appendChild(errorDiv);
+    }
+    
+    clearFieldError(input) {
+        input.classList.remove('error');
+        const existingError = input.parentNode.querySelector('.field-error');
+        if (existingError) {
+            existingError.remove();
+        }
+    }
+    
     initPhoneMask() {
         const phoneInputs = document.querySelectorAll('input[type="tel"]');
         phoneInputs.forEach(input => {
@@ -250,6 +384,19 @@ class Forms {
                     value = '+7 (' + value.slice(1, 4) + ') ' + value.slice(4, 7) + '-' + value.slice(7, 9) + '-' + value.slice(9, 11);
                 } else {
                     value = '+7 (' + value.slice(0, 3) + ') ' + value.slice(3, 6) + '-' + value.slice(6, 8) + '-' + value.slice(8, 10);
+                }
+                e.target.value = value;
+            });
+        });
+    }
+    
+    initIINMask() {
+        const iinInputs = document.querySelectorAll('input[placeholder="ИИН"]');
+        iinInputs.forEach(input => {
+            input.addEventListener('input', (e) => {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 12) {
+                    value = value.slice(0, 12);
                 }
                 e.target.value = value;
             });

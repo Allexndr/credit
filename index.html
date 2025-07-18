@@ -30,17 +30,45 @@
                 
                 <nav class="header__nav" id="nav">
                     <ul class="nav__list">
-                        <li class="nav__item">
-                            <a href="#services" class="nav__link">Услуги</a>
+                        <li class="nav__item nav__item--dropdown">
+                            <a href="#services" class="nav__link">
+                                Частным лицам
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                    <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </a>
+                            <div class="dropdown">
+                                <a href="#" class="dropdown__link">Беззалоговое кредитование</a>
+                                <a href="#" class="dropdown__link">Залоговое кредитование</a>
+                                <a href="#" class="dropdown__link">Рефинансирование</a>
+                            </div>
+                        </li>
+                        <li class="nav__item nav__item--dropdown">
+                            <a href="#business" class="nav__link">
+                                Бизнесу
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                    <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </a>
+                            <div class="dropdown">
+                                <a href="#" class="dropdown__link">Беззалоговое кредитование</a>
+                                <a href="#" class="dropdown__link">Кредит для ИП</a>
+                            </div>
                         </li>
                         <li class="nav__item">
-                            <a href="#calculator" class="nav__link">Калькулятор</a>
+                            <a href="#calculator" class="nav__link">Расчёт возможностей</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#tariffs" class="nav__link">Тарифы и Услуги</a>
                         </li>
                         <li class="nav__item">
                             <a href="#about" class="nav__link">О нас</a>
                         </li>
                         <li class="nav__item">
                             <a href="#contact" class="nav__link">Контакты</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#faq" class="nav__link">FAQ</a>
                         </li>
                     </ul>
                 </nav>
@@ -52,6 +80,13 @@
                         </svg>
                         +7 (700) 000-00-00
                     </a>
+                    <button class="btn btn--outline" onclick="openModal('login')">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                        Войти
+                    </button>
                     <button class="btn btn--primary" onclick="openModal('application')">
                         Получить кредит
                     </button>
@@ -424,6 +459,144 @@
         </div>
     </section>
 
+    <!-- Отзывы клиентов -->
+    <section class="reviews">
+        <div class="container">
+            <div class="section__header">
+                <h2 class="section__title">Отзывы клиентов</h2>
+                <p class="section__description">
+                    Каждый день мы помогаем людям получить лучшие условия и сэкономить
+                </p>
+            </div>
+            
+            <div class="reviews__grid">
+                <div class="review-card">
+                    <div class="review-card__rating">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <p class="review-card__text">
+                        "Мне помогли даже с плохой кредитной историей — одобрили в Jusan Bank за один день! 
+                        Была в шоке, что так быстро. Спасибо менеджеру Адиле!"
+                    </p>
+                    <div class="review-card__author">
+                        <div class="author-avatar">АА</div>
+                        <div class="author-info">
+                            <span class="author-name">Айнур А.</span>
+                            <span class="author-city">Алматы</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="review-card">
+                    <div class="review-card__rating">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <p class="review-card__text">
+                        "Обратился за рефинансом. Снизили платёж на 60 000 тенге и объединили два кредита в один. 
+                        Всё быстро, прозрачно и без лишних справок."
+                    </p>
+                    <div class="review-card__author">
+                        <div class="author-avatar">ЕБ</div>
+                        <div class="author-info">
+                            <span class="author-name">Ербол Б.</span>
+                            <span class="author-city">Шымкент</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="review-card">
+                    <div class="review-card__rating">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <p class="review-card__text">
+                        "Отправила только ИИН и телефон — мне сразу подобрали банк, оформили заявку и всё объяснили. 
+                        Очень удобно и бесплатно!"
+                    </p>
+                    <div class="review-card__author">
+                        <div class="author-avatar">ГТ</div>
+                        <div class="author-info">
+                            <span class="author-name">Гаухар Т.</span>
+                            <span class="author-city">Семей</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ секция -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="section__header">
+                <h2 class="section__title">Часто задаваемые вопросы</h2>
+                <p class="section__description">
+                    Ответы на популярные вопросы о кредитовании
+                </p>
+            </div>
+            
+            <div class="faq__list">
+                <div class="faq-item">
+                    <button class="faq-item__question" onclick="toggleFAQ(this)">
+                        <span>Как платить меньше по кредиту?</span>
+                        <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </button>
+                    <div class="faq-item__answer">
+                        <p>Есть несколько способов снизить ежемесячные платежи: рефинансирование в банке с более низкой ставкой, реструктуризация кредита, досрочное погашение части долга. Мы поможем выбрать наиболее выгодный вариант для вашей ситуации.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-item__question" onclick="toggleFAQ(this)">
+                        <span>Рефинансирование кредитов и взять дополнительную сумму</span>
+                        <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </button>
+                    <div class="faq-item__answer">
+                        <p>При рефинансировании можно не только снизить ставку, но и получить дополнительные средства. Это позволяет закрыть старые кредиты и получить нужную сумму на новые цели по более выгодным условиям.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-item__question" onclick="toggleFAQ(this)">
+                        <span>Можно ли получить кредит, если были просрочки?</span>
+                        <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </button>
+                    <div class="faq-item__answer">
+                        <p>Да, можно. Мы работаем с банками, которые лояльно относятся к заемщикам с небольшими просрочками в прошлом. Главное - чтобы просрочки не превышали 90 дней и не было просрочек в последние 6 месяцев.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-item__question" onclick="toggleFAQ(this)">
+                        <span>Стоит ли сейчас брать кредит?</span>
+                        <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </button>
+                    <div class="faq-item__answer">
+                        <p>Решение зависит от ваших целей и финансового состояния. Если кредит нужен для инвестиций в образование, бизнес или недвижимость - это может быть оправдано. Мы поможем рассчитать, будет ли кредит выгодным в вашей ситуации.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     <!-- Контакты -->
     <section class="contact" id="contact">
         <div class="container">
@@ -490,15 +663,28 @@
                             <input type="tel" class="form-input" placeholder="+7 (___) ___-__-__" required>
                         </div>
                         <div class="form-row">
+                            <input type="text" class="form-input" placeholder="ИИН" maxlength="12" required>
+                        </div>
+                        <div class="form-row">
                             <select class="form-select" required>
                                 <option value="">Выберите услугу</option>
-                                <option value="express">Экспресс кредит</option>
+                                <option value="consumer">Потребительский кредит</option>
                                 <option value="mortgage">Ипотека</option>
                                 <option value="auto">Автокредит</option>
+                                <option value="business">Бизнес кредит</option>
+                                <option value="refinancing">Рефинансирование</option>
                             </select>
                         </div>
                         <div class="form-row">
                             <textarea class="form-textarea" placeholder="Комментарий (необязательно)"></textarea>
+                        </div>
+                        
+                        <div class="form-row">
+                            <label class="checkbox">
+                                <input type="checkbox" required>
+                                <span class="checkmark"></span>
+                                Я соглашаюсь на обработку персональных данных
+                            </label>
                         </div>
                         
                         <button type="submit" class="btn btn--primary btn--full">
@@ -506,8 +692,8 @@
                         </button>
                         
                         <p class="form-notice">
-                            Нажимая кнопку, вы соглашаетесь с 
-                            <a href="#" class="link">политикой конфиденциальности</a>
+                            Быстрое решение по заявке. 
+                            <a href="#" class="link">Политика конфиденциальности</a>
                         </p>
                     </form>
                 </div>
@@ -594,6 +780,89 @@
         </div>
     </footer>
 
+    <!-- Модальное окно входа -->
+    <div class="modal" id="modal-login">
+        <div class="modal__overlay" onclick="closeModal('login')"></div>
+        <div class="modal__content modal__content--small">
+            <button class="modal__close" onclick="closeModal('login')">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+            
+            <div class="modal__header">
+                <h3>Вход в личный кабинет</h3>
+                <p>Войдите, чтобы отслеживать статус заявок</p>
+            </div>
+            
+            <form class="modal__form" id="login-form">
+                <div class="form-row">
+                    <input type="tel" class="form-input" placeholder="+7 (___) ___-__-__" required>
+                </div>
+                <div class="form-row">
+                    <input type="password" class="form-input" placeholder="Пароль" required>
+                </div>
+                
+                <button type="submit" class="btn btn--primary btn--full">
+                    Войти
+                </button>
+                
+                <div class="modal__actions">
+                    <a href="#" class="link">Забыли пароль?</a>
+                    <span>|</span>
+                    <a href="#" class="link" onclick="closeModal('login'); openModal('register');">Регистрация</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Модальное окно регистрации -->
+    <div class="modal" id="modal-register">
+        <div class="modal__overlay" onclick="closeModal('register')"></div>
+        <div class="modal__content">
+            <button class="modal__close" onclick="closeModal('register')">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+            
+            <div class="modal__header">
+                <h3>Регистрация</h3>
+                <p>Создайте личный кабинет для отслеживания заявок</p>
+            </div>
+            
+            <form class="modal__form" id="register-form">
+                <div class="form-row">
+                    <input type="text" class="form-input" placeholder="Ваше имя" required>
+                </div>
+                <div class="form-row">
+                    <input type="tel" class="form-input" placeholder="+7 (___) ___-__-__" required>
+                </div>
+                <div class="form-row">
+                    <input type="email" class="form-input" placeholder="Email" required>
+                </div>
+                <div class="form-row">
+                    <input type="text" class="form-input" placeholder="ИИН" maxlength="12" required>
+                </div>
+                <div class="form-row">
+                    <input type="password" class="form-input" placeholder="Пароль" required>
+                </div>
+                <div class="form-row">
+                    <input type="password" class="form-input" placeholder="Подтвердите пароль" required>
+                </div>
+                
+                <button type="submit" class="btn btn--primary btn--full">
+                    Зарегистрироваться
+                </button>
+                
+                <p class="form-notice">
+                    Уже есть аккаунт? 
+                    <a href="#" class="link" onclick="closeModal('register'); openModal('login');">Войдите</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
     <!-- Модальное окно заявки -->
     <div class="modal" id="modal-application">
         <div class="modal__overlay" onclick="closeModal('application')"></div>
@@ -619,12 +888,17 @@
                 <div class="form-row">
                     <input type="email" class="form-input" placeholder="Email" required>
                 </div>
+                <div class="form-row">
+                    <input type="text" class="form-input" placeholder="ИИН" maxlength="12" required>
+                </div>
                 <div class="form-row form-row--half">
                     <select class="form-select" required>
                         <option value="">Тип кредита</option>
-                        <option value="express">Экспресс кредит</option>
+                        <option value="consumer">Потребительский кредит</option>
                         <option value="mortgage">Ипотека</option>
                         <option value="auto">Автокредит</option>
+                        <option value="business">Бизнес кредит</option>
+                        <option value="refinancing">Рефинансирование</option>
                     </select>
                     <select class="form-select" required>
                         <option value="">Сумма</option>
@@ -632,7 +906,16 @@
                         <option value="500000">до 500 000 ₸</option>
                         <option value="1000000">до 1 000 000 ₸</option>
                         <option value="3000000">до 3 000 000 ₸</option>
+                        <option value="5000000">до 5 000 000 ₸</option>
+                        <option value="10000000">свыше 5 000 000 ₸</option>
                     </select>
+                </div>
+                <div class="form-row">
+                    <label class="checkbox">
+                        <input type="checkbox" required>
+                        <span class="checkmark"></span>
+                        Я соглашаюсь на обработку персональных данных
+                    </label>
                 </div>
                 
                 <button type="submit" class="btn btn--primary btn--full">
@@ -640,8 +923,8 @@
                 </button>
                 
                 <p class="form-notice">
-                    Нажимая кнопку, вы соглашаетесь с 
-                    <a href="#" class="link">политикой конфиденциальности</a>
+                    Решение по заявке в течение 5 минут. 
+                    <a href="#" class="link">Политика конфиденциальности</a>
                 </p>
             </form>
         </div>
