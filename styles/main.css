@@ -228,8 +228,14 @@ a:hover {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem 0;
+    padding: 1.25rem 0;
     gap: 2rem;
+}
+
+@media (min-width: 768px) {
+    .header__inner {
+        padding: 1.5rem 0;
+    }
 }
 
 /* Логотип */
@@ -245,9 +251,22 @@ a:hover {
 }
 
 .logo__image {
-    height: 50px;
+    height: 45px;
     width: auto;
     object-fit: contain;
+}
+
+/* Адаптивность логотипа */
+@media (min-width: 768px) {
+    .logo__image {
+        height: 50px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .logo__image {
+        height: 55px;
+    }
 }
 
 /* Навигация */

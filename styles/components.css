@@ -834,6 +834,16 @@
     max-width: 400px;
 }
 
+.footer__brand .logo__image {
+    height: 40px;
+}
+
+@media (min-width: 768px) {
+    .footer__brand .logo__image {
+        height: 45px;
+    }
+}
+
 .footer__description {
     color: var(--text-light);
     margin: 1rem 0 2rem;
