@@ -241,10 +241,23 @@ a:hover {
     color: var(--text-primary);
     text-decoration: none;
     transition: var(--transition-fast);
+    gap: 0.75rem;
 }
 
 .logo:hover {
     transform: scale(1.05);
+}
+
+.logo__image {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.logo__text-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .logo__text {
@@ -267,7 +280,6 @@ a:hover {
 
 .logo__suffix {
     color: var(--accent);
-    margin-left: 0.5rem;
     font-weight: 400;
     opacity: 0.8;
 }
