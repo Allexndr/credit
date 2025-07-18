@@ -1,0 +1,458 @@
+/* ===== АДАПТИВНЫЕ СТИЛИ ===== */
+
+/* Мобильные устройства (до 768px) */
+@media (max-width: 767px) {
+    /* Общие адаптации */
+    .container {
+        padding: 0 1rem;
+    }
+    
+    section {
+        padding: 3rem 0;
+    }
+    
+    .section__title {
+        font-size: 2rem;
+    }
+    
+    /* Шапка */
+    .header__inner {
+        padding: 0.75rem 0;
+    }
+    
+    .header__phone {
+        display: none;
+    }
+    
+    /* Главная секция */
+    .hero {
+        min-height: 80vh;
+        padding-top: 4rem;
+    }
+    
+    .hero__title {
+        font-size: 2rem;
+        line-height: 1.2;
+    }
+    
+    .hero__description {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .hero__features {
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .feature {
+        justify-content: center;
+        padding: 0.5rem 1rem;
+    }
+    
+    .hero__actions {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .hero__actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .floating-card {
+        display: none;
+    }
+    
+    /* Услуги */
+    .services__grid {
+        gap: 1.5rem;
+    }
+    
+    .service-card {
+        padding: 1.5rem;
+    }
+    
+    .service-card--featured {
+        transform: none;
+    }
+    
+    .service-card--featured:hover {
+        transform: translateY(-5px);
+    }
+    
+    .service-card__badge {
+        top: 1rem;
+        right: 1rem;
+    }
+    
+    /* Калькулятор */
+    .calculator__content {
+        gap: 2rem;
+    }
+    
+    .calculator__form,
+    .result-card {
+        padding: 1.5rem;
+    }
+    
+    .form-row--half {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    /* Партнеры */
+    .partners__grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .partner-card {
+        padding: 1.5rem;
+    }
+    
+    .partner-logo {
+        width: 60px;
+        height: 60px;
+    }
+    
+    /* О нас */
+    .about__inner {
+        gap: 2rem;
+    }
+    
+    .advantage {
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .advantage__icon {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .stat-item {
+        padding: 1.5rem;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+    
+    /* Контакты */
+    .contact__content {
+        gap: 2rem;
+    }
+    
+    .contact-item {
+        padding: 1rem;
+    }
+    
+    .contact-item__icon {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+    
+    .contact__form {
+        padding: 1.5rem;
+    }
+    
+    /* Модальные окна */
+    .modal {
+        padding: 0.5rem;
+    }
+    
+    .modal__header {
+        padding: 2rem 1.5rem 1rem;
+    }
+    
+    .modal__form {
+        padding: 0 1.5rem 2rem;
+    }
+    
+    .modal__close {
+        top: 0.5rem;
+        right: 0.5rem;
+        width: 2rem;
+        height: 2rem;
+    }
+    
+    /* Футер */
+    .footer__content {
+        padding: 3rem 0 1.5rem;
+    }
+    
+    .footer__main {
+        gap: 2rem;
+        margin-bottom: 2rem;
+    }
+    
+    .footer__nav {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .footer__legal {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    /* WhatsApp кнопка */
+    .whatsapp-btn {
+        bottom: 1rem;
+        right: 1rem;
+        width: 3rem;
+        height: 3rem;
+    }
+}
+
+/* Планшеты (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    /* Общие */
+    .container {
+        padding: 0 1.5rem;
+    }
+    
+    /* Главная секция */
+    .hero__title {
+        font-size: 2.5rem;
+    }
+    
+    .hero__features {
+        justify-content: center;
+    }
+    
+    .hero__actions {
+        justify-content: center;
+    }
+    
+    .floating-card {
+        right: -5%;
+        top: 30%;
+    }
+    
+    /* Услуги */
+    .services__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .service-card--featured {
+        grid-column: span 2;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    
+    /* Партнеры */
+    .partners__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* О нас */
+    .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    /* Навигация для планшетов */
+    .header__nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--bg-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: translateX(-100%);
+        transition: var(--transition);
+        z-index: 999;
+    }
+    
+    .header__nav.active {
+        transform: translateX(0);
+    }
+    
+    .nav__list {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .nav__link {
+        font-size: 1.25rem;
+    }
+}
+
+/* Большие экраны (1200px+) */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1400px;
+        padding: 0 2rem;
+    }
+    
+    .hero__title {
+        font-size: 4rem;
+    }
+    
+    .section__title {
+        font-size: 3rem;
+    }
+    
+    .services__grid {
+        gap: 3rem;
+    }
+    
+    .service-card {
+        padding: 2.5rem;
+    }
+    
+    .calculator__form,
+    .result-card {
+        padding: 3rem;
+    }
+}
+
+/* Очень большие экраны (1600px+) */
+@media (min-width: 1600px) {
+    .container {
+        max-width: 1600px;
+    }
+    
+    .hero__inner {
+        gap: 6rem;
+    }
+    
+    .hero__title {
+        font-size: 4.5rem;
+    }
+    
+    .services__grid,
+    .partners__grid {
+        gap: 4rem;
+    }
+}
+
+/* Высота экрана меньше 600px (ландшафт мобильных) */
+@media (max-height: 600px) and (orientation: landscape) {
+    .hero {
+        min-height: auto;
+        padding: 6rem 0 3rem;
+    }
+    
+    .hero__title {
+        font-size: 2rem;
+    }
+    
+    .hero__description {
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+    }
+    
+    .hero__features {
+        margin-bottom: 1.5rem;
+    }
+    
+    .floating-card {
+        display: none;
+    }
+}
+
+/* Устройства с поддержкой hover */
+@media (hover: hover) {
+    .btn:hover {
+        transform: translateY(-2px);
+    }
+    
+    .service-card:hover {
+        transform: translateY(-8px);
+    }
+    
+    .partner-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .advantage:hover {
+        transform: translateX(8px);
+    }
+    
+    .contact-item:hover {
+        transform: translateY(-5px);
+    }
+}
+
+/* Устройства без hover (тач-устройства) */
+@media (hover: none) {
+    .btn:active {
+        transform: scale(0.98);
+    }
+    
+    .service-card:active,
+    .partner-card:active,
+    .advantage:active,
+    .contact-item:active {
+        transform: scale(0.98);
+    }
+}
+
+/* Темная тема (если поддерживается системой) */
+@media (prefers-color-scheme: dark) {
+    /* Можно добавить стили для темной темы в будущем */
+}
+
+/* Уменьшение анимаций для пользователей с чувствительностью к движению */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .floating-card {
+        animation: none;
+    }
+    
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* Печать */
+@media print {
+    .header,
+    .whatsapp-btn,
+    .modal,
+    .floating-card {
+        display: none !important;
+    }
+    
+    .hero {
+        background: none !important;
+        color: #000 !important;
+        min-height: auto;
+        padding: 2rem 0;
+    }
+    
+    .hero__title,
+    .section__title {
+        color: #000 !important;
+    }
+    
+    section {
+        padding: 1rem 0;
+        break-inside: avoid;
+    }
+    
+    .service-card,
+    .partner-card,
+    .advantage,
+    .contact-item {
+        break-inside: avoid;
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
+    }
+} 

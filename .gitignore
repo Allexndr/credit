@@ -1,0 +1,35 @@
+# Файлы операционной системы
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Файлы редакторов
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Временные файлы
+*.tmp
+*.temp
+*.log
+
+# Зависимости Node.js (если будут добавлены в будущем)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Файлы сборки
+dist/
+build/
+
+# Файлы конфигурации
+.env
+.env.local
+.env.production
