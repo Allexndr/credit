@@ -42,7 +42,7 @@
                             </a>
                             <div class="dropdown">
                                 <a href="#" class="dropdown__link">Потребительский кредит</a>
-                                <a href="#" class="dropdown__link">Ипотека</a>
+                                <a href="#mortgage-programs" class="dropdown__link">Ипотечные программы</a>
                                 <a href="#" class="dropdown__link">Автокредит</a>
                                 <a href="#" class="dropdown__link">Бизнес кредит</a>
                                 <a href="#" class="dropdown__link">Рефинансирование</a>
@@ -244,6 +244,138 @@
                     </div>
                     <button class="btn btn--outline" onclick="selectService('auto')">
                         Выбрать
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ипотечные программы -->
+    <section class="mortgage-programs" id="mortgage-programs">
+        <div class="container">
+            <div class="section__header">
+                <h2 class="section__title">Ипотечные программы</h2>
+                <p class="section__description">
+                    Выберите подходящую программу ипотечного кредитования
+                </p>
+            </div>
+            
+            <div class="mortgage-programs__grid">
+                <!-- Обычная ипотека -->
+                <div class="mortgage-card">
+                    <div class="mortgage-card__header">
+                        <h3 class="mortgage-card__title">Обычная ипотека</h3>
+                        <div class="mortgage-card__badge">Стандартная</div>
+                    </div>
+                    <div class="mortgage-card__content">
+                        <p class="mortgage-card__description">
+                            Первоначальный взнос. Первичка, вторичка, частные дома.
+                        </p>
+                        <div class="mortgage-card__features">
+                            <div class="mortgage-feature">
+                                <span class="mortgage-feature__label">Первоначальный взнос:</span>
+                                <span class="mortgage-feature__value">От 20%</span>
+                            </div>
+                            <div class="mortgage-feature">
+                                <span class="mortgage-feature__label">Срок кредитования:</span>
+                                <span class="mortgage-feature__value">До 25 лет</span>
+                            </div>
+                            <div class="mortgage-feature">
+                                <span class="mortgage-feature__label">Тип недвижимости:</span>
+                                <span class="mortgage-feature__value">Первичка, вторичка, частные дома</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ипотека без подтверждения дохода -->
+                <div class="mortgage-card">
+                    <div class="mortgage-card__header">
+                        <h3 class="mortgage-card__title">Ипотека без подтверждения дохода</h3>
+                        <div class="mortgage-card__badge">Упрощенная</div>
+                    </div>
+                    <div class="mortgage-card__content">
+                        <p class="mortgage-card__description">
+                            Минимум документов для быстрого одобрения.
+                        </p>
+                        <div class="mortgage-card__features">
+                            <div class="mortgage-feature">
+                                <span class="mortgage-feature__label">Первоначальный взнос:</span>
+                                <span class="mortgage-feature__value">От 20%</span>
+                            </div>
+                            <div class="mortgage-feature">
+                                <span class="mortgage-feature__label">Срок кредитования:</span>
+                                <span class="mortgage-feature__value">До 25 лет</span>
+                            </div>
+                            <div class="mortgage-feature">
+                                <span class="mortgage-feature__label">Тип недвижимости:</span>
+                                <span class="mortgage-feature__value">Первичка</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Партнерская ипотека -->
+                <div class="mortgage-card mortgage-card--featured">
+                    <div class="mortgage-card__header">
+                        <h3 class="mortgage-card__title">Партнерская ипотека</h3>
+                        <div class="mortgage-card__badge">Рекомендуем</div>
+                    </div>
+                    <div class="mortgage-card__content">
+                        <p class="mortgage-card__description">
+                            Специальные условия от банков-партнеров.
+                        </p>
+                        <div class="mortgage-card__features">
+                            <div class="mortgage-feature">
+                                <span class="mortgage-feature__label">Первоначальный взнос:</span>
+                                <span class="mortgage-feature__value">От 20%</span>
+                            </div>
+                            <div class="mortgage-feature">
+                                <span class="mortgage-feature__label">Тип недвижимости:</span>
+                                <span class="mortgage-feature__value">Первичка</span>
+                            </div>
+                            <div class="mortgage-feature">
+                                <span class="mortgage-feature__label">Банки-партнеры:</span>
+                                <span class="mortgage-feature__value">Altyn Bank, Freedom Bank, Банк Центр Кредит, Халык Банк</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Льготная ипотека -->
+                <div class="mortgage-card">
+                    <div class="mortgage-card__header">
+                        <h3 class="mortgage-card__title">Льготная ипотека под 2,45%</h3>
+                        <div class="mortgage-card__badge">Выгодно</div>
+                    </div>
+                    <div class="mortgage-card__content">
+                        <p class="mortgage-card__description">
+                            Государственная программа с минимальной ставкой.
+                        </p>
+                        <div class="mortgage-card__features">
+                            <div class="mortgage-feature">
+                                <span class="mortgage-feature__label">Первоначальный взнос:</span>
+                                <span class="mortgage-feature__value">От 10%</span>
+                            </div>
+                            <div class="mortgage-feature">
+                                <span class="mortgage-feature__label">Банк:</span>
+                                <span class="mortgage-feature__value">Отбасы Банк</span>
+                            </div>
+                            <div class="mortgage-feature">
+                                <span class="mortgage-feature__label">Программы:</span>
+                                <span class="mortgage-feature__value">7-20-25, Орку/Наураз, Вакатты отбасы, "Матпац", Молодежные программы</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mortgage-programs__cta">
+                <div class="cta-content">
+                    <h3>Нужна консультация?</h3>
+                    <p>Наши специалисты помогут выбрать оптимальную программу ипотечного кредитования</p>
+                    <button class="btn btn--primary btn--large" onclick="openModal('application')">
+                        Получить консультацию
                     </button>
                 </div>
             </div>
