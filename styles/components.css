@@ -971,7 +971,8 @@
     z-index: 100;
 }
 
-.nav__item--dropdown:hover .dropdown {
+.nav__item--dropdown:hover .dropdown,
+.nav__item--dropdown.active .dropdown {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);

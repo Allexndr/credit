@@ -118,18 +118,27 @@
     }
     
     /* О нас */
-    .about__inner {
+    .about__content {
         gap: 2rem;
     }
     
-    .advantage {
-        padding: 1rem;
-        margin-bottom: 1rem;
+    .about__features {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
     
-    .advantage__icon {
-        width: 2.5rem;
-        height: 2.5rem;
+    .feature-card {
+        padding: 1.5rem;
+        min-height: auto;
+    }
+    
+    .feature-card__icon {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .feature-card__title {
+        font-size: 1.1rem;
     }
     
     .stats-grid {
@@ -254,6 +263,10 @@
     }
     
     /* О нас */
+    .about__features {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
     .stats-grid {
         grid-template-columns: repeat(4, 1fr);
     }

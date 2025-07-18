@@ -93,9 +93,66 @@ class Header {
         this.handleScroll();
         this.initMobileMenu();
         this.initSmoothScroll();
+        this.initDropdown();
         
         window.addEventListener('scroll', () => this.handleScroll());
         window.addEventListener('resize', () => this.closeMobileMenu());
+    }
+    
+    initDropdown() {
+        const dropdownItems = document.querySelectorAll('.nav__item--dropdown');
+        
+        dropdownItems.forEach(item => {
+            const dropdown = item.querySelector('.dropdown');
+            const links = dropdown.querySelectorAll('.dropdown__link');
+            
+            // Добавляем обработчики для ссылок в dropdown
+            links.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const text = link.textContent.trim();
+                    
+                    // Закрываем dropdown
+                    item.classList.remove('active');
+                    
+                    // Прокручиваем к соответствующей секции
+                    if (text.includes('Потребительский')) {
+                        scrollToSection('services');
+                    } else if (text.includes('Ипотека')) {
+                        scrollToSection('services');
+                    } else if (text.includes('Автокредит')) {
+                        scrollToSection('services');
+                    } else if (text.includes('Бизнес')) {
+                        scrollToSection('services');
+                    } else if (text.includes('Рефинансирование')) {
+                        scrollToSection('services');
+                    }
+                });
+            });
+            
+            // Клик по основной ссылке dropdown
+            const mainLink = item.querySelector('.nav__link');
+            mainLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                item.classList.toggle('active');
+                
+                // Закрываем другие dropdown
+                dropdownItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+            });
+        });
+        
+        // Закрываем dropdown при клике вне его
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav__item--dropdown')) {
+                dropdownItems.forEach(item => {
+                    item.classList.remove('active');
+                });
+            }
+        });
     }
     
     handleScroll() {
@@ -847,4 +904,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // ===== ГЛОБАЛЬНЫЕ ФУНКЦИИ =====
 // Экспорт функций в глобальную область видимости
-window.scrollToSection = scrollToSection; 
+window.scrollToSection = scrollToSection;
+
+// Глобальная функция для открытия модального окна
+window.openModal = function(modalId) {
+    const modal = document.querySelector(`#modal-${modalId}`);
+    if (modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+};
+
+// Глобальная функция для закрытия модального окна
+window.closeModal = function() {
+    const activeModal = document.querySelector('.modal.active');
+    if (activeModal) {
+        activeModal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}; 
