@@ -1129,19 +1129,19 @@
             
             <form class="modal__form" id="application-form">
                 <div class="form-row">
-                    <input type="text" class="form-input" placeholder="Ваше имя" required>
+                    <input type="text" name="name" class="form-input" placeholder="Ваше имя" required>
                 </div>
                 <div class="form-row">
-                    <input type="tel" class="form-input" placeholder="+7 (___) ___-__-__" required>
+                    <input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required>
                 </div>
                 <div class="form-row">
-                    <input type="email" class="form-input" placeholder="Email" required>
+                    <input type="email" name="email" class="form-input" placeholder="Email" required>
                 </div>
                 <div class="form-row">
-                    <input type="text" class="form-input" placeholder="ИИН" maxlength="12" required>
+                    <input type="text" name="iin" class="form-input" placeholder="ИИН" maxlength="12" required>
                 </div>
                 <div class="form-row form-row--half">
-                    <select class="form-select" required>
+                    <select name="credit_type" class="form-select" required>
                         <option value="">Тип кредита</option>
                         <option value="consumer">Потребительский кредит</option>
                         <option value="mortgage">Ипотека</option>
@@ -1149,7 +1149,7 @@
                         <option value="business">Бизнес кредит</option>
                         <option value="refinancing">Рефинансирование</option>
                     </select>
-                    <select class="form-select" required>
+                    <select name="amount" class="form-select" required>
                         <option value="">Сумма</option>
                         <option value="100000">до 100 000 ₸</option>
                         <option value="500000">до 500 000 ₸</option>
@@ -1161,7 +1161,7 @@
                 </div>
                 <div class="form-row">
                     <label class="checkbox">
-                        <input type="checkbox" required>
+                        <input type="checkbox" name="consent" required>
                         <span class="checkmark"></span>
                         Я соглашаюсь на обработку персональных данных
                     </label>

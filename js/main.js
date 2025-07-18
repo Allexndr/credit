@@ -579,6 +579,9 @@ class Forms {
             return;
         }
         
+        // Отправка в WhatsApp
+        this.sendToWhatsApp(form, formData);
+        
         // Показать уведомление об успешной отправке
         this.showNotification('Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в течение 5 минут.', 'success');
         
@@ -591,9 +594,54 @@ class Forms {
         
         // Очистить форму
         form.reset();
+    }
+    
+    sendToWhatsApp(form, formData) {
+        // Номер WhatsApp (замените на реальный)
+        const phoneNumber = '77000000000';
         
-        // В реальном проекте здесь бы была отправка данных на сервер
-        console.log('Form data:', Object.fromEntries(formData));
+        // Формируем сообщение
+        let message = '🆕 *НОВАЯ ЗАЯВКА НА КРЕДИТ*\n\n';
+        
+        // Маппинг полей для красивого отображения
+        const fieldLabels = {
+            'name': '👤 Имя',
+            'phone': '📞 Телефон',
+            'email': '📧 Email',
+            'iin': '🆔 ИИН',
+            'credit_type': '💳 Тип кредита',
+            'amount': '💰 Сумма',
+            'consent': '✅ Согласие на обработку данных'
+        };
+        
+        // Собираем данные из FormData
+        for (let [key, value] of formData.entries()) {
+            if (value && fieldLabels[key]) {
+                // Для селектов получаем текст опции
+                if (key === 'credit_type' || key === 'amount') {
+                    const select = form.querySelector(`[name="${key}"]`);
+                    if (select && select.selectedOptions[0]) {
+                        value = select.selectedOptions[0].text;
+                    }
+                }
+                
+                message += `${fieldLabels[key]}: *${value}*\n`;
+            }
+        }
+        
+        message += '\n⏰ Время заявки: ' + new Date().toLocaleString('ru-RU');
+        message += '\n\n💬 Komek damu - Ваш надежный партнер в получении кредита!';
+        
+        // Кодируем сообщение для URL
+        const encodedMessage = encodeURIComponent(message);
+        
+        // Формируем ссылку WhatsApp
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+        
+        // Открываем WhatsApp
+        window.open(whatsappUrl, '_blank');
+        
+        console.log('WhatsApp message:', message);
     }
     
     validateForm(form) {
