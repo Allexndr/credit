@@ -183,6 +183,10 @@
     border-color: var(--primary);
 }
 
+.service-card:hover .service-card__icon {
+    transform: scale(1.1);
+}
+
 .service-card:hover::before {
     left: 100%;
 }
@@ -220,23 +224,6 @@
     color: var(--text-white);
     position: relative;
     transition: var(--transition);
-}
-
-.service-card__icon::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: var(--radius-lg);
-    background: var(--gradient-primary);
-    opacity: 0;
-    transition: var(--transition);
-}
-
-.service-card:hover .service-card__icon::after {
-    opacity: 1;
 }
 
 .service-card__title {
