@@ -27,7 +27,7 @@
     /* Главная секция */
     .hero {
         min-height: 80vh;
-        padding-top: 8rem;
+        padding-top: 5rem;
     }
     
     .hero__title {
