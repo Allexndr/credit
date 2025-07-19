@@ -36,11 +36,12 @@ body {
         left: 0;
         right: 0;
         z-index: 1000;
-        background: var(--bg-dark);
+        background: #0f172a;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
     
     .header__inner {
-        padding: 0.75rem 0;
+        padding: 1rem 0;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -67,10 +68,32 @@ body {
         border: none;
         cursor: pointer;
         padding: 0.5rem;
+        border-radius: 0.25rem;
+        transition: all 0.3s ease;
+    }
+    
+    .burger:hover {
+        background: rgba(255, 255, 255, 0.1);
     }
     
     .burger span {
-        background: rgba(255, 255, 255, 0.9);
+        background: #ffffff;
+        height: 2px;
+        width: 24px;
+        display: block;
+        transition: all 0.3s ease;
+    }
+    
+    .burger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    .burger.active span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .burger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
     }
     
     .header__nav {
@@ -79,59 +102,67 @@ body {
         left: 0;
         right: 0;
         bottom: 0;
-        background: rgba(15, 23, 42, 0.95);
-        backdrop-filter: blur(10px);
+        background: #0f172a;
         display: flex;
         align-items: center;
         justify-content: center;
         z-index: 1000;
         opacity: 0;
         visibility: hidden;
-        transform: translateY(-100%);
+        transform: translateX(-100%);
         transition: all 0.3s ease;
     }
     
     .header__nav.active {
         opacity: 1;
         visibility: visible;
-        transform: translateY(0);
+        transform: translateX(0);
     }
     
     .nav__list {
         flex-direction: column;
-        gap: 2rem;
+        gap: 1.5rem;
         align-items: center;
+        padding: 2rem 1rem;
     }
     
     .nav__link {
         font-size: 1.25rem;
-        color: var(--text-white);
+        color: #ffffff;
         text-decoration: none;
-        padding: 0.5rem 1rem;
-        border-radius: var(--radius-md);
-        transition: var(--transition);
+        padding: 1rem 2rem;
+        border-radius: 0.5rem;
+        transition: all 0.3s ease;
+        width: 200px;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
     }
     
     .nav__link:hover {
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
     }
     
     /* Dropdown в мобильной версии */
     .nav__item--dropdown {
         position: relative;
+        width: 200px;
     }
     
     .nav__item--dropdown .dropdown {
         position: static;
-        background: transparent;
+        background: rgba(255, 255, 255, 0.1);
         box-shadow: none;
-        padding: 1rem 0;
-        border-radius: 0;
+        padding: 0.5rem 0;
+        border-radius: 0.5rem;
         display: none;
         opacity: 1;
         visibility: visible;
         transform: none;
         min-width: auto;
+        margin-top: 0.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
     }
     
     .nav__item--dropdown.active .dropdown {
@@ -139,17 +170,23 @@ body {
     }
     
     .dropdown__link {
-        color: var(--text-light);
+        color: #ffffff;
         font-size: 1rem;
-        padding: 0.5rem 0;
+        padding: 0.75rem 1rem;
         display: block;
         text-align: center;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+    
+    .dropdown__link:hover {
+        background: rgba(255, 255, 255, 0.2);
     }
     
     /* Главная секция */
     .hero {
         min-height: 100vh;
-        padding-top: 6rem;
+        padding-top: 80px;
         padding-bottom: 2rem;
     }
     
