@@ -297,7 +297,7 @@ a:hover {
 
 @media (min-width: 1024px) {
     .header__nav {
-        display: block;
+        display: flex !important;
     }
 }
 

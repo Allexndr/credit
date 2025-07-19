@@ -63,6 +63,14 @@ body {
         display: flex !important;
         position: relative;
         z-index: 1001;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.5rem;
+    }
+    
+    .burger span {
+        background: rgba(255, 255, 255, 0.9);
     }
     
     .header__nav {
@@ -71,21 +79,22 @@ body {
         left: 0;
         right: 0;
         bottom: 0;
-        background: var(--bg-dark);
+        background: rgba(15, 23, 42, 0.95);
+        backdrop-filter: blur(10px);
         display: flex;
         align-items: center;
         justify-content: center;
-        transform: translateX(-100%);
-        transition: var(--transition);
         z-index: 1000;
         opacity: 0;
         visibility: hidden;
+        transform: translateY(-100%);
+        transition: all 0.3s ease;
     }
     
     .header__nav.active {
-        transform: translateX(0);
         opacity: 1;
         visibility: visible;
+        transform: translateY(0);
     }
     
     .nav__list {
@@ -108,16 +117,25 @@ body {
     }
     
     /* Dropdown в мобильной версии */
+    .nav__item--dropdown {
+        position: relative;
+    }
+    
     .nav__item--dropdown .dropdown {
         position: static;
         background: transparent;
         box-shadow: none;
         padding: 1rem 0;
         border-radius: 0;
-        display: block;
+        display: none;
         opacity: 1;
         visibility: visible;
         transform: none;
+        min-width: auto;
+    }
+    
+    .nav__item--dropdown.active .dropdown {
+        display: block;
     }
     
     .dropdown__link {
@@ -125,6 +143,7 @@ body {
         font-size: 1rem;
         padding: 0.5rem 0;
         display: block;
+        text-align: center;
     }
     
     /* Главная секция */
