@@ -265,7 +265,7 @@ a:hover {
 }
 
 .logo__image {
-    height: 80px;
+    height: 100px;
     width: auto;
     object-fit: contain;
     filter: brightness(1.1) contrast(1.1);
@@ -280,13 +280,13 @@ a:hover {
 /* Адаптивность логотипа */
 @media (min-width: 768px) {
     .logo__image {
-        height: 90px;
+        height: 110px;
     }
 }
 
 @media (min-width: 1024px) {
     .logo__image {
-        height: 100px;
+        height: 120px;
     }
 }
 
@@ -795,30 +795,10 @@ section {
     }
     
     .header__nav {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: var(--bg-primary);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transform: translateX(-100%);
-        transition: var(--transition);
-        z-index: 999;
+        display: none !important;
     }
     
-    .header__nav.active {
-        transform: translateX(0);
-    }
-    
-    .nav__list {
-        flex-direction: column;
-        gap: 3rem;
-    }
-    
-    .nav__link {
-        font-size: 1.5rem;
+    .burger {
+        display: none !important;
     }
 } 
