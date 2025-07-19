@@ -1,5 +1,19 @@
 /* ===== АДАПТИВНЫЕ СТИЛИ ===== */
 
+/* Основные исправления */
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+html {
+    overflow-x: hidden;
+}
+
+body {
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
 /* Мобильные устройства (до 768px) */
 @media (max-width: 767px) {
     /* Общие адаптации */
@@ -16,28 +30,136 @@
     }
     
     /* Шапка */
+    .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background: var(--bg-dark);
+    }
+    
     .header__inner {
         padding: 0.75rem 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .header__logo .logo__image {
+        height: 40px;
+        width: auto;
     }
     
     .header__phone {
         display: none;
     }
     
+    .header__actions .btn {
+        display: none;
+    }
+    
+    .burger {
+        display: flex !important;
+        position: relative;
+        z-index: 1001;
+    }
+    
+    .header__nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--bg-dark);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: translateX(-100%);
+        transition: var(--transition);
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+    }
+    
+    .header__nav.active {
+        transform: translateX(0);
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .nav__list {
+        flex-direction: column;
+        gap: 2rem;
+        align-items: center;
+    }
+    
+    .nav__link {
+        font-size: 1.25rem;
+        color: var(--text-white);
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border-radius: var(--radius-md);
+        transition: var(--transition);
+    }
+    
+    .nav__link:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Dropdown в мобильной версии */
+    .nav__item--dropdown .dropdown {
+        position: static;
+        background: transparent;
+        box-shadow: none;
+        padding: 1rem 0;
+        border-radius: 0;
+        display: block;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+    }
+    
+    .dropdown__link {
+        color: var(--text-light);
+        font-size: 1rem;
+        padding: 0.5rem 0;
+        display: block;
+    }
+    
     /* Главная секция */
     .hero {
-        min-height: 80vh;
-        padding-top: 5rem;
+        min-height: 100vh;
+        padding-top: 6rem;
+        padding-bottom: 2rem;
+    }
+    
+    .hero__inner {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+    }
+    
+    .hero__content {
+        order: 1;
+    }
+    
+    .hero__image {
+        order: 2;
+        max-width: 300px;
+        margin: 0 auto;
     }
     
     .hero__title {
-        font-size: 2rem;
+        font-size: 2.5rem;
         line-height: 1.2;
+        margin-bottom: 1rem;
     }
     
     .hero__description {
-        font-size: 1rem;
+        font-size: 1.1rem;
         margin-bottom: 1.5rem;
+        line-height: 1.6;
     }
     
     .hero__features {
@@ -48,16 +170,18 @@
     
     .feature {
         justify-content: center;
-        padding: 0.5rem 1rem;
+        text-align: center;
     }
     
     .hero__actions {
         flex-direction: column;
-        width: 100%;
+        gap: 1rem;
+        align-items: center;
     }
     
-    .hero__actions .btn {
+    .btn {
         width: 100%;
+        max-width: 280px;
         justify-content: center;
     }
     
@@ -259,7 +383,18 @@
     
     /* Партнеры */
     .partners__grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .partner-card {
+        padding: 1rem;
+        text-align: center;
+    }
+    
+    .partner-logo img {
+        max-height: 40px;
+        width: auto;
     }
     
     /* О нас */
@@ -272,23 +407,31 @@
     }
     
     /* Навигация для планшетов */
+    .burger {
+        display: flex !important;
+    }
+    
     .header__nav {
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
-        background: var(--bg-primary);
+        background: var(--bg-dark);
         display: flex;
         align-items: center;
         justify-content: center;
         transform: translateX(-100%);
         transition: var(--transition);
-        z-index: 999;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
     }
     
     .header__nav.active {
         transform: translateX(0);
+        opacity: 1;
+        visibility: visible;
     }
     
     .nav__list {
@@ -298,6 +441,7 @@
     
     .nav__link {
         font-size: 1.25rem;
+        color: var(--text-white);
     }
 }
 
