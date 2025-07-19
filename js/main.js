@@ -598,11 +598,22 @@ class Forms {
     
     sendToWhatsApp(form, formData) {
         // Номер WhatsApp для чата
-        const phoneNumber = '87011061039';
+        const phoneNumber = '77011061039';
         
         // Формируем сообщение
-        let message = '🆕 *НОВАЯ ЗАЯВКА НА КРЕДИТ*\n\n';
+        let message = '🆕 *НОВАЯ ЗАЯВКА НА КРЕДИТ*\n';
+        message += '═══════════════════════\n\n';
         
+        // Маппинг смайликов для типов кредитов
+        const creditTypeEmojis = {
+            'consumer': '🛍️',      // Потребительский кредит
+            'mortgage': '🏠',       // Ипотека
+            'auto': '🚗',          // Автокредит
+            'business': '💼',      // Бизнес кредит
+            'refinancing': '🔄',   // Рефинансирование
+            'express': '⚡'        // Экспресс-кредит
+        };
+
         // Маппинг полей для красивого отображения
         const fieldLabels = {
             'name': '👤 Имя',
@@ -616,22 +627,48 @@ class Forms {
         };
         
         // Собираем данные из FormData
+        let creditTypeValue = '';
+        let creditTypeText = '';
         for (let [key, value] of formData.entries()) {
             if (value && fieldLabels[key]) {
                 // Для селектов получаем текст опции
                 if (key === 'credit_type' || key === 'amount') {
                     const select = form.querySelector(`[name="${key}"]`);
                     if (select && select.selectedOptions[0]) {
+                        if (key === 'credit_type') {
+                            creditTypeValue = select.value; // Сохраняем значение для смайлика
+                            creditTypeText = select.selectedOptions[0].text; // Сохраняем текст
+                        }
                         value = select.selectedOptions[0].text;
                     }
                 }
                 
-                message += `${fieldLabels[key]}: *${value}*\n`;
+                // Специальная обработка для типа кредита с динамическим смайликом
+                if (key === 'credit_type') {
+                    const emoji = creditTypeEmojis[creditTypeValue] || '💳';
+                    message += `${emoji} Тип кредита: *${value}*\n`;
+                } else if (key === 'phone') {
+                    message += `${fieldLabels[key]}: *${value}*\n`;
+                } else if (key === 'iin') {
+                    message += `${fieldLabels[key]}: *${value}*\n`;
+                } else if (key === 'email') {
+                    message += `${fieldLabels[key]}: *${value}*\n`;
+                } else {
+                    message += `${fieldLabels[key]}: *${value}*\n`;
+                }
             }
         }
         
-        message += '\n⏰ Время заявки: ' + new Date().toLocaleString('ru-RU');
-        message += '\n\n💬 Komek damu - Ваш надежный партнер в получении кредита!';
+        // Обновляем заголовок с соответствующим смайликом
+        if (creditTypeValue && creditTypeEmojis[creditTypeValue]) {
+            message = message.replace('🆕 *НОВАЯ ЗАЯВКА НА КРЕДИТ*', 
+                `${creditTypeEmojis[creditTypeValue]} *НОВАЯ ЗАЯВКА: ${creditTypeText.toUpperCase()}*`);
+        }
+        
+        message += '\n═══════════════════════\n';
+        message += '⏰ Время заявки: ' + new Date().toLocaleString('ru-RU');
+        message += '\n═══════════════════════\n\n';
+        message += '💬 Komek damu - Ваш надежный партнер в получении кредита!';
         
         // Кодируем сообщение для URL
         const encodedMessage = encodeURIComponent(message);
