@@ -597,8 +597,8 @@ class Forms {
     }
     
     sendToWhatsApp(form, formData) {
-        // Номер WhatsApp для получения заявок
-        const phoneNumber = '77002579004';
+        // Номер WhatsApp для чата
+        const phoneNumber = '87011061039';
         
         // Формируем сообщение
         let message = '🆕 *НОВАЯ ЗАЯВКА НА КРЕДИТ*\n\n';
