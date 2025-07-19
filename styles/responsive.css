@@ -157,10 +157,6 @@ body {
         justify-content: center;
     }
     
-    .floating-card {
-        display: none;
-    }
-    
     /* Услуги */
     .services__grid {
         gap: 1.5rem;
@@ -337,11 +333,6 @@ body {
         justify-content: center;
     }
     
-    .floating-card {
-        right: -5%;
-        top: 30%;
-    }
-    
     .header__actions .btn {
         display: block !important;
     }
@@ -461,9 +452,6 @@ body {
         margin-bottom: 1.5rem;
     }
     
-    .floating-card {
-        display: none;
-    }
 }
 
 /* Устройства с поддержкой hover */
@@ -516,10 +504,6 @@ body {
         transition-duration: 0.01ms !important;
     }
     
-    .floating-card {
-        animation: none;
-    }
-    
     html {
         scroll-behavior: auto;
     }
@@ -529,8 +513,7 @@ body {
 @media print {
     .header,
     .whatsapp-btn,
-    .modal,
-    .floating-card {
+    .modal {
         display: none !important;
     }
     

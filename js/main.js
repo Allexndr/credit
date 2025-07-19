@@ -1,5 +1,47 @@
 // ===== MAIN JAVASCRIPT =====
 
+// Функция для удаления аналитических панелей
+function removeAnalyticsPanels() {
+    // Поиск и удаление элементов по содержимому
+    const elementsToRemove = [];
+    
+    // Поиск всех элементов на странице
+    const allElements = document.querySelectorAll('*');
+    allElements.forEach(element => {
+        const text = element.textContent || element.innerText || '';
+        if (text.includes('17.6K') || 
+            text.includes('1.3%') || 
+            text.includes('Total impressions') || 
+            text.includes('Average CTR') ||
+            text.includes('Average position') ||
+            text.includes('25.2')) {
+            elementsToRemove.push(element);
+        }
+    });
+    
+    // Удаляем найденные элементы
+    elementsToRemove.forEach(element => {
+        element.remove();
+    });
+    
+    // Поиск и удаление по классам и id
+    const selectors = [
+        '[data-analytics]',
+        '.analytics-panel',
+        '.dashboard-panel',
+        '[class*="analytics"]',
+        '[class*="dashboard"]',
+        '[id*="analytics"]',
+        '[id*="dashboard"]',
+        '.floating-card'
+    ];
+    
+    selectors.forEach(selector => {
+        const elements = document.querySelectorAll(selector);
+        elements.forEach(el => el.remove());
+    });
+}
+
 // DOM Elements
 const header = document.getElementById('header');
 const burger = document.getElementById('burger');
@@ -961,6 +1003,9 @@ window.selectService = function(serviceType) {
 
 // ===== ИНИЦИАЛИЗАЦИЯ =====
 document.addEventListener('DOMContentLoaded', function() {
+    // Удаляем аналитические панели при загрузке
+    removeAnalyticsPanels();
+    
     // Инициализация всех компонентов
     new Header();
     new Calculator();
@@ -972,7 +1017,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Добавить класс loaded для плавного появления контента
     setTimeout(() => {
         document.body.classList.add('loaded');
+        // Повторно проверяем и удаляем панели после загрузки
+        removeAnalyticsPanels();
     }, 100);
+    
+    // Периодически проверяем и удаляем панели (на случай динамического добавления)
+    setInterval(removeAnalyticsPanels, 1000);
     
     console.log('Komek damu - Сайт загружен успешно!');
 });
