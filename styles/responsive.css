@@ -246,12 +246,15 @@ body {
     
     .analytics-dashboard {
         margin-top: 2rem;
-        padding: 1.5rem;
+        margin-left: -1rem;
+        margin-right: -1rem;
+        padding: 0;
     }
     
     .analytics-title {
         font-size: 1.25rem;
         margin-bottom: 1.5rem;
+        padding: 0 1rem;
     }
     
     /* Контакты */

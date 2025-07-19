@@ -122,10 +122,12 @@
 /* Analytics Dashboard */
 .analytics-dashboard {
     margin-top: 4rem;
-    padding: 2rem;
-    background: var(--bg-primary);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
+    margin-left: -2rem;
+    margin-right: -2rem;
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
 }
 
 .analytics-title {
@@ -134,25 +136,26 @@
     color: var(--text-primary);
     margin-bottom: 2rem;
     text-align: center;
+    padding: 0 2rem;
 }
 
 .analytics-image {
     position: relative;
-    border-radius: var(--radius-md);
+    border-radius: 0;
     overflow: hidden;
-    box-shadow: var(--shadow-lg);
+    box-shadow: none;
 }
 
 .analytics-img {
     width: 100%;
     height: auto;
     display: block;
-    border-radius: var(--radius-md);
+    border-radius: 0;
     transition: var(--transition);
 }
 
 .analytics-img:hover {
-    transform: scale(1.02);
+    transform: scale(1.01);
 }
 
 .stat-number {
