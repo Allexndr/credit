@@ -1223,6 +1223,16 @@ window.openModal = function(modalId) {
         modal.style.visibility = 'visible';
         modal.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
         
+        // Принудительно устанавливаем стили для контента модального окна
+        const modalContent = modal.querySelector('.modal__content');
+        if (modalContent) {
+            modalContent.style.zIndex = '10000';
+            modalContent.style.position = 'relative';
+            modalContent.style.display = 'block';
+            modalContent.style.opacity = '1';
+            modalContent.style.visibility = 'visible';
+        }
+        
         console.log('Modal opened successfully');
         console.log('Modal classes:', modal.className);
         console.log('Modal computed styles:', window.getComputedStyle(modal));
