@@ -685,6 +685,8 @@ class Modal {
                 this.closeAll();
             }
         });
+        
+        // НЕ переопределяем глобальную функцию openModal
     }
     
     open(modalId) {
@@ -1175,6 +1177,18 @@ document.addEventListener('DOMContentLoaded', function() {
     // Периодически проверяем и удаляем панели (на случай динамического добавления)
     setInterval(removeAnalyticsPanels, 1000);
     
+    // Добавляем обработчики для кнопок "Получить кредит"
+    const creditButtons = document.querySelectorAll('button[onclick*="openModal(\'application\')"]');
+    console.log('Found credit buttons:', creditButtons.length);
+    
+    creditButtons.forEach((button, index) => {
+        button.addEventListener('click', function(e) {
+            console.log(`Credit button ${index + 1} clicked`);
+            console.log('Button element:', this);
+            console.log('Button onclick:', this.getAttribute('onclick'));
+        });
+    });
+    
     console.log('Komek damu - Сайт загружен успешно!');
 });
 
@@ -1184,7 +1198,12 @@ window.scrollToSection = scrollToSection;
 
 // Глобальная функция для открытия модального окна
 window.openModal = function(modalId) {
+    console.log('=== openModal called ===');
+    console.log('Modal ID:', modalId);
+    
     const modal = document.querySelector(`#modal-${modalId}`);
+    console.log('Modal element found:', !!modal);
+    console.log('Modal element:', modal);
     
     if (modal) {
         modal.classList.add('active');
@@ -1203,6 +1222,13 @@ window.openModal = function(modalId) {
         modal.style.opacity = '1';
         modal.style.visibility = 'visible';
         modal.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+        
+        console.log('Modal opened successfully');
+        console.log('Modal classes:', modal.className);
+        console.log('Modal computed styles:', window.getComputedStyle(modal));
+    } else {
+        console.error('Modal not found:', `#modal-${modalId}`);
+        console.log('Available modals:', document.querySelectorAll('.modal'));
     }
 };
 
