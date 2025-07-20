@@ -1156,6 +1156,15 @@ window.selectService = function(serviceType) {
 
 // ===== ИНИЦИАЛИЗАЦИЯ =====
 document.addEventListener('DOMContentLoaded', function() {
+    // Принудительно сбрасываем все модальные окна при загрузке
+    const allModals = document.querySelectorAll('.modal');
+    allModals.forEach(modal => {
+        modal.classList.remove('active');
+        modal.style.display = 'none';
+        modal.style.opacity = '0';
+        modal.style.visibility = 'hidden';
+    });
+    
     // Удаляем аналитические панели при загрузке
     removeAnalyticsPanels();
     
@@ -1231,7 +1240,21 @@ window.openModal = function(modalId) {
             modalContent.style.display = 'block';
             modalContent.style.opacity = '1';
             modalContent.style.visibility = 'visible';
+            modalContent.style.background = 'white';
+            modalContent.style.color = 'black';
+            modalContent.style.padding = '20px';
+            modalContent.style.borderRadius = '10px';
+            modalContent.style.boxShadow = '0 10px 30px rgba(0,0,0,0.5)';
         }
+        
+        // Проверяем все элементы внутри модального окна
+        const allElements = modal.querySelectorAll('*');
+        console.log('Elements inside modal:', allElements.length);
+        allElements.forEach((el, index) => {
+            if (index < 10) { // Показываем первые 10 элементов
+                console.log(`Element ${index}:`, el.tagName, el.className, el.textContent?.substring(0, 50));
+            }
+        });
         
         console.log('Modal opened successfully');
         console.log('Modal classes:', modal.className);
@@ -1249,6 +1272,15 @@ window.closeModal = function() {
         activeModal.classList.remove('active');
         document.body.style.overflow = '';
     }
+    
+    // Принудительно сбрасываем все модальные окна
+    const allModals = document.querySelectorAll('.modal');
+    allModals.forEach(modal => {
+        modal.classList.remove('active');
+        modal.style.display = 'none';
+        modal.style.opacity = '0';
+        modal.style.visibility = 'hidden';
+    });
 };
 
 // Функция отправки заявки на консультацию по бизнес-программе
