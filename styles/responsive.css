@@ -91,8 +91,9 @@ body {
         flex-shrink: 0;
     }
     
+    /* Показываем бургер на мобильных */
     .burger {
-        display: none !important;
+        display: flex !important;
     }
     
     .header__nav {
@@ -373,12 +374,20 @@ body {
         grid-template-columns: repeat(4, 1fr);
     }
     
-    /* Навигация для планшетов */
+    /* Навигация для планшетов - показываем бургер только до 1023px */
     .burger {
-        display: none !important;
+        display: flex !important;
     }
     
     .header__nav {
+        display: none !important;
+    }
+}
+
+/* Десктопы (1024px+) */
+@media (min-width: 1024px) {
+    /* Скрываем бургер на десктопе */
+    .burger {
         display: none !important;
     }
 }
@@ -409,6 +418,12 @@ body {
     .calculator__form,
     .result-card {
         padding: 3rem;
+    }
+    
+    /* Улучшаем отображение кнопки в header на больших экранах */
+    .header__actions .btn {
+        padding: 0.75rem 2rem !important;
+        font-size: 1rem !important;
     }
 }
 
@@ -541,5 +556,24 @@ body {
         break-inside: avoid;
         box-shadow: none !important;
         border: 1px solid #ccc !important;
+    }
+}
+
+/* ПРИНУДИТЕЛЬНОЕ СКРЫТИЕ БУРГЕРА НА ДЕСКТОПЕ - МАКСИМАЛЬНЫЙ ПРИОРИТЕТ */
+@media screen and (min-width: 1024px) {
+    .burger,
+    #burger,
+    button.burger,
+    .header .burger,
+    .header__inner .burger {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        position: absolute !important;
+        left: -9999px !important;
+        width: 0 !important;
+        height: 0 !important;
+        overflow: hidden !important;
     }
 } 

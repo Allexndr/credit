@@ -336,10 +336,8 @@ a:focus {
 
 /* Утилиты */
 .gradient-text {
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: white;
+    font-weight: 700;
 }
 
 .text-center {
@@ -414,7 +412,7 @@ a:focus {
 @media (min-width: 768px) {
     .header__inner {
         padding: 1.5rem 0;
-        gap: 2rem;
+        gap: 1.5rem;
     }
 }
 
@@ -452,7 +450,7 @@ a:focus {
 
 @media (min-width: 1024px) {
     .logo__image {
-        height: 120px;
+        height: 100px;
     }
 }
 
@@ -476,7 +474,7 @@ a:focus {
     .nav__list {
         display: flex;
         align-items: center;
-        gap: 1.5rem;
+        gap: 0.75rem;
         list-style: none;
         flex-direction: row;
         padding: 0;
@@ -494,8 +492,8 @@ a:focus {
     .nav__link {
         color: rgba(255, 255, 255, 0.9) !important;
         font-weight: 500;
-        font-size: 0.95rem;
-        padding: 0.5rem 0.75rem;
+        font-size: 0.9rem;
+        padding: 0.5rem 0.25rem;
         border-radius: var(--radius-md);
         transition: var(--transition-fast);
         display: block;
@@ -643,7 +641,7 @@ a:focus {
 .header__actions {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.5rem;
     z-index: 1000;
     position: relative;
 }
@@ -751,8 +749,19 @@ a:focus {
 
 /* Скрываем бургер на десктопе */
 @media (min-width: 1024px) {
-    .burger {
+    .burger,
+    #burger,
+    .header .burger,
+    .header__inner .burger {
         display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        position: absolute !important;
+        left: -9999px !important;
+        width: 0 !important;
+        height: 0 !important;
+        overflow: hidden !important;
     }
 }
 
@@ -767,6 +776,30 @@ a:focus {
     }
 }
 
+/* Показываем навигацию на десктопе */
+@media (min-width: 1024px) {
+    .header__nav {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: static !important;
+        transform: none !important;
+    }
+    
+    /* Предотвращаем перенос текста в навигации на десктопе */
+    .nav__link {
+        white-space: nowrap !important;
+    }
+    
+    /* Стили для кнопки в header__actions на десктопе */
+    .header__actions .btn {
+        white-space: nowrap !important;
+        min-width: fit-content !important;
+        padding: 0.75rem 1.25rem !important;
+        font-size: 0.9rem !important;
+    }
+}
+
 /* ===== ГЛАВНАЯ СЕКЦИЯ ===== */
 .hero {
     background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #1e3a8a 100%);
@@ -775,7 +808,7 @@ a:focus {
     align-items: center;
     position: relative;
     overflow: hidden;
-    padding-top: 120px; /* Добавляем отступ сверху для компенсации фиксированного хедера */
+    padding-top: 160px; /* Увеличиваем отступ сверху для компенсации фиксированного хедера */
 }
 
 .hero::before {
@@ -1048,6 +1081,52 @@ section {
     color: var(--text-white);
 }
 
+/* Специальные стили для кнопок "Выбрать" - более контрастные */
+.service-card .btn,
+.mortgage-card .btn,
+.business-card .btn {
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+    transition: all 0.3s ease !important;
+}
+
+.service-card .btn--primary,
+.mortgage-card .btn--primary,
+.business-card .btn--primary {
+    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%) !important;
+    color: white !important;
+    border: 2px solid #1e40af !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+.service-card .btn--primary:hover,
+.mortgage-card .btn--primary:hover,
+.business-card .btn--primary:hover {
+    background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%) !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 8px 25px rgba(30, 64, 175, 0.4) !important;
+}
+
+.service-card .btn--outline,
+.mortgage-card .btn--outline,
+.business-card .btn--outline {
+    background: white !important;
+    color: #1e40af !important;
+    border: 2px solid #1e40af !important;
+    font-weight: 700 !important;
+}
+
+.service-card .btn--outline:hover,
+.mortgage-card .btn--outline:hover,
+.business-card .btn--outline:hover {
+    background: #1e40af !important;
+    color: white !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 8px 25px rgba(30, 64, 175, 0.4) !important;
+}
+
 .btn--large {
     padding: 1rem 2rem;
     font-size: 1.125rem;
@@ -1208,4 +1287,95 @@ a[href*="become-partner"] {
     -moz-outline: none !important;
     background: transparent !important;
     background-color: transparent !important;
+}
+
+/* ===== МОБИЛЬНОЕ МЕНЮ С ВЫПАДАЮЩИМИ СПИСКАМИ ===== */
+.mobile-menu {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    padding: 1rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 1rem;
+}
+
+.mobile-menu__section {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-menu__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu__header:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.mobile-menu__title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-white);
+}
+
+.mobile-menu__arrow {
+    transition: transform 0.3s ease;
+    color: var(--text-white);
+}
+
+.mobile-menu__section.active .mobile-menu__arrow {
+    transform: rotate(180deg);
+}
+
+.mobile-menu__content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.mobile-menu__section.active .mobile-menu__content {
+    max-height: 300px;
+}
+
+.mobile-menu__link {
+    display: block;
+    padding: 0.75rem 1rem 0.75rem 2rem;
+    color: var(--text-white);
+    text-decoration: none;
+    font-size: 0.95rem;
+    border-left: 3px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu__link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-left-color: var(--primary);
+    color: var(--primary);
+}
+
+.mobile-menu__actions {
+    padding: 1rem 0;
+    margin-top: 1rem;
+}
+
+/* Показываем мобильное меню только на мобильных устройствах */
+@media (max-width: 1023px) {
+    .mobile-menu {
+        display: flex;
+    }
+    
+    .nav__list {
+        display: none;
+    }
+}
+
+@media (min-width: 1024px) {
+    .mobile-menu {
+        display: none !important;
+    }
 } 

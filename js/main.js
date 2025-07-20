@@ -679,10 +679,6 @@ class Modal {
     }
     
     init() {
-        // Обработчики для открытия модальных окон
-        window.openModal = (modalId) => this.open(modalId);
-        window.closeModal = (modalId) => this.close(modalId);
-        
         // Закрытие по Escape
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
@@ -708,6 +704,7 @@ class Modal {
     }
     
     closeAll() {
+        const modals = document.querySelectorAll('.modal');
         modals.forEach(modal => {
             modal.classList.remove('active');
         });
@@ -1120,9 +1117,39 @@ class ScrollAnimations {
 // ===== ДОПОЛНИТЕЛЬНЫЕ ФУНКЦИИ =====
 // Выбор услуги
 window.selectService = function(serviceType) {
-    // Можно добавить логику для выбора услуги
     console.log('Selected service:', serviceType);
-    openModal('application');
+    
+    // Словарь с названиями услуг
+    const serviceNames = {
+        'small-business': 'Субсидии для малого бизнеса',
+        'trade-business': 'Субсидирование торговли',
+        'large-business': 'Кредитование бизнеса до 500 млн',
+        'unsecured': 'Беззалоговый кредит',
+        'refinancing': 'Рефинансирование',
+        'secured': 'Залоговый кредит',
+        'ip-unsecured': 'Беззалоговый кредит для ИП',
+        'ip-secured': 'Залоговый кредит для ИП',
+        'too-credit': 'Кредитование ТОО',
+        'auto': 'АВТО кредитование'
+    };
+    
+    const serviceName = serviceNames[serviceType] || 'услугу';
+    
+    // Определяем правильное окончание для "нужен/нужна/нужно"
+    let ending = 'нужен';
+    if (serviceName.includes('Субсидии') || serviceName.includes('Кредитование') || serviceName.includes('Рефинансирование') || serviceName.includes('Субсидирование')) {
+        ending = 'нужно';
+    }
+    
+    // Формируем сообщение для WhatsApp с правильным окончанием
+    const message = `Здравствуйте! Мне ${ending} ${serviceName}. Хотел бы получить консультацию и узнать подробности.`;
+    
+    // Кодируем сообщение для URL
+    const encodedMessage = encodeURIComponent(message);
+    
+    // Отправляем в WhatsApp
+    const whatsappUrl = `https://wa.me/77011061039?text=${encodedMessage}`;
+    window.open(whatsappUrl, '_blank');
 }
 
 // ===== ИНИЦИАЛИЗАЦИЯ =====
@@ -1157,15 +1184,25 @@ window.scrollToSection = scrollToSection;
 
 // Глобальная функция для открытия модального окна
 window.openModal = function(modalId) {
-    console.log('Opening modal:', modalId);
     const modal = document.querySelector(`#modal-${modalId}`);
-    console.log('Modal element found:', !!modal);
+    
     if (modal) {
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
-        console.log('Modal opened successfully');
-    } else {
-        console.error('Modal not found:', `#modal-${modalId}`);
+        
+        // Принудительно устанавливаем стили для отображения
+        modal.style.position = 'fixed';
+        modal.style.top = '0';
+        modal.style.left = '0';
+        modal.style.right = '0';
+        modal.style.bottom = '0';
+        modal.style.zIndex = '9999';
+        modal.style.display = 'flex';
+        modal.style.alignItems = 'center';
+        modal.style.justifyContent = 'center';
+        modal.style.opacity = '1';
+        modal.style.visibility = 'visible';
+        modal.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
     }
 };
 
@@ -1295,6 +1332,22 @@ document.addEventListener('DOMContentLoaded', () => {
     // Инициализируем навигацию
     const navigation = new Navigation();
 });
+
+// Функция для переключения секций мобильного меню
+window.toggleMobileSection = function(sectionId) {
+    const section = document.querySelector(`#mobile-${sectionId}`).parentElement;
+    const isActive = section.classList.contains('active');
+    
+    // Закрываем все секции
+    document.querySelectorAll('.mobile-menu__section').forEach(s => {
+        s.classList.remove('active');
+    });
+    
+    // Открываем текущую секцию, если она не была активной
+    if (!isActive) {
+        section.classList.add('active');
+    }
+};
 
 // Также скрываем при событии load
 window.addEventListener('load', () => {
