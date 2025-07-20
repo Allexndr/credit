@@ -18,9 +18,13 @@
     <!-- Подключение стилей -->
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/partner.css">
     <link rel="stylesheet" href="styles/responsive.css">
 </head>
-<body>
+<body class="page-fade-in">
+    <!-- Overlay для переходов между страницами -->
+    <div class="page-transition-overlay" id="pageTransitionOverlay"></div>
+    
     <!-- Шапка сайта -->
     <header class="header" id="header">
         <div class="container">
@@ -34,18 +38,18 @@
                 <nav class="header__nav" id="nav">
                     <ul class="nav__list">
                         <li class="nav__item nav__item--dropdown">
-                            <a href="#services" class="nav__link">
+                            <a href="#" class="nav__link dropdown-toggle">
                                 Услуги
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
                                     <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2"/>
                                 </svg>
                             </a>
                             <div class="dropdown">
-                                <a href="#" class="dropdown__link">Потребительский кредит</a>
+                                <a href="#services" class="dropdown__link">Потребительский кредит</a>
                                 <a href="#mortgage-programs" class="dropdown__link">Ипотечные программы</a>
-                                <a href="#" class="dropdown__link">Автокредит</a>
-                                <a href="#" class="dropdown__link">Бизнес кредит</a>
-                                <a href="#" class="dropdown__link">Рефинансирование</a>
+                                <a href="#services" class="dropdown__link">Автокредит</a>
+                                <a href="#business-support" class="dropdown__link">Кредитование бизнеса</a>
+                                <a href="#services" class="dropdown__link">Рефинансирование</a>
                             </div>
                         </li>
                         <li class="nav__item">
@@ -58,7 +62,18 @@
                             <a href="#about" class="nav__link">О нас</a>
                         </li>
                         <li class="nav__item">
+                            <a href="#become-partner" class="nav__link">Стать партнёром</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#faq" class="nav__link">FAQ</a>
+                        </li>
+                        <li class="nav__item">
                             <a href="#contact" class="nav__link">Контакты</a>
+                        </li>
+                        <li class="nav__item nav__item--mobile-cta">
+                            <button class="btn btn--primary btn--mobile-nav" onclick="openModal('application')">
+                                Получить кредит
+                            </button>
                         </li>
                     </ul>
                 </nav>
@@ -122,17 +137,147 @@
                     </div>
                 </div>
                 
+                <div class="hero__image">
+                    <img src="WhatsApp Image 2025-07-19 at 22.12.06.jpeg" alt="WhatsApp консультация" class="hero__whatsapp-image">
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Услуги -->
-    <section class="services" id="services">
+    <!-- DAMU - Ипотечные поддержки бизнеса -->
+    <section class="business-support" id="business-support">
         <div class="container">
             <div class="section__header">
-                <h2 class="section__title">Наши услуги</h2>
+                <h2 class="section__title">DAMU - Ипотечные поддержки бизнеса</h2>
                 <p class="section__description">
-                    Выберите подходящий вариант кредитования
+                    Государственные программы субсидирования и поддержки предпринимательства
+                </p>
+            </div>
+            
+            <div class="business-support__grid">
+                <div class="business-card">
+                    <div class="business-card__icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="business-card__title">Субсидии для малого бизнеса</h3>
+                    <p class="business-card__description">
+                        Программа субсидирования для инвестиций и оборотного капитала малого бизнеса.
+                        Снижение процентной ставки до 40%.
+                    </p>
+                    <div class="business-card__features">
+                        <div class="business-feature">
+                            <span class="business-feature__label">Субсидия:</span>
+                            <span class="business-feature__value">40% от номинальной ставки</span>
+                        </div>
+                        <div class="business-feature">
+                            <span class="business-feature__label">Максимальная сумма:</span>
+                            <span class="business-feature__value">до 200 млн ₸</span>
+                        </div>
+                        <div class="business-feature">
+                            <span class="business-feature__label">Назначение:</span>
+                            <span class="business-feature__value">Инвестиции и оборотка</span>
+                        </div>
+                    </div>
+                    <button class="btn btn--outline" onclick="selectService('small-business')">
+                        Подробнее
+                    </button>
+                </div>
+
+                <div class="business-card business-card--featured">
+                    <div class="business-card__badge">Выгодно</div>
+                    <div class="business-card__icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                            <path d="M3 3h18v18H3zM9 9h6v6H9z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="business-card__title">Субсидирование торговли</h3>
+                    <p class="business-card__description">
+                        Специальная программа поддержки предпринимателей в сфере торговли.
+                        Льготная процентная ставка 10,25%.
+                    </p>
+                    <div class="business-card__features">
+                        <div class="business-feature">
+                            <span class="business-feature__label">Ставка:</span>
+                            <span class="business-feature__value">10,25% годовых</span>
+                        </div>
+                        <div class="business-feature">
+                            <span class="business-feature__label">Максимальная сумма:</span>
+                            <span class="business-feature__value">до 3 млрд ₸</span>
+                        </div>
+                        <div class="business-feature">
+                            <span class="business-feature__label">Сфера:</span>
+                            <span class="business-feature__value">Торговля</span>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary" onclick="selectService('trade-business')">
+                        Подробнее
+                    </button>
+                </div>
+
+                <div class="business-card">
+                    <div class="business-card__icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="business-card__title">Кредитование бизнеса до 500 млн</h3>
+                    <p class="business-card__description">
+                        Крупное финансирование для развития бизнеса. 
+                        Гибкие условия, индивидуальный подход к каждому проекту.
+                    </p>
+                    <div class="business-card__features">
+                        <div class="business-feature">
+                            <span class="business-feature__label">Сумма:</span>
+                            <span class="business-feature__value">до 500 млн ₸</span>
+                        </div>
+                        <div class="business-feature">
+                            <span class="business-feature__label">Срок:</span>
+                            <span class="business-feature__value">до 10 лет</span>
+                        </div>
+                        <div class="business-feature">
+                            <span class="business-feature__label">Ставка:</span>
+                            <span class="business-feature__value">от 12,6% годовых</span>
+                        </div>
+                    </div>
+                    <button class="btn btn--outline" onclick="selectService('large-business')">
+                        Подробнее
+                    </button>
+                </div>
+            </div>
+
+            <div class="business-support__info">
+                <div class="business-offer-card">
+                    <img src="ChatGPT Image Jul 18, 2025, 04_44_48 PM.png" alt="Предложение от DAMU и Baiterek - ставка 12,6%" class="business-offer-image">
+                    <div class="business-offer-content">
+                        <h3>Специальное предложение от партнеров</h3>
+                        <div class="offer-partners">
+                            <span class="partner-badge">Baiterek</span>
+                            <span class="partner-badge">DAMU</span>
+                        </div>
+                        <div class="offer-rate">
+                            <span class="rate-text">Ставка от</span>
+                            <span class="rate-value">12,6%</span>
+                            <span class="rate-period">годовых</span>
+                        </div>
+                        <p>Льготное кредитование бизнеса через государственные программы поддержки предпринимательства</p>
+                        <button class="btn btn--primary" onclick="openModal('business-consultation')">
+                            Получить консультацию по программе
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Кредитные решения -->
+    <section class="credit-solutions" id="credit-solutions">
+        <div class="container">
+            <div class="section__header">
+                <h2 class="section__title">Кредитные решения</h2>
+                <p class="section__description">
+                    Выберите подходящий вариант кредитования для ваших потребностей
                 </p>
             </div>
             
@@ -143,42 +288,151 @@
                             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </div>
-                    <h3 class="service-card__title">Потребительский кредит</h3>
+                    <h3 class="service-card__title">Беззалоговый кредит</h3>
                     <p class="service-card__description">
-                        Финансирование личных потребностей с фиксированной процентной ставкой. 
-                        Быстрое рассмотрение, гибкие условия погашения.
+                        Быстрое получение кредита без залога и поручителей. 
+                        Минимальный пакет документов, оперативное решение.
                     </p>
                     <div class="service-card__features">
                         <div class="service-feature">
                             <span class="service-feature__label">Сумма:</span>
-                            <span class="service-feature__value">50 000 - 1 000 000 ₸</span>
+                            <span class="service-feature__value">50 000 - 3 000 000 ₸</span>
                         </div>
                         <div class="service-feature">
                             <span class="service-feature__label">Срок:</span>
-                            <span class="service-feature__value">3 - 36 месяцев</span>
+                            <span class="service-feature__value">3 - 60 месяцев</span>
                         </div>
                         <div class="service-feature">
                             <span class="service-feature__label">Ставка:</span>
                             <span class="service-feature__value">от 12% годовых</span>
                         </div>
                     </div>
-                    <button class="btn btn--outline" onclick="selectService('express')">
+                    <button class="btn btn--outline" onclick="selectService('unsecured')">
+                        Выбрать
+                    </button>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-card__icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="2"/>
+                            <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-card__title">Рефинансирование</h3>
+                    <p class="service-card__description">
+                        Перекредитование существующих займов под более выгодные условия.
+                        Снижение процентной ставки и ежемесячного платежа.
+                    </p>
+                    <div class="service-card__features">
+                        <div class="service-feature">
+                            <span class="service-feature__label">Сумма:</span>
+                            <span class="service-feature__value">от 100 000 ₸</span>
+                        </div>
+                        <div class="service-feature">
+                            <span class="service-feature__label">Срок:</span>
+                            <span class="service-feature__value">до 7 лет</span>
+                        </div>
+                        <div class="service-feature">
+                            <span class="service-feature__label">Экономия:</span>
+                            <span class="service-feature__value">до 50% от платежа</span>
+                        </div>
+                    </div>
+                    <button class="btn btn--outline" onclick="selectService('refinancing')">
                         Выбрать
                     </button>
                 </div>
 
                 <div class="service-card service-card--featured">
-                    <div class="service-card__badge">Популярный</div>
+                    <div class="service-card__badge">Выгодно</div>
                     <div class="service-card__icon">
                         <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
-                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <polyline points="9,22 9,12 15,12 15,22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke="currentColor" stroke-width="2"/>
+                            <polyline points="9,22 9,12 15,12 15,22" stroke="currentColor" stroke-width="2"/>
                         </svg>
                     </div>
-                    <h3 class="service-card__title">Ипотечное кредитование</h3>
+                    <h3 class="service-card__title">Залоговый кредит</h3>
                     <p class="service-card__description">
-                        Долгосрочное финансирование приобретения недвижимости. 
-                        Выгодные процентные ставки, гибкие программы кредитования.
+                        Кредит под залог недвижимости или транспорта.
+                        Минимальные процентные ставки, крупные суммы.
+                    </p>
+                    <div class="service-card__features">
+                        <div class="service-feature">
+                            <span class="service-feature__label">Сумма:</span>
+                            <span class="service-feature__value">до 100 000 000 ₸</span>
+                        </div>
+                        <div class="service-feature">
+                            <span class="service-feature__label">Срок:</span>
+                            <span class="service-feature__value">до 20 лет</span>
+                        </div>
+                        <div class="service-feature">
+                            <span class="service-feature__label">Ставка:</span>
+                            <span class="service-feature__value">от 8% годовых</span>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary" onclick="selectService('secured')">
+                        Выбрать
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Решения для бизнеса -->
+    <section class="business-solutions" id="business-solutions">
+        <div class="container">
+            <div class="section__header">
+                <h2 class="section__title">Решения для бизнеса</h2>
+                <p class="section__description">
+                    Кредитование для индивидуальных предпринимателей и ТОО
+                </p>
+            </div>
+            
+            <div class="services__grid">
+                <div class="service-card">
+                    <div class="service-card__icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="8.5" cy="7" r="4" stroke="currentColor" stroke-width="2"/>
+                            <path d="m22 2-5 10-3-3-10 5" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-card__title">Беззалоговый кредит для ИП</h3>
+                    <p class="service-card__description">
+                        Быстрое финансирование для индивидуальных предпринимателей
+                        без залога и сложных процедур.
+                    </p>
+                    <div class="service-card__features">
+                        <div class="service-feature">
+                            <span class="service-feature__label">Сумма:</span>
+                            <span class="service-feature__value">до 5 000 000 ₸</span>
+                        </div>
+                        <div class="service-feature">
+                            <span class="service-feature__label">Срок:</span>
+                            <span class="service-feature__value">до 3 лет</span>
+                        </div>
+                        <div class="service-feature">
+                            <span class="service-feature__label">Ставка:</span>
+                            <span class="service-feature__value">от 15% годовых</span>
+                        </div>
+                    </div>
+                    <button class="btn btn--outline" onclick="selectService('ip-unsecured')">
+                        Выбрать
+                    </button>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-card__icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="8.5" cy="7" r="4" stroke="currentColor" stroke-width="2"/>
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-card__title">Залоговый кредит для ИП</h3>
+                    <p class="service-card__description">
+                        Крупное финансирование под залог недвижимости или оборудования
+                        для развития бизнеса ИП.
                     </p>
                     <div class="service-card__features">
                         <div class="service-feature">
@@ -187,26 +441,72 @@
                         </div>
                         <div class="service-feature">
                             <span class="service-feature__label">Срок:</span>
-                            <span class="service-feature__value">до 25 лет</span>
+                            <span class="service-feature__value">до 10 лет</span>
                         </div>
                         <div class="service-feature">
-                            <span class="service-feature__label">Взнос:</span>
-                            <span class="service-feature__value">от 15%</span>
+                            <span class="service-feature__label">Ставка:</span>
+                            <span class="service-feature__value">от 12% годовых</span>
                         </div>
                     </div>
-                    <button class="btn btn--primary" onclick="selectService('mortgage')">
+                    <button class="btn btn--outline" onclick="selectService('ip-secured')">
                         Выбрать
                     </button>
                 </div>
 
-                <div class="service-card">
+                <div class="service-card service-card--featured">
+                    <div class="service-card__badge">Для ТОО</div>
+                    <div class="service-card__icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                            <path d="M3 3h18v18H3zM9 9h6v6H9z" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-card__title">Кредитование ТОО</h3>
+                    <p class="service-card__description">
+                        Корпоративное кредитование для товариществ с ограниченной ответственностью.
+                        Гибкие условия и индивидуальный подход.
+                    </p>
+                    <div class="service-card__features">
+                        <div class="service-feature">
+                            <span class="service-feature__label">Сумма:</span>
+                            <span class="service-feature__value">до 500 000 000 ₸</span>
+                        </div>
+                        <div class="service-feature">
+                            <span class="service-feature__label">Срок:</span>
+                            <span class="service-feature__value">до 15 лет</span>
+                        </div>
+                        <div class="service-feature">
+                            <span class="service-feature__label">Ставка:</span>
+                            <span class="service-feature__value">от 10% годовых</span>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary" onclick="selectService('too-credit')">
+                        Выбрать
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Специализированные услуги -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section__header">
+                <h2 class="section__title">Специализированные услуги</h2>
+                <p class="section__description">
+                    Дополнительные финансовые продукты
+                </p>
+            </div>
+            
+            <div class="services__grid">
+                <div class="service-card service-card--featured">
+                    <div class="service-card__badge">Популярный</div>
                     <div class="service-card__icon">
                         <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
                             <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
                             <path d="M7 15h.01M11 15h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                         </svg>
                     </div>
-                    <h3 class="service-card__title">Автомобильное кредитование</h3>
+                    <h3 class="service-card__title">АВТО кредитование</h3>
                     <p class="service-card__description">
                         Целевое финансирование покупки транспортных средств. 
                         Кредитование новых и подержанных автомобилей.
@@ -225,7 +525,7 @@
                             <span class="service-feature__value">от 20%</span>
                         </div>
                     </div>
-                    <button class="btn btn--outline" onclick="selectService('auto')">
+                    <button class="btn btn--primary" onclick="selectService('auto')">
                         Выбрать
                     </button>
                 </div>
@@ -244,15 +544,15 @@
             </div>
             
             <div class="mortgage-programs__grid">
-                <!-- Обычная ипотека -->
+                <!-- Стандартная ипотека -->
                 <div class="mortgage-card">
                     <div class="mortgage-card__header">
-                        <h3 class="mortgage-card__title">Обычная ипотека</h3>
-                        <div class="mortgage-card__badge">Стандартная</div>
+                        <h3 class="mortgage-card__title">Стандартная ипотека</h3>
+                        <div class="mortgage-card__badge">Базовая</div>
                     </div>
                     <div class="mortgage-card__content">
                         <p class="mortgage-card__description">
-                            Первоначальный взнос. Первичка, вторичка, частные дома.
+                            Классическая ипотечная программа. Первичка, вторичка, частные дома.
                         </p>
                         <div class="mortgage-card__features">
                             <div class="mortgage-feature">
@@ -264,89 +564,89 @@
                                 <span class="mortgage-feature__value">До 25 лет</span>
                             </div>
                             <div class="mortgage-feature">
-                                <span class="mortgage-feature__label">Тип недвижимости:</span>
-                                <span class="mortgage-feature__value">Первичка, вторичка, частные дома</span>
+                                <span class="mortgage-feature__label">Ставка:</span>
+                                <span class="mortgage-feature__value">от 12% годовых</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Ипотека без подтверждения дохода -->
-                <div class="mortgage-card">
-                    <div class="mortgage-card__header">
-                        <h3 class="mortgage-card__title">Ипотека без подтверждения дохода</h3>
-                        <div class="mortgage-card__badge">Упрощенная</div>
-                    </div>
-                    <div class="mortgage-card__content">
-                        <p class="mortgage-card__description">
-                            Минимум документов для быстрого одобрения.
-                        </p>
-                        <div class="mortgage-card__features">
-                            <div class="mortgage-feature">
-                                <span class="mortgage-feature__label">Первоначальный взнос:</span>
-                                <span class="mortgage-feature__value">От 20%</span>
-                            </div>
-                            <div class="mortgage-feature">
-                                <span class="mortgage-feature__label">Срок кредитования:</span>
-                                <span class="mortgage-feature__value">До 25 лет</span>
-                            </div>
-                            <div class="mortgage-feature">
-                                <span class="mortgage-feature__label">Тип недвижимости:</span>
-                                <span class="mortgage-feature__value">Первичка</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Партнерская ипотека -->
+                <!-- Льготная услуга от 2% -->
                 <div class="mortgage-card mortgage-card--featured">
                     <div class="mortgage-card__header">
-                        <h3 class="mortgage-card__title">Партнерская ипотека</h3>
-                        <div class="mortgage-card__badge">Рекомендуем</div>
-                    </div>
-                    <div class="mortgage-card__content">
-                        <p class="mortgage-card__description">
-                            Специальные условия от банков-партнеров.
-                        </p>
-                        <div class="mortgage-card__features">
-                            <div class="mortgage-feature">
-                                <span class="mortgage-feature__label">Первоначальный взнос:</span>
-                                <span class="mortgage-feature__value">От 20%</span>
-                            </div>
-                            <div class="mortgage-feature">
-                                <span class="mortgage-feature__label">Тип недвижимости:</span>
-                                <span class="mortgage-feature__value">Первичка</span>
-                            </div>
-                            <div class="mortgage-feature">
-                                <span class="mortgage-feature__label">Банки-партнеры:</span>
-                                <span class="mortgage-feature__value">Altyn Bank, Freedom Bank, Банк Центр Кредит, Халык Банк</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Льготная ипотека -->
-                <div class="mortgage-card">
-                    <div class="mortgage-card__header">
-                        <h3 class="mortgage-card__title">Льготная ипотека под 2,45%</h3>
+                        <h3 class="mortgage-card__title">Льготная услуга от 2%</h3>
                         <div class="mortgage-card__badge">Выгодно</div>
                     </div>
                     <div class="mortgage-card__content">
                         <p class="mortgage-card__description">
-                            Государственная программа с минимальной ставкой.
+                            Государственная программа льготного ипотечного кредитования с минимальной ставкой.
                         </p>
                         <div class="mortgage-card__features">
                             <div class="mortgage-feature">
-                                <span class="mortgage-feature__label">Первоначальный взнос:</span>
-                                <span class="mortgage-feature__value">От 10%</span>
+                                <span class="mortgage-feature__label">Ставка:</span>
+                                <span class="mortgage-feature__value">от 2% годовых</span>
                             </div>
                             <div class="mortgage-feature">
-                                <span class="mortgage-feature__label">Банк:</span>
-                                <span class="mortgage-feature__value">Отбасы Банк</span>
+                                <span class="mortgage-feature__label">Первоначальный взнос:</span>
+                                <span class="mortgage-feature__value">От 20%</span>
+                            </div>
+                            <div class="mortgage-feature">
+                                <span class="mortgage-feature__label">Срок:</span>
+                                <span class="mortgage-feature__value">До 25 лет</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Программа консультация 2-5% -->
+                <div class="mortgage-card">
+                    <div class="mortgage-card__header">
+                        <h3 class="mortgage-card__title">Консультационная программа 2-5%</h3>
+                        <div class="mortgage-card__badge">Консультация</div>
+                    </div>
+                    <div class="mortgage-card__content">
+                        <p class="mortgage-card__description">
+                            Специальная программа с персональной консультацией и гибкими условиями.
+                        </p>
+                        <div class="mortgage-card__features">
+                            <div class="mortgage-feature">
+                                <span class="mortgage-feature__label">Ставка:</span>
+                                <span class="mortgage-feature__value">2-5% годовых</span>
+                            </div>
+                            <div class="mortgage-feature">
+                                <span class="mortgage-feature__label">Тип клиента:</span>
+                                <span class="mortgage-feature__value">ТОО/Физ. лица</span>
+                            </div>
+                            <div class="mortgage-feature">
+                                <span class="mortgage-feature__label">Консультация:</span>
+                                <span class="mortgage-feature__value">Бесплатно</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Быстрая ипотека 3-20-25 Отау/Нурлы -->
+                <div class="mortgage-card">
+                    <div class="mortgage-card__header">
+                        <h3 class="mortgage-card__title">Быстрая ипотека Отау/Нурлы</h3>
+                        <div class="mortgage-card__badge">Быстро</div>
+                    </div>
+                    <div class="mortgage-card__content">
+                        <p class="mortgage-card__description">
+                            Ускоренная программа для жилищных программ Отау и Нурлы Жер.
+                        </p>
+                        <div class="mortgage-card__features">
+                            <div class="mortgage-feature">
+                                <span class="mortgage-feature__label">Ставка:</span>
+                                <span class="mortgage-feature__value">3-20% годовых</span>
+                            </div>
+                            <div class="mortgage-feature">
+                                <span class="mortgage-feature__label">Срок:</span>
+                                <span class="mortgage-feature__value">До 25 лет</span>
                             </div>
                             <div class="mortgage-feature">
                                 <span class="mortgage-feature__label">Программы:</span>
-                                <span class="mortgage-feature__value">7-20-25, Орку/Наураз, Вакатты отбасы, "Матпац", Молодежные программы</span>
+                                <span class="mortgage-feature__value">Отау, Нурлы Жер</span>
                             </div>
                         </div>
                     </div>
@@ -1007,6 +1307,179 @@
         </div>
     </section>
 
+    <!-- Стать партнёром -->
+    <section class="become-partner" id="become-partner">
+        <div class="container">
+            <!-- Главный баннер -->
+            <div class="partner-hero">
+                <div class="partner-hero__content">
+                    <h2 class="partner-hero__title">Станьте партнёром Burkit Finance</h2>
+                    <p class="partner-hero__description">
+                        Зарабатывайте с нами, помогая людям получать выгодные кредиты.
+                    </p>
+                    <p class="partner-hero__subtitle">
+                        Присоединяйтесь как <span class="text-highlight">банковский менеджер</span>, 
+                        <span class="text-highlight">агент</span> или <span class="text-highlight">аффилиат</span>.
+                    </p>
+                    <button class="btn btn--primary btn--large" onclick="openModal('partner-application')">
+                        Присоединиться к Burkit Finance →
+                    </button>
+                </div>
+                <div class="partner-hero__image">
+                    <img src="images/hero-person.png" alt="Партнёрство с Burkit Finance">
+                </div>
+            </div>
+
+            <!-- Выбор формата партнёрства -->
+            <div class="section__header">
+                <h2 class="section__title">Выберите свой формат партнёрства</h2>
+            </div>
+            
+            <div class="partnership-types">
+                <div class="partnership-card">
+                    <div class="partnership-card__icon">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="partnership-card__title">Менеджер банка</h3>
+                    <div class="partnership-card__advantage">
+                        <span class="advantage-badge">✓ Преимущество</span>
+                        <p class="partnership-card__description">
+                            Принимайте заявки напрямую от Burkit Finance и увеличивайте объёмы кредитования с минимальными усилиями.
+                        </p>
+                    </div>
+                    <button class="btn btn--outline" onclick="selectPartnership('bank-manager')">
+                        Узнать детали →
+                    </button>
+                </div>
+
+                <div class="partnership-card">
+                    <div class="partnership-card__icon">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="9" cy="7" r="4" stroke="#059669" stroke-width="2"/>
+                            <path d="m22 21-3-3m0 0a2 2 0 1 1-2.83-2.83 2 2 0 0 1 2.83 2.83Z" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="partnership-card__title">Агент</h3>
+                    <div class="partnership-card__advantage">
+                        <span class="advantage-badge">✓ Преимущество</span>
+                        <p class="partnership-card__description">
+                            Консультируйте клиентов с Вашего населенного пункта и зарабатывайте % от одобренной суммы
+                        </p>
+                    </div>
+                    <button class="btn btn--outline" onclick="selectPartnership('agent')">
+                        Узнать детали →
+                    </button>
+                </div>
+
+                <div class="partnership-card">
+                    <div class="partnership-card__icon">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="12" cy="12" r="3" stroke="#059669" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3 class="partnership-card__title">Аффилиат</h3>
+                    <div class="partnership-card__advantage">
+                        <span class="advantage-badge">✓ Преимущество</span>
+                        <p class="partnership-card__description">
+                            Размещайте партнёрские ссылки, получайте вознаграждение за каждого привлечённого клиента
+                        </p>
+                    </div>
+                    <button class="btn btn--outline" onclick="selectPartnership('affiliate')">
+                        Узнать детали →
+                    </button>
+                </div>
+            </div>
+
+            <!-- CTA секция -->
+            <div class="partner-cta">
+                <div class="partner-cta__content">
+                    <h3 class="partner-cta__title">Присоединяйтесь к партнёрской программе Burkit Finance</h3>
+                    <p class="partner-cta__description">
+                        Удобные инструменты, понятные условия, прозрачные выплаты — всё для вашего успеха.<br>
+                        Выбирайте подходящую роль: менеджер, агент или аффилиат — и начните уже сегодня!
+                    </p>
+                    <button class="btn btn--primary btn--large" onclick="openModal('partner-application')">
+                        Стать партнёром →
+                    </button>
+                </div>
+                <div class="partner-cta__image">
+                    <!-- Здесь можно добавить изображение команды -->
+                </div>
+            </div>
+
+            <!-- FAQ для партнёров -->
+            <div class="partner-faq">
+                <h3 class="partner-faq__title">Всё, что нужно знать о партнёрстве</h3>
+                
+                <div class="partner-faq__list">
+                    <div class="partner-faq-item">
+                        <button class="partner-faq-item__question" onclick="togglePartnerFAQ(this)">
+                            Кто может стать партнёром Burkit Finance?
+                            <svg class="partner-faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                        <div class="partner-faq-item__answer">
+                            <p>Партнёром может стать любой: менеджер банка, агент из любого региона Казахстана, блогер или даже бывший клиент. Главное — желание зарабатывать вместе с нами. Мы даём доступ к обучению, CRM и всем необходимым материалам. У вас может быть аудитория в соцсетях, или вы можете просто рекомендовать наши услуги друзьям и знакомым.</p>
+                        </div>
+                    </div>
+
+                    <div class="partner-faq-item">
+                        <button class="partner-faq-item__question" onclick="togglePartnerFAQ(this)">
+                            Как я буду зарабатывать как партнёр?
+                            <svg class="partner-faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                        <div class="partner-faq-item__answer">
+                            <p>Доходы зависят от выбранного формата партнёрства. Менеджеры банков получают комиссию с каждого оформленного кредита. Агенты зарабатывают процент от одобренной суммы кредита. Аффилиаты получают фиксированное вознаграждение за каждого привлечённого клиента, который оформил кредит.</p>
+                        </div>
+                    </div>
+
+                    <div class="partner-faq-item">
+                        <button class="partner-faq-item__question" onclick="togglePartnerFAQ(this)">
+                            Как происходит оформление клиентов и как я вижу свои заявки?
+                            <svg class="partner-faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                        <div class="partner-faq-item__answer">
+                            <p>После регистрации вы получите доступ к партнёрскому кабинету, где можете отслеживать все заявки клиентов, их статусы и свои доходы в режиме реального времени. Каждому партнёру выдаётся уникальная ссылка для привлечения клиентов.</p>
+                        </div>
+                    </div>
+
+                    <div class="partner-faq-item">
+                        <button class="partner-faq-item__question" onclick="togglePartnerFAQ(this)">
+                            Когда и как я получу оплату?
+                            <svg class="partner-faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                        <div class="partner-faq-item__answer">
+                            <p>Выплаты производятся ежемесячно до 15 числа следующего месяца на ваш банковский счёт. Минимальная сумма для вывода — 10 000 тенге. Все расчёты прозрачны и доступны в личном кабинете.</p>
+                        </div>
+                    </div>
+
+                    <div class="partner-faq-item">
+                        <button class="partner-faq-item__question" onclick="togglePartnerFAQ(this)">
+                            Что делать, если у меня нет опыта, но я хочу стать партнёром?
+                            <svg class="partner-faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                        <div class="partner-faq-item__answer">
+                            <p>Мы предоставляем полное обучение всем партнёрам: обучающие материалы, вебинары, персональное сопровождение от менеджера. Также предоставляем готовые рекламные материалы и помогаем с первыми клиентами.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- FAQ секция -->
     <section class="faq" id="faq">
         <div class="container">
@@ -1404,6 +1877,134 @@
         </div>
     </div>
 
+    <!-- Модальное окно заявки на партнёрство -->
+    <div class="modal" id="modal-partner-application">
+        <div class="modal__overlay" onclick="closeModal('partner-application')"></div>
+        <div class="modal__content">
+            <button class="modal__close" onclick="closeModal('partner-application')">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+            
+            <div class="modal__header">
+                <h3>Заявка на партнёрство</h3>
+                <p>Присоединяйтесь к нашей команде и начните зарабатывать уже сегодня!</p>
+            </div>
+            
+            <form class="form" onsubmit="submitPartnerApplication(event)">
+                <div class="form-row">
+                    <input type="text" name="fullName" class="form-input" placeholder="ФИО" required>
+                </div>
+                <div class="form-row">
+                    <input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" value="+7" required>
+                </div>
+                <div class="form-row">
+                    <input type="email" name="email" class="form-input" placeholder="Email" required>
+                </div>
+                <div class="form-row">
+                    <select name="partnershipType" class="form-select" required>
+                        <option value="">Выберите тип партнёрства</option>
+                        <option value="bank-manager">Менеджер банка</option>
+                        <option value="agent">Агент</option>
+                        <option value="affiliate">Аффилиат</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <input type="text" name="city" class="form-input" placeholder="Город" required>
+                </div>
+                <div class="form-row">
+                    <textarea name="experience" class="form-textarea" placeholder="Опыт работы в финансовой сфере (необязательно)"></textarea>
+                </div>
+                <div class="form-row">
+                    <textarea name="motivation" class="form-textarea" placeholder="Почему хотите стать партнёром? (необязательно)"></textarea>
+                </div>
+                <div class="form-row">
+                    <label class="checkbox">
+                        <input type="checkbox" name="consent" required>
+                        <span class="checkmark"></span>
+                        Я соглашаюсь на обработку персональных данных
+                    </label>
+                </div>
+                
+                <button type="submit" class="btn btn--primary btn--full">
+                    Отправить заявку
+                </button>
+                
+                <p class="form-notice">
+                    Мы свяжемся с вами в течение рабочего дня. 
+                    <a href="#" class="link">Политика конфиденциальности</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Модальное окно консультации по бизнес-программе -->
+    <div class="modal" id="modal-business-consultation">
+        <div class="modal__overlay" onclick="closeModal('business-consultation')"></div>
+        <div class="modal__content">
+            <button class="modal__close" onclick="closeModal('business-consultation')">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+            
+            <div class="modal__header">
+                <h3>Консультация по программе DAMU</h3>
+                <p>Получите персональную консультацию по государственным программам поддержки бизнеса</p>
+            </div>
+            
+            <form class="form" onsubmit="submitBusinessConsultation(event)">
+                <div class="form-row">
+                    <input type="text" name="fullName" class="form-input" placeholder="ФИО" required>
+                </div>
+                <div class="form-row">
+                    <input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" value="+7" required>
+                </div>
+                <div class="form-row">
+                    <input type="email" name="email" class="form-input" placeholder="Email">
+                </div>
+                <div class="form-row">
+                    <select name="businessType" class="form-select" required>
+                        <option value="">Тип бизнеса</option>
+                        <option value="small-business">Малый бизнес</option>
+                        <option value="trade">Торговля</option>
+                        <option value="large-business">Крупный бизнес</option>
+                        <option value="ip">ИП</option>
+                        <option value="too">ТОО</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <select name="creditAmount" class="form-select" required>
+                        <option value="">Требуемая сумма</option>
+                        <option value="under-10m">До 10 млн ₸</option>
+                        <option value="10-50m">10-50 млн ₸</option>
+                        <option value="50-200m">50-200 млн ₸</option>
+                        <option value="over-200m">Свыше 200 млн ₸</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <textarea name="purpose" class="form-textarea" placeholder="Цель кредитования (инвестиции, оборотный капитал, развитие)"></textarea>
+                </div>
+                <div class="form-row">
+                    <label class="checkbox">
+                        <input type="checkbox" name="consent" required>
+                        <span class="checkmark"></span>
+                        Я соглашаюсь на обработку персональных данных
+                    </label>
+                </div>
+                
+                <button type="submit" class="btn btn--primary btn--full">
+                    Получить консультацию
+                </button>
+                
+                <p class="form-notice">
+                    Наш специалист свяжется с вами в течение рабочего дня для персональной консультации по программам DAMU и Baiterek.
+                </p>
+            </form>
+        </div>
+    </div>
+
     <!-- WhatsApp кнопка -->
     <a href="https://wa.me/77011061039?text" class="whatsapp-btn" target="_blank">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -1413,5 +2014,58 @@
 
     <!-- Скрипты -->
     <script src="js/main.js"></script>
+    
+    <!-- Принудительное убирание обводок -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Находим все навигационные ссылки
+        const navLinks = document.querySelectorAll('.nav__link');
+        
+        navLinks.forEach(function(link) {
+            // Убираем класс active
+            link.classList.remove('nav__link--active');
+            
+            // Убираем все возможные обводки
+            link.style.outline = 'none';
+            link.style.border = 'none';
+            link.style.boxShadow = 'none';
+            link.style.background = 'transparent';
+            link.style.backgroundColor = 'transparent';
+            link.style.webkitTapHighlightColor = 'transparent';
+            link.style.webkitFocusRingColor = 'transparent';
+            
+            // Добавляем обработчики событий
+            link.addEventListener('focus', function() {
+                this.classList.remove('nav__link--active');
+                this.style.outline = 'none';
+                this.style.border = 'none';
+                this.style.boxShadow = 'none';
+                this.style.background = 'rgba(79, 126, 247, 0.2)';
+            });
+            
+            link.addEventListener('click', function() {
+                this.classList.remove('nav__link--active');
+                this.style.outline = 'none';
+                this.style.border = 'none';
+                this.style.boxShadow = 'none';
+            });
+            
+            link.addEventListener('blur', function() {
+                this.classList.remove('nav__link--active');
+                this.style.background = 'transparent';
+            });
+        });
+        
+        // Проверяем каждые 100ms и убираем класс active
+        setInterval(function() {
+            const activeLinks = document.querySelectorAll('.nav__link--active');
+            activeLinks.forEach(function(link) {
+                link.classList.remove('nav__link--active');
+                link.style.background = 'transparent';
+                link.style.outline = 'none';
+            });
+        }, 100);
+    });
+    </script>
 </body>
 </html> 

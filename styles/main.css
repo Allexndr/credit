@@ -1,4 +1,32 @@
 /* ===== ОСНОВНЫЕ СТИЛИ ===== */
+
+/* УБИРАЕМ ОБВОДКИ - МАКСИМАЛЬНЫЙ ПРИОРИТЕТ */
+a[href="#become-partner"],
+a[href="#become-partner"]:focus,
+a[href="#become-partner"]:focus-visible,
+a[href="#become-partner"]:active,
+a[href="#become-partner"]:hover,
+a[href="#become-partner"]:visited,
+.nav__link--active,
+.nav__link.nav__link--active,
+.nav__link.nav__link--active:focus,
+.nav__link.nav__link--active:hover,
+.nav__link.nav__link--active:active {
+    outline: 0 !important;
+    outline: none !important;
+    border: 0 !important;
+    border: none !important;
+    box-shadow: 0 0 0 0 transparent !important;
+    box-shadow: none !important;
+    -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-focus-ring-color: transparent !important;
+    -moz-outline: 0 !important;
+    -moz-outline: none !important;
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
 :root {
     /* Цветовая схема - Банковская */
     --primary: #1e3a8a;
@@ -46,6 +74,69 @@
     /* Анимации */
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Переходы между страницами */
+    --page-transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ===== ПЕРЕХОДЫ МЕЖДУ СТРАНИЦАМИ ===== */
+.page-transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--page-transition);
+}
+
+.page-transition-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.page-transition-overlay::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid white;
+    border-radius: 50%;
+    animation: page-spin 1s linear infinite;
+}
+
+@keyframes page-spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+body.page-transitioning {
+    overflow: hidden;
+}
+
+/* Анимация появления страницы */
+.page-fade-in {
+    opacity: 0;
+    animation: fadeInPage 0.6s ease forwards;
+}
+
+@keyframes fadeInPage {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* ===== GLOBAL STYLES ===== */
@@ -53,6 +144,28 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    outline: none !important;
+}
+
+/* Убираем все обводки глобально */
+*:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+*:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+a:focus,
+a:focus-visible,
+button:focus,
+button:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
 }
 
 /* Скрыть любые аналитические панели */
@@ -119,6 +232,19 @@ body.loaded {
 /* Основной контент */
 .main-content {
     flex: 1;
+    padding-top: 0; /* Убираем отступ для устранения белой линии */
+}
+
+@media (min-width: 768px) {
+    .main-content {
+        padding-top: 0; /* Убираем отступ */
+    }
+}
+
+@media (min-width: 1024px) {
+    .main-content {
+        padding-top: 0; /* Убираем отступ */
+    }
 }
 
 /* Контейнер */
@@ -196,10 +322,16 @@ a {
     color: var(--primary);
     text-decoration: none;
     transition: var(--transition-fast);
+    outline: none !important;
 }
 
 a:hover {
     color: var(--primary-dark);
+}
+
+a:focus {
+    outline: none !important;
+    box-shadow: none !important;
 }
 
 /* Утилиты */
@@ -242,7 +374,7 @@ a:hover {
 .header {
     background: rgba(30, 41, 59, 0.95);
     backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(79, 126, 247, 0.2);
+    border-bottom: none; /* Убираем границу */
     position: fixed;
     top: 0;
     left: 0;
@@ -253,8 +385,8 @@ a:hover {
 
 .header.scrolled {
     background: rgba(30, 41, 59, 0.98);
-    border-bottom: 1px solid rgba(79, 126, 247, 0.3);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    border-bottom: none; /* Убираем границу и при скролле */
+    box-shadow: none; /* Убираем тень */
 }
 
 .header__inner {
@@ -262,12 +394,27 @@ a:hover {
     align-items: center;
     justify-content: space-between;
     padding: 1.2rem 0;
-    gap: 2rem;
+    gap: 1rem;
+    position: relative;
+    z-index: 1000;
+}
+
+@media (max-width: 1023px) {
+    .header__inner {
+        padding: 1rem 0;
+        gap: 0.5rem;
+        justify-content: space-between; /* Логотип слева, бургер справа */
+    }
+    
+    .header__logo {
+        flex: 1; /* Логотип занимает доступное место */
+    }
 }
 
 @media (min-width: 768px) {
     .header__inner {
         padding: 1.5rem 0;
+        gap: 2rem;
     }
 }
 
@@ -284,7 +431,7 @@ a:hover {
 }
 
 .logo__image {
-    height: 100px;
+    height: 80px;
     width: auto;
     object-fit: contain;
     filter: brightness(1.1) contrast(1.1);
@@ -299,7 +446,7 @@ a:hover {
 /* Адаптивность логотипа */
 @media (min-width: 768px) {
     .logo__image {
-        height: 110px;
+        height: 100px;
     }
 }
 
@@ -314,38 +461,182 @@ a:hover {
     display: none;
 }
 
+/* Десктопная навигация */
 @media (min-width: 1024px) {
     .header__nav {
         display: flex !important;
         position: static !important;
         background: transparent !important;
-        left: auto !important;
-        right: auto !important;
-        bottom: auto !important;
         width: auto !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+    }
+    
+    .nav__list {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        list-style: none;
+        flex-direction: row;
+        padding: 0;
+    }
+    
+    .nav__item {
+        position: relative;
+    }
+    
+    /* Скрываем мобильную кнопку на десктопе */
+    .nav__item--mobile-cta {
+        display: none !important;
+    }
+    
+    .nav__link {
+        color: rgba(255, 255, 255, 0.9) !important;
+        font-weight: 500;
+        font-size: 0.95rem;
+        padding: 0.5rem 0.75rem;
+        border-radius: var(--radius-md);
+        transition: var(--transition-fast);
+        display: block;
+        text-decoration: none;
     }
 }
 
-.nav__list {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    list-style: none;
-}
-
-.nav__link {
-    color: rgba(255, 255, 255, 0.9);
-    font-weight: 500;
-    font-size: 0.95rem;
-    padding: 0.5rem 0.75rem;
-    border-radius: var(--radius-md);
-    transition: var(--transition-fast);
-    position: relative;
-}
-
-.nav__link:hover {
-    color: white;
-    background: rgba(79, 126, 247, 0.2);
+/* Мобильная навигация */
+@media (max-width: 1023px) {
+    .header__nav {
+        position: fixed;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(30, 41, 59, 0.98);
+        backdrop-filter: blur(20px);
+        border-top: 1px solid rgba(79, 126, 247, 0.2);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        transform: translateY(-100%);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        display: none !important;
+    }
+    
+    .header__nav.active {
+        display: block !important;
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .nav__list {
+        display: flex;
+        flex-direction: column;
+        padding: 2rem 1rem;
+        gap: 0;
+        list-style: none;
+        margin: 0;
+    }
+    
+    .nav__item {
+        width: 100%;
+        border-bottom: 1px solid rgba(79, 126, 247, 0.1);
+        margin: 0;
+    }
+    
+    .nav__item:last-child {
+        border-bottom: none;
+    }
+    
+    /* Специальная кнопка для мобильного меню */
+    .nav__item--mobile-cta {
+        border-bottom: none;
+        padding: 1.5rem 0;
+        margin-top: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .nav__link {
+        display: block;
+        padding: 1rem 0;
+        font-size: 1.1rem;
+        text-align: center;
+        border-radius: 0;
+        color: rgba(255, 255, 255, 0.9) !important;
+        text-decoration: none;
+        transition: var(--transition-fast);
+    }
+    
+    .nav__link:hover {
+        background: rgba(79, 126, 247, 0.2);
+        color: white !important;
+    }
+    
+    /* Стили для кнопки в мобильном меню */
+    .btn--mobile-nav {
+        width: 80%;
+        max-width: 300px;
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border-radius: var(--radius-lg);
+        background: var(--gradient-primary);
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: var(--transition);
+        margin: 0 auto;
+        display: block;
+    }
+    
+    .btn--mobile-nav:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+    }
+    
+    /* Dropdown для мобильных */
+    .nav__item--dropdown .nav__link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+    
+    .nav__item--dropdown .dropdown {
+        position: static;
+        background: rgba(15, 23, 42, 0.9);
+        box-shadow: none;
+        border-radius: 0;
+        opacity: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+    
+    .nav__item--dropdown.active .dropdown {
+        opacity: 1;
+        max-height: 300px;
+    }
+    
+    .nav__item--dropdown .dropdown__link {
+        display: block;
+        padding: 0.75rem 2rem;
+        font-size: 0.95rem;
+        color: rgba(255, 255, 255, 0.8) !important;
+        border-bottom: 1px solid rgba(79, 126, 247, 0.1);
+        text-decoration: none;
+    }
+    
+    .nav__item--dropdown .dropdown__link:last-child {
+        border-bottom: none;
+    }
+    
+    .nav__item--dropdown .dropdown__link:hover {
+        background: rgba(79, 126, 247, 0.15);
+        color: white !important;
+    }
 }
 
 /* Действия в шапке */
@@ -353,6 +644,21 @@ a:hover {
     display: flex;
     align-items: center;
     gap: 1rem;
+    z-index: 1000;
+    position: relative;
+}
+
+/* Показываем actions только на десктопе */
+@media (max-width: 1023px) {
+    .header__actions {
+        display: none !important; /* Полностью скрываем actions на мобильных */
+    }
+}
+
+@media (min-width: 1024px) {
+    .header__actions {
+        display: flex !important; /* Показываем только на десктопе */
+    }
 }
 
 .header__phone {
@@ -384,26 +690,33 @@ a:hover {
 
 /* Бургер меню */
 .burger {
-    display: none;
+    display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 1.5rem;
-    height: 1.125rem;
-    background: none;
-    border: none;
+    width: 30px;
+    height: 22px;
+    background: red; /* ВРЕМЕННО ДЛЯ ОТЛАДКИ */
+    border: 2px solid yellow; /* ВРЕМЕННО ДЛЯ ОТЛАДКИ */
     cursor: pointer;
     padding: 0;
-    z-index: 1001;
+    z-index: 9999;
     position: relative;
+    transition: var(--transition-fast);
+    flex-shrink: 0;
+}
+
+.burger:hover {
+    opacity: 0.8;
 }
 
 .burger span {
     display: block;
-    height: 2px;
+    height: 3px; /* Увеличили толщину */
     width: 100%;
-    background: rgba(255, 255, 255, 0.9);
+    background: #000000; /* Черный цвет для контраста */
     border-radius: 1px;
     transition: var(--transition-fast);
+    transform-origin: center;
 }
 
 .burger.active span:nth-child(1) {
@@ -418,13 +731,39 @@ a:hover {
     transform: rotate(-45deg) translate(7px, -6px);
 }
 
+/* ВРЕМЕННО: Показываем бургер на всех устройствах для отладки */
+.burger {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Показываем бургер только на мобильных */
 @media (max-width: 1023px) {
     .burger {
         display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+}
+
+/* Скрываем бургер на десктопе */
+@media (min-width: 1024px) {
+    .burger {
+        display: flex !important; /* ВРЕМЕННО показываем на десктопе */
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+}
+
+/* Скрываем навигацию на мобильных */
+@media (max-width: 1023px) {
+    .header__nav {
+        display: none !important;
     }
     
-    .header__nav {
-        display: none;
+    .header__nav.active {
+        display: block !important;
     }
 }
 
@@ -434,9 +773,9 @@ a:hover {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding-top: 8rem;
     position: relative;
     overflow: hidden;
+    padding-top: 120px; /* Добавляем отступ сверху для компенсации фиксированного хедера */
 }
 
 .hero::before {
@@ -649,6 +988,15 @@ section {
     white-space: nowrap;
     position: relative;
     overflow: hidden;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.btn:focus,
+.btn:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
 }
 
 .btn:before {
@@ -769,14 +1117,95 @@ section {
     }
     
     .hero {
-        padding-top: 6rem;
+        padding-top: 100px; /* Увеличиваем отступ для мобильного header */
+        min-height: calc(100vh - 100px); /* Компенсируем отступ */
     }
-    
-    .header__nav {
-        display: none !important;
-    }
-    
-    .burger {
-        display: none !important;
-    }
+}
+
+/* ===== ПРИНУДИТЕЛЬНОЕ УБИРАНИЕ ОБВОДОК ===== */
+/* Эти стили должны быть в самом конце файла для максимального приоритета */
+.nav__link,
+.nav__link:focus,
+.nav__link:focus-visible,
+.nav__link:active,
+.nav__link:hover,
+a[href*="partner"],
+a[href*="komek-damu-partner"],
+a[href*="become-partner"] {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-focus-ring-color: transparent !important;
+    -moz-outline: none !important;
+    user-select: none;
+}
+
+/* Убираем стандартные focus стили браузера */
+:focus {
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-focus-ring-color: transparent !important;
+}
+
+:focus-visible {
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+}
+
+:-moz-focusring {
+    outline: none !important;
+    -moz-outline: none !important;
+}
+
+/* Webkit специфичные стили */
+::-webkit-focus-ring-color {
+    outline-color: transparent !important;
+    color: transparent !important;
+}
+
+/* Убираем табуляционные обводки */
+*:focus,
+*:focus-visible,
+*:-moz-focusring {
+    outline: none !important;
+    outline-offset: 0 !important;
+    outline-color: transparent !important;
+    outline-width: 0 !important;
+    outline-style: none !important;
+    box-shadow: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-focus-ring-color: transparent !important;
+}
+
+/* Специально для ссылок в навигации */
+.header .nav__link,
+.header .nav__link:focus,
+.header .nav__link:active,
+.header .nav__link:visited,
+.header .nav__link:hover,
+.header .nav__link--active,
+.header .nav__link.nav__link--active,
+.nav__link--active,
+.nav__link.nav__link--active,
+.nav__link.nav__link--active:focus,
+.nav__link.nav__link--active:hover,
+.nav__link.nav__link--active:active,
+.nav__link.nav__link--active:visited {
+    outline: 0 !important;
+    outline: none !important;
+    border: 0 !important;
+    border: none !important;
+    box-shadow: 0 0 0 0 transparent !important;
+    box-shadow: none !important;
+    -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-focus-ring-color: transparent !important;
+    -moz-outline: 0 !important;
+    -moz-outline: none !important;
+    background: transparent !important;
+    background-color: transparent !important;
 } 

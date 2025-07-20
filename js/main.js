@@ -69,14 +69,14 @@ function scrollToSection(sectionId) {
 // ===== FAQ ФУНКЦИОНАЛЬНОСТЬ =====
 function toggleFAQ(button) {
     const faqItem = button.parentElement;
-    const answer = faqItem.querySelector('.faq-item__answer');
+    const answer = faqItem.querySelector('.faq-answer, .faq-item__answer');
     const icon = button.querySelector('.faq-icon');
     
     // Закрываем все другие FAQ
     document.querySelectorAll('.faq-item').forEach(item => {
         if (item !== faqItem) {
             item.classList.remove('active');
-            const otherAnswer = item.querySelector('.faq-item__answer');
+            const otherAnswer = item.querySelector('.faq-answer, .faq-item__answer');
             const otherIcon = item.querySelector('.faq-icon');
             otherAnswer.style.maxHeight = null;
             otherIcon.style.transform = 'rotate(0deg)';
@@ -93,6 +93,49 @@ function toggleFAQ(button) {
         answer.style.maxHeight = null;
         icon.style.transform = 'rotate(0deg)';
     }
+}
+
+// Функция для партнёрского FAQ
+function togglePartnerFAQ(button) {
+    const faqItem = button.parentElement;
+    const answer = faqItem.querySelector('.partner-faq-item__answer');
+    const icon = button.querySelector('.partner-faq-icon');
+    
+    // Закрываем все другие FAQ
+    document.querySelectorAll('.partner-faq-item').forEach(item => {
+        if (item !== faqItem) {
+            item.classList.remove('active');
+            const otherAnswer = item.querySelector('.partner-faq-item__answer');
+            const otherIcon = item.querySelector('.partner-faq-icon');
+            if (otherAnswer) otherAnswer.style.maxHeight = null;
+            if (otherIcon) otherIcon.style.transform = 'rotate(0deg)';
+        }
+    });
+    
+    // Переключаем текущий FAQ
+    faqItem.classList.toggle('active');
+    
+    if (faqItem.classList.contains('active')) {
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+        icon.style.transform = 'rotate(45deg)';
+    } else {
+        answer.style.maxHeight = null;
+        icon.style.transform = 'rotate(0deg)';
+    }
+}
+
+// Алиас для обратной совместимости
+window.toggleFaq = toggleFAQ;
+window.togglePartnerFaq = togglePartnerFAQ;
+
+// Функция выбора типа партнёрства
+function selectPartnership(type) {
+    // Здесь можно добавить логику для открытия модального окна
+    // или перехода на специальную страницу для конкретного типа партнёрства
+    console.log('Выбран тип партнёрства:', type);
+    
+    // Пока что просто открываем общую форму заявки на партнёрство
+    openModal('partner-application');
 }
 
 // ===== ВАЛИДАЦИЯ ФОРМ =====
@@ -206,7 +249,17 @@ class Header {
     }
     
     initMobileMenu() {
-        burger.addEventListener('click', () => this.toggleMobileMenu());
+        if (!burger || !nav) {
+            console.error('Burger or nav elements not found!');
+            return;
+        }
+        
+        console.log('Initializing mobile menu...');
+        
+        burger.addEventListener('click', () => {
+            console.log('Burger clicked!');
+            this.toggleMobileMenu();
+        });
         
         // Закрытие меню при клике на ссылку
         const navLinks = nav.querySelectorAll('.nav__link');
@@ -223,9 +276,12 @@ class Header {
     }
     
     toggleMobileMenu() {
+        console.log('Toggling mobile menu...');
         burger.classList.toggle('active');
         nav.classList.toggle('active');
         document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
+        console.log('Burger active:', burger.classList.contains('active'));
+        console.log('Nav active:', nav.classList.contains('active'));
     }
     
     closeMobileMenu() {
@@ -1047,4 +1103,124 @@ window.closeModal = function() {
         activeModal.classList.remove('active');
         document.body.style.overflow = '';
     }
-}; 
+};
+
+// Функция отправки заявки на консультацию по бизнес-программе
+window.submitBusinessConsultation = function(event) {
+    event.preventDefault();
+    
+    const form = event.target;
+    const formData = new FormData(form);
+    
+    // Имитация отправки (в реальном проекте здесь был бы AJAX запрос)
+    console.log('Заявка на консультацию по DAMU:', Object.fromEntries(formData));
+    
+    // Показываем сообщение об успешной отправке
+    alert('Спасибо! Ваша заявка на консультацию принята. Наш специалист свяжется с вами в течение рабочего дня.');
+    
+    // Закрываем модальное окно и сбрасываем форму
+    closeModal();
+    form.reset();
+};
+
+// ===== ПЛАВНЫЕ ПЕРЕХОДЫ МЕЖДУ СТРАНИЦАМИ =====
+class PageTransition {
+    constructor() {
+        this.overlay = document.getElementById('pageTransitionOverlay');
+        this.isTransitioning = false;
+        this.init();
+    }
+
+    init() {
+        // Перехватываем клики по ссылкам для плавного перехода
+        document.addEventListener('click', (e) => {
+            const link = e.target.closest('a[href]');
+            if (link && this.shouldTransition(link)) {
+                e.preventDefault();
+                this.transitionToPage(link.href);
+            }
+        });
+
+        // Обрабатываем кнопки назад/вперед браузера
+        window.addEventListener('popstate', () => {
+            if (!this.isTransitioning) {
+                this.transitionToPage(window.location.href, false);
+            }
+        });
+    }
+
+    shouldTransition(link) {
+        const href = link.getAttribute('href');
+        
+        // Не делаем переход для:
+        if (!href || 
+            href.startsWith('#') || 
+            href.startsWith('tel:') || 
+            href.startsWith('mailto:') || 
+            href.startsWith('javascript:') ||
+            link.target === '_blank' ||
+            href.includes('wa.me')) {
+            return false;
+        }
+
+        // Проверяем, что это ссылка на наши страницы
+        return href.includes('index.html') || 
+               href.includes('komek-damu-partner.html') ||
+               href === '/' ||
+               (!href.includes('http') && !href.includes('www'));
+    }
+
+    async transitionToPage(url, pushState = true) {
+        if (this.isTransitioning) return;
+        
+        this.isTransitioning = true;
+        document.body.classList.add('page-transitioning');
+
+        // Показываем overlay
+        this.overlay.classList.add('active');
+
+        // Ждем анимацию overlay
+        await new Promise(resolve => setTimeout(resolve, 300));
+
+        try {
+            // Проверяем, работаем ли мы с file:// протоколом
+            const isFileProtocol = window.location.protocol === 'file:';
+            
+            // Переходим на новую страницу
+            if (pushState && !isFileProtocol) {
+                window.history.pushState(null, '', url);
+            }
+            window.location.href = url;
+        } catch (error) {
+            console.error('Ошибка перехода:', error);
+            // В случае ошибки просто переходим без History API
+            window.location.href = url;
+        }
+    }
+
+    hideOverlay() {
+        this.overlay.classList.remove('active');
+        document.body.classList.remove('page-transitioning');
+        this.isTransitioning = false;
+    }
+
+    // Скрываем overlay при загрузке страницы
+    hideOnLoad() {
+        setTimeout(() => {
+            this.hideOverlay();
+        }, 100);
+    }
+}
+
+// Создаем экземпляр класса переходов
+const pageTransition = new PageTransition();
+
+// Скрываем overlay при загрузке страницы
+document.addEventListener('DOMContentLoaded', () => {
+    pageTransition.hideOnLoad();
+});
+
+// Также скрываем при событии load
+window.addEventListener('load', () => {
+    pageTransition.hideOnLoad();
+}); 
