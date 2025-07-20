@@ -48,6 +48,37 @@ const burger = document.getElementById('burger');
 const nav = document.getElementById('nav');
 const modals = document.querySelectorAll('.modal');
 
+// Стилизуем бургер нормально
+if (burger) {
+    burger.style.cssText = `
+        display: flex !important;
+        position: relative !important;
+        width: 30px !important;
+        height: 22px !important;
+        background: none !important;
+        border: none !important;
+        z-index: 9999 !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        cursor: pointer !important;
+    `;
+    
+    // Стилизуем spans внутри бургера
+    const spans = burger.querySelectorAll('span');
+    spans.forEach(span => {
+        span.style.cssText = `
+            display: block !important;
+            width: 100% !important;
+            height: 3px !important;
+            background: white !important;
+            border-radius: 2px !important;
+            transition: all 0.3s ease !important;
+        `;
+    });
+}
+
 // ===== УТИЛИТЫ =====
 function formatNumber(num) {
     return new Intl.NumberFormat('kk-KZ').format(num);
@@ -186,48 +217,66 @@ class Header {
     
     initDropdown() {
         const dropdownItems = document.querySelectorAll('.nav__item--dropdown');
+        console.log('Found dropdown items:', dropdownItems.length);
         
         dropdownItems.forEach(item => {
             const dropdown = item.querySelector('.dropdown');
-            const links = dropdown.querySelectorAll('.dropdown__link');
+            const links = dropdown ? dropdown.querySelectorAll('.dropdown__link') : [];
+            console.log('Dropdown found:', !!dropdown, 'Links:', links.length);
+            
+            if (!dropdown) return;
             
             // Добавляем обработчики для ссылок в dropdown
             links.forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
                     const text = link.textContent.trim();
+                    console.log('Dropdown link clicked:', text);
                     
                     // Закрываем dropdown
                     item.classList.remove('active');
+                    // Закрываем основное мобильное меню
+                    if (window.innerWidth <= 1023) {
+                        nav.classList.remove('active');
+                        burger.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
                     
                     // Прокручиваем к соответствующей секции
-                    if (text.includes('Потребительский')) {
-                        scrollToSection('services');
-                    } else if (text.includes('Ипотека')) {
-                        scrollToSection('services');
-                    } else if (text.includes('Автокредит')) {
-                        scrollToSection('services');
-                    } else if (text.includes('Бизнес')) {
-                        scrollToSection('services');
-                    } else if (text.includes('Рефинансирование')) {
-                        scrollToSection('services');
-                    }
+                    setTimeout(() => {
+                        if (text.includes('Потребительский')) {
+                            scrollToSection('services');
+                        } else if (text.includes('Ипотека')) {
+                            scrollToSection('services');
+                        } else if (text.includes('Автокредит')) {
+                            scrollToSection('services');
+                        } else if (text.includes('Бизнес')) {
+                            scrollToSection('services');
+                        } else if (text.includes('Рефинансирование')) {
+                            scrollToSection('services');
+                        }
+                    }, 100);
                 });
             });
             
             // Клик по основной ссылке dropdown
             const mainLink = item.querySelector('.nav__link');
-            mainLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                item.classList.toggle('active');
-                
-                // Закрываем другие dropdown
-                dropdownItems.forEach(otherItem => {
-                    if (otherItem !== item) {
-                        otherItem.classList.remove('active');
-                    }
+            if (mainLink) {
+                mainLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation(); // Останавливаем всплытие события
+                    console.log('Main dropdown link clicked');
+                    item.classList.toggle('active');
+                    console.log('Dropdown active:', item.classList.contains('active'));
+                    
+                    // Закрываем другие dropdown
+                    dropdownItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
                 });
-            });
+            }
         });
         
         // Закрываем dropdown при клике вне его
@@ -266,6 +315,25 @@ class Header {
         navLinks.forEach(link => {
             link.addEventListener('click', () => this.closeMobileMenu());
         });
+        
+        // Добавляем обработчик для кнопки "Получить кредит" в мобильном меню
+        const mobileButton = document.getElementById('mobile-credit-btn');
+        if (mobileButton) {
+            console.log('Found mobile credit button');
+            mobileButton.addEventListener('click', (e) => {
+                console.log('Mobile credit button clicked!');
+                e.preventDefault();
+                e.stopPropagation();
+                // Закрываем мобильное меню
+                this.closeMobileMenu();
+                // Открываем модальное окно
+                setTimeout(() => {
+                    openModal('application');
+                }, 100);
+            });
+        } else {
+            console.error('Mobile credit button not found!');
+        }
         
         // Закрытие меню при клике вне его
         document.addEventListener('click', (e) => {
@@ -1089,10 +1157,15 @@ window.scrollToSection = scrollToSection;
 
 // Глобальная функция для открытия модального окна
 window.openModal = function(modalId) {
+    console.log('Opening modal:', modalId);
     const modal = document.querySelector(`#modal-${modalId}`);
+    console.log('Modal element found:', !!modal);
     if (modal) {
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
+        console.log('Modal opened successfully');
+    } else {
+        console.error('Modal not found:', `#modal-${modalId}`);
     }
 };
 
@@ -1218,6 +1291,9 @@ const pageTransition = new PageTransition();
 // Скрываем overlay при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
     pageTransition.hideOnLoad();
+    
+    // Инициализируем навигацию
+    const navigation = new Navigation();
 });
 
 // Также скрываем при событии load
