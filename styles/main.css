@@ -1188,6 +1188,288 @@ section {
     box-shadow: var(--shadow-xl);
 }
 
+/* ===== ПРОГРАММЫ DAMU ===== */
+.damu-programs {
+    padding: 5rem 0;
+    background: var(--bg-white);
+    color: var(--text-dark);
+}
+
+.damu-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+    background: rgba(79, 126, 247, 0.08);
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(79, 126, 247, 0.15);
+}
+
+.damu-logo__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    border-radius: 0.75rem;
+    overflow: hidden;
+}
+
+.damu-logo__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0.75rem;
+}
+
+.damu-logo__text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.damu-logo__title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.damu-logo__rate {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--accent);
+}
+
+.damu-programs__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.damu-program-card {
+    background: var(--bg-white);
+    border-radius: 1rem;
+    padding: 2rem;
+    border: 1px solid rgba(79, 126, 247, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: var(--transition);
+}
+
+.damu-program-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(79, 126, 247, 0.15);
+    border-color: rgba(79, 126, 247, 0.3);
+}
+
+.damu-program-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.damu-program-card__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.damu-program-card__rate {
+    background: var(--accent);
+    color: var(--text-white);
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.damu-program-card__conditions {
+    margin-bottom: 2rem;
+}
+
+.condition-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(79, 126, 247, 0.1);
+}
+
+.condition-item:last-child {
+    border-bottom: none;
+}
+
+.condition-label {
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+.condition-value {
+    font-weight: 600;
+    color: var(--text-dark);
+    text-align: right;
+}
+
+/* ===== КРЕДИТЫ ДЛЯ БИЗНЕСА ===== */
+.business-credit {
+    padding: 5rem 0;
+    background: var(--bg-light);
+}
+
+.business-credit__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.business-credit-card {
+    background: var(--bg-white);
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+    border: 1px solid var(--border-color);
+}
+
+.business-credit-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.business-credit-card__icon {
+    width: 64px;
+    height: 64px;
+    background: var(--primary);
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-white);
+    margin-bottom: 1.5rem;
+}
+
+.business-credit-card__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.business-credit-card__description {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.business-credit-card__features {
+    margin-bottom: 2rem;
+}
+
+.business-credit-feature {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.business-credit-feature:last-child {
+    border-bottom: none;
+}
+
+.business-credit-feature__label {
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.business-credit-feature__value {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* ===== ПРЕИМУЩЕСТВА ===== */
+.advantages {
+    padding: 5rem 0;
+    background: var(--bg-white);
+}
+
+.advantages__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.advantage-card {
+    text-align: center;
+    padding: 2rem;
+    border-radius: 1rem;
+    background: var(--bg-light);
+    transition: var(--transition);
+}
+
+.advantage-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.advantage-card__icon {
+    width: 80px;
+    height: 80px;
+    background: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-white);
+    margin: 0 auto 1.5rem;
+}
+
+.advantage-card__title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.advantage-card__description {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* ===== АДАПТИВНОСТЬ ДЛЯ НОВЫХ СЕКЦИЙ ===== */
+@media (max-width: 768px) {
+    .damu-programs__grid,
+    .business-credit__grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .advantages__grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+    
+    .damu-program-card,
+    .business-credit-card {
+        padding: 1.5rem;
+    }
+    
+    .condition-item,
+    .business-credit-feature {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .condition-value,
+    .business-credit-feature__value {
+        text-align: left;
+    }
+}
+
 /* ===== АДАПТИВНОСТЬ ===== */
 @media (max-width: 1023px) {
     /* Компенсация для мобильных */

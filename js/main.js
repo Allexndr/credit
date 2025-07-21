@@ -1132,14 +1132,27 @@ window.selectService = function(serviceType) {
         'ip-unsecured': 'Беззалоговый кредит для ИП',
         'ip-secured': 'Залоговый кредит для ИП',
         'too-credit': 'Кредитование ТОО',
-        'auto': 'АВТО кредитование'
+        'auto': 'АВТО кредитование',
+        'Программа Өрлеу': 'Программа Өрлеу',
+        'Программа Jana Business': 'Программа Jana Business',
+        'Беззалоговый кредит': 'Беззалоговый кредит',
+        'Рефинансирование': 'Рефинансирование',
+        'Беззалоговый для ИП': 'Беззалоговый кредит для ИП',
+        'Залоговый': 'Залоговый кредит',
+        'Льготная программа под 2%': 'Льготная ипотека под 2%',
+        'Без подтверждения дохода': 'Ипотека без подтверждения дохода',
+        'Без первоначального взноса': 'Ипотека без первоначального взноса',
+        'Партнерская ипотека': 'Партнерская ипотека',
+        'Беззалоговый кредит для физических лиц': 'Беззалоговый кредит для физических лиц',
+        'Беззалоговый кредит для ИП': 'Беззалоговый кредит для ИП',
+        'Залоговый кредит для бизнеса': 'Залоговый кредит для бизнеса'
     };
     
     const serviceName = serviceNames[serviceType] || 'услугу';
     
     // Определяем правильное окончание для "нужен/нужна/нужно"
     let ending = 'нужен';
-    if (serviceName.includes('Субсидии') || serviceName.includes('Кредитование') || serviceName.includes('Рефинансирование') || serviceName.includes('Субсидирование')) {
+    if (serviceName.includes('Субсидии') || serviceName.includes('Кредитование') || serviceName.includes('Рефинансирование') || serviceName.includes('Субсидирование') || serviceName.includes('Ипотека') || serviceName.includes('Программа')) {
         ending = 'нужно';
     }
     
@@ -1415,6 +1428,42 @@ window.toggleMobileSection = function(sectionId) {
     if (!isActive) {
         section.classList.add('active');
     }
+};
+
+// Функция отправки калькулятора
+window.submitCalculator = function() {
+    const name = document.getElementById('calculator-name').value;
+    const phone = document.getElementById('calculator-phone').value;
+    const iin = document.getElementById('calculator-iin').value;
+    const consent = document.getElementById('calculator-consent').checked;
+    
+    if (!name || !phone || !iin || !consent) {
+        alert('Пожалуйста, заполните все поля и согласитесь с обработкой персональных данных');
+        return;
+    }
+    
+    // Формируем сообщение для WhatsApp
+    const message = `Здравствуйте! Мне нужен расчёт кредита.
+
+Имя: ${name}
+Телефон: ${phone}
+ИИН: ${iin}
+
+Пожалуйста, свяжитесь со мной для персонального расчёта.`;
+    
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/77011061039?text=${encodedMessage}`;
+    
+    // Открываем WhatsApp
+    window.open(whatsappUrl, '_blank');
+    
+    // Очищаем форму
+    document.getElementById('calculator-name').value = '';
+    document.getElementById('calculator-phone').value = '+7';
+    document.getElementById('calculator-iin').value = '';
+    document.getElementById('calculator-consent').checked = false;
+    
+    alert('Спасибо! Мы свяжемся с вами в ближайшее время.');
 };
 
 // Также скрываем при событии load
