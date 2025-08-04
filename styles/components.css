@@ -700,6 +700,37 @@
     font-size: 0.875rem;
 }
 
+.contact-social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.contact-social-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-primary);
+    text-decoration: none;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius-sm);
+    background: var(--bg-secondary);
+    transition: var(--transition);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.contact-social-link:hover {
+    background: var(--primary-color);
+    color: var(--text-white);
+    transform: translateY(-1px);
+}
+
+.contact-social-link svg {
+    width: 16px;
+    height: 16px;
+}
+
 /* ===== ФОРМЫ ===== */
 .contact__form {
     background: var(--bg-secondary);
