@@ -460,28 +460,58 @@
     margin: 0;
 }
 
-/* Стили для сетки партнеров */
-.partners-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 1.5rem;
+/* Стили для горизонтальной полоски партнеров */
+.partners-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
     margin-top: 3rem;
+    flex-wrap: wrap;
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
 }
 
-@media (min-width: 768px) {
-    .partners-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2rem;
-    }
+.partner-item {
+    flex: 0 0 auto;
+    background: var(--bg-primary);
+    padding: 1rem 1.5rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    border: 1px solid var(--border-color);
 }
 
-@media (min-width: 1024px) {
-    .partners-grid {
-        grid-template-columns: repeat(6, 1fr);
-        gap: 1.5rem;
+.partner-item:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.partner-item img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    filter: grayscale(100%);
+    transition: var(--transition);
+}
+
+.partner-item:hover img {
+    filter: grayscale(0%);
+}
+
+@media (max-width: 767px) {
+    .partners-row {
+        gap: 1rem;
+        padding: 0 1rem;
+    }
+    
+    .partner-item {
+        padding: 0.75rem 1rem;
+    }
+    
+    .partner-item img {
+        height: 30px;
     }
 }
 
