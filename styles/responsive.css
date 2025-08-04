@@ -158,6 +158,31 @@ body {
         justify-content: center;
     }
     
+    /* Форма заявки в hero на мобильных */
+    .hero__application-form {
+        margin-top: 1.5rem;
+    }
+    
+    .application-form {
+        padding: 1.5rem;
+        max-width: 100%;
+    }
+    
+    .application-form__title {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+    }
+    
+    .client-type-selector {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .client-type-option {
+        justify-content: center;
+        padding: 0.5rem;
+    }
+    
     /* Услуги */
     .services__grid {
         gap: 1.5rem;
@@ -208,6 +233,30 @@ body {
     .partner-logo {
         width: 60px;
         height: 60px;
+    }
+    
+    /* Сетка партнеров на мобильных */
+    .partners-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+    
+    .partner-card {
+        padding: 1rem 0.5rem;
+    }
+    
+    .partner-logo {
+        width: 60px;
+        height: 40px;
+        margin-bottom: 0.5rem;
+    }
+    
+    .partner-info h4 {
+        font-size: 0.8rem;
+    }
+    
+    .partner-info p {
+        font-size: 0.75rem;
     }
     
     /* О нас */
@@ -336,6 +385,16 @@ body {
     
     .header__actions .btn {
         display: block !important;
+    }
+    
+    /* Форма заявки в hero на планшетах */
+    .application-form {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    
+    .client-type-selector {
+        justify-content: center;
     }
     
     /* Услуги */

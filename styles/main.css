@@ -940,6 +940,168 @@ a:focus {
     }
 }
 
+/* Форма заявки в hero секции */
+.hero__application-form {
+    margin-top: 2rem;
+}
+
+.application-form {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+@media (min-width: 1024px) {
+    .application-form {
+        margin: 0;
+        max-width: 450px;
+    }
+}
+
+.application-form__title {
+    color: var(--text-white);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.application-form__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.application-form .form-group {
+    margin-bottom: 0;
+}
+
+.application-form .form-input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-white);
+    backdrop-filter: blur(10px);
+}
+
+.application-form .form-input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.application-form .form-input:focus {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.2);
+}
+
+.client-type-selector {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.client-type-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+    color: var(--text-white);
+}
+
+.client-type-option:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.client-type-option input[type="radio"] {
+    display: none;
+}
+
+.client-type-option input[type="radio"]:checked + .client-type-label {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.client-type-option input[type="radio"]:checked ~ .client-type-option {
+    background: rgba(5, 150, 105, 0.2);
+    border-color: var(--accent);
+}
+
+.client-type-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.application-form .checkbox {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.875rem;
+}
+
+.application-form .btn {
+    margin-top: 0.5rem;
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+.application-form .btn:hover {
+    background: #047857;
+    border-color: #047857;
+    transform: translateY(-2px);
+}
+
+/* Стили для ошибок в форме hero */
+.application-form .form-input.error {
+    border-color: var(--error);
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.application-form .field-error {
+    color: var(--error);
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.application-form .field-error::before {
+    content: '⚠️';
+    font-size: 0.875rem;
+}
+
+/* Улучшения для поля телефона */
+.application-form input[type="tel"] {
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.5px;
+    cursor: text;
+}
+
+.application-form input[type="tel"]::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    font-family: inherit;
+    letter-spacing: normal;
+}
+
+/* Стили для всех полей телефона */
+input[type="tel"] {
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.5px;
+}
+
+input[type="tel"]:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.2);
+}
+
 /* Изображение героя */
 .hero__image {
     display: flex;
@@ -1079,6 +1241,18 @@ section {
 .btn--outline:hover {
     background: var(--primary);
     color: var(--text-white);
+}
+
+.btn--accent {
+    background: var(--accent);
+    color: var(--text-white);
+    border-color: var(--accent);
+}
+
+.btn--accent:hover {
+    background: #047857;
+    border-color: #047857;
+    transform: translateY(-2px);
 }
 
 /* Специальные стили для кнопок "Выбрать" - более контрастные */
@@ -1313,6 +1487,34 @@ section {
     text-align: right;
 }
 
+/* Специальная карточка партнеров */
+.damu-program-card--special {
+    border: 2px solid var(--primary);
+    background: linear-gradient(135deg, var(--bg-white) 0%, rgba(30, 58, 138, 0.02) 100%);
+}
+
+.damu-program-card--special:hover {
+    border-color: var(--accent);
+    box-shadow: 0 8px 30px rgba(5, 150, 105, 0.15);
+}
+
+.damu-program-card__partners {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.partner-badge {
+    background: var(--primary);
+    color: var(--text-white);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
 /* ===== КРЕДИТЫ ДЛЯ БИЗНЕСА ===== */
 .business-credit {
     padding: 5rem 0;
@@ -1326,69 +1528,10 @@ section {
     margin-top: 3rem;
 }
 
-.business-credit-card {
-    background: var(--bg-white);
-    border-radius: 1rem;
-    padding: 2rem;
-    box-shadow: var(--shadow-md);
-    transition: var(--transition);
-    border: 1px solid var(--border-color);
-}
 
-.business-credit-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
-}
 
-.business-credit-card__icon {
-    width: 64px;
-    height: 64px;
-    background: var(--primary);
-    border-radius: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-white);
-    margin-bottom: 1.5rem;
-}
-
-.business-credit-card__title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 1rem;
-}
-
-.business-credit-card__description {
-    color: var(--text-secondary);
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-}
-
-.business-credit-card__features {
-    margin-bottom: 2rem;
-}
-
-.business-credit-feature {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.75rem 0;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.business-credit-feature:last-child {
-    border-bottom: none;
-}
-
-.business-credit-feature__label {
-    font-weight: 500;
-    color: var(--text-secondary);
-}
-
-.business-credit-feature__value {
-    font-weight: 600;
-    color: var(--text-primary);
+.hidden {
+    display: none !important;
 }
 
 /* ===== ПРЕИМУЩЕСТВА ===== */

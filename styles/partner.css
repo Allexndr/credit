@@ -442,6 +442,15 @@
     padding: 20px;
 }
 
+.modal__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
 .modal__content {
     background: white;
     border-radius: 20px;
@@ -586,5 +595,175 @@
     
     .faq-answer p {
         padding: 0 20px 20px;
+    }
+}
+
+/* Специальное предложение от партнеров */
+.special-offer {
+    padding: 100px 0;
+    background: #f8fafc;
+}
+
+.special-offer__card {
+    max-width: 800px;
+    margin: 60px auto 0;
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 2px solid #e5e7eb;
+    position: relative;
+    overflow: hidden;
+}
+
+.special-offer__card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #059669, #10b981);
+}
+
+.special-offer__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.special-offer__partners {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.partner-badge {
+    background: #1e40af;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.special-offer__rate {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.rate-label {
+    font-size: 0.75rem;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+.rate-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1e40af;
+    line-height: 1;
+}
+
+.rate-period {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-top: 4px;
+}
+
+.special-offer__content {
+    text-align: center;
+}
+
+.special-offer__description {
+    font-size: 1.125rem;
+    color: #374151;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.special-offer__features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.feature-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    background: #f8fafc;
+    border-radius: 12px;
+}
+
+.feature-label {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.feature-value {
+    font-size: 1rem;
+    color: #1f2937;
+    font-weight: 600;
+}
+
+/* Адаптивность для специального предложения */
+@media (max-width: 768px) {
+    .special-offer__header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .special-offer__rate {
+        text-align: center;
+        align-items: center;
+    }
+    
+    .special-offer__features {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .special-offer__card {
+        padding: 30px 20px;
+        margin: 40px 20px 0;
+    }
+    
+    .rate-value {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .special-offer__card {
+        padding: 20px 15px;
+    }
+    
+    .special-offer__partners {
+        justify-content: center;
+    }
+    
+    .partner-badge {
+        font-size: 0.75rem;
+        padding: 6px 12px;
+    }
+    
+    .rate-value {
+        font-size: 1.75rem;
     }
 }

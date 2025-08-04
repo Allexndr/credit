@@ -84,6 +84,23 @@ function formatNumber(num) {
     return new Intl.NumberFormat('kk-KZ').format(num);
 }
 
+// Функции для модальных окон
+function openModal(modalId) {
+    const modal = document.getElementById(`modal-${modalId}`);
+    if (modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeModal(modalId) {
+    const modal = document.getElementById(`modal-${modalId}`);
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+
 function scrollToSection(sectionId) {
     const section = document.getElementById(sectionId);
     if (section) {
@@ -97,67 +114,7 @@ function scrollToSection(sectionId) {
     }
 }
 
-// ===== FAQ ФУНКЦИОНАЛЬНОСТЬ =====
-function toggleFAQ(button) {
-    const faqItem = button.parentElement;
-    const answer = faqItem.querySelector('.faq-answer, .faq-item__answer');
-    const icon = button.querySelector('.faq-icon');
-    
-    // Закрываем все другие FAQ
-    document.querySelectorAll('.faq-item').forEach(item => {
-        if (item !== faqItem) {
-            item.classList.remove('active');
-            const otherAnswer = item.querySelector('.faq-answer, .faq-item__answer');
-            const otherIcon = item.querySelector('.faq-icon');
-            otherAnswer.style.maxHeight = null;
-            otherIcon.style.transform = 'rotate(0deg)';
-        }
-    });
-    
-    // Переключаем текущий FAQ
-    faqItem.classList.toggle('active');
-    
-    if (faqItem.classList.contains('active')) {
-        answer.style.maxHeight = answer.scrollHeight + 'px';
-        icon.style.transform = 'rotate(180deg)';
-    } else {
-        answer.style.maxHeight = null;
-        icon.style.transform = 'rotate(0deg)';
-    }
-}
 
-// Функция для партнёрского FAQ
-function togglePartnerFAQ(button) {
-    const faqItem = button.parentElement;
-    const answer = faqItem.querySelector('.partner-faq-item__answer');
-    const icon = button.querySelector('.partner-faq-icon');
-    
-    // Закрываем все другие FAQ
-    document.querySelectorAll('.partner-faq-item').forEach(item => {
-        if (item !== faqItem) {
-            item.classList.remove('active');
-            const otherAnswer = item.querySelector('.partner-faq-item__answer');
-            const otherIcon = item.querySelector('.partner-faq-icon');
-            if (otherAnswer) otherAnswer.style.maxHeight = null;
-            if (otherIcon) otherIcon.style.transform = 'rotate(0deg)';
-        }
-    });
-    
-    // Переключаем текущий FAQ
-    faqItem.classList.toggle('active');
-    
-    if (faqItem.classList.contains('active')) {
-        answer.style.maxHeight = answer.scrollHeight + 'px';
-        icon.style.transform = 'rotate(45deg)';
-    } else {
-        answer.style.maxHeight = null;
-        icon.style.transform = 'rotate(0deg)';
-    }
-}
-
-// Алиас для обратной совместимости
-window.toggleFaq = toggleFAQ;
-window.togglePartnerFaq = togglePartnerFAQ;
 
 // Функция выбора типа партнёрства
 function selectPartnership(type) {
@@ -744,6 +701,12 @@ class Forms {
             return;
         }
         
+        // Специальная обработка для формы hero
+        if (form.id === 'hero-application-form') {
+            this.handleHeroForm(form, formData);
+            return;
+        }
+        
         // Отправка в WhatsApp
         this.sendToWhatsApp(form, formData);
         
@@ -761,9 +724,58 @@ class Forms {
         form.reset();
     }
     
+    handleHeroForm(form, formData) {
+        // Номер WhatsApp для чата
+        const phoneNumber = '77011061059';
+        
+        // Формируем сообщение для hero формы
+        let message = '=== 🚀 НОВАЯ ЗАЯВКА С ГЛАВНОЙ СТРАНИЦЫ ===\n';
+        message += '==========================================\n\n';
+        
+        // Получаем данные из формы
+        const name = formData.get('name') || 'Не указано';
+        const phone = formData.get('phone') || 'Не указано';
+        const clientType = formData.get('client_type') || 'Не указано';
+        
+        // Преобразуем тип клиента в читаемый вид
+        const clientTypeText = clientType === 'individual' ? 'Физическое лицо' : 'Юридическое лицо';
+        
+        message += `> Имя: ${name}\n`;
+        message += `> Телефон: ${phone}\n`;
+        message += `> Тип клиента: ${clientTypeText}\n`;
+        message += `> Согласие на обработку данных: Да\n`;
+        
+        message += '\n==========================================\n';
+        message += '> Время: ' + new Date().toLocaleString('ru-RU');
+        message += '\n==========================================\n\n';
+        message += '> Komek damu - звоните!';
+        
+        // Кодируем сообщение для URL
+        const encodedMessage = encodeURIComponent(message);
+        
+        // Формируем ссылку WhatsApp
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+        
+        // Открываем WhatsApp
+        window.open(whatsappUrl, '_blank');
+        
+        // Показать уведомление об успешной отправке
+        this.showNotification('Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в течение 5 минут.', 'success');
+        
+        // Очистить форму
+        form.reset();
+        
+        // Прокрутить к калькулятору для дальнейшего взаимодействия
+        setTimeout(() => {
+            scrollToSection('calculator');
+        }, 1000);
+        
+        console.log('Hero form message:', message);
+    }
+    
     sendToWhatsApp(form, formData) {
         // Номер WhatsApp для чата
-        const phoneNumber = '77011061039';
+        const phoneNumber = '77011061059';
         
         // Формируем сообщение
         let message = '=== НОВАЯ ЗАЯВКА НА КРЕДИТ ===\n';
@@ -906,19 +918,231 @@ class Forms {
     initPhoneMask() {
         const phoneInputs = document.querySelectorAll('input[type="tel"]');
         phoneInputs.forEach(input => {
+            // Устанавливаем начальное значение
+            if (!input.value) {
+                input.value = '+7';
+            }
+            
             input.addEventListener('input', (e) => {
-                let value = e.target.value.replace(/\D/g, '');
-                if (value.startsWith('7')) {
-                    value = '+7 (' + value.slice(1, 4) + ') ' + value.slice(4, 7) + '-' + value.slice(7, 9) + '-' + value.slice(9, 11);
-                } else if (value.startsWith('8')) {
-                    value = '+7 (' + value.slice(1, 4) + ') ' + value.slice(4, 7) + '-' + value.slice(7, 9) + '-' + value.slice(9, 11);
-                } else {
-                    value = '+7 (' + value.slice(0, 3) + ') ' + value.slice(3, 6) + '-' + value.slice(6, 8) + '-' + value.slice(8, 10);
+                const target = e.target;
+                let value = target.value;
+                const oldValue = target.value;
+                const cursorPosition = target.selectionStart;
+                
+                // Если поле пустое, добавляем +7
+                if (!value) {
+                    target.value = '+7';
+                    target.setSelectionRange(3, 3);
+                    return;
                 }
-                e.target.value = value;
+                
+                // Если пользователь удалил +7, добавляем обратно
+                if (!value.startsWith('+7')) {
+                    value = '+7' + value.replace(/\D/g, '');
+                }
+                
+                // Удаляем все нецифровые символы кроме +7
+                let digits = value.replace(/\D/g, '');
+                
+                // Если номер начинается с 8, заменяем на 7
+                if (digits.startsWith('8')) {
+                    digits = '7' + digits.slice(1);
+                }
+                
+                // Если номер не начинается с 7, добавляем 7 в начало
+                if (!digits.startsWith('7')) {
+                    digits = '7' + digits;
+                }
+                
+                // Ограничиваем длину до 11 цифр (7 + 10 цифр номера)
+                if (digits.length > 11) {
+                    digits = digits.slice(0, 11);
+                }
+                
+                // Форматируем номер
+                let formattedValue = '+7';
+                if (digits.length > 1) {
+                    const remainingDigits = digits.slice(1);
+                    if (remainingDigits.length > 0) {
+                        formattedValue += ' (' + remainingDigits.slice(0, 3);
+                        if (remainingDigits.length > 3) {
+                            formattedValue += ') ' + remainingDigits.slice(3, 6);
+                            if (remainingDigits.length > 6) {
+                                formattedValue += '-' + remainingDigits.slice(6, 8);
+                                if (remainingDigits.length > 8) {
+                                    formattedValue += '-' + remainingDigits.slice(8, 10);
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                // Обновляем значение
+                target.value = formattedValue;
+                
+                // Вычисляем новую позицию курсора
+                let newCursorPosition = cursorPosition;
+                
+                // Если добавилась цифра (длина увеличилась)
+                if (formattedValue.length > oldValue.length) {
+                    // Находим позицию последней добавленной цифры
+                    const addedDigit = formattedValue.charAt(cursorPosition - 1);
+                    if (/\d/.test(addedDigit)) {
+                        newCursorPosition = cursorPosition;
+                    } else {
+                        // Если добавился символ форматирования, перемещаем курсор после него
+                        newCursorPosition = cursorPosition + 1;
+                    }
+                } else if (formattedValue.length < oldValue.length) {
+                    // Если удалилась цифра
+                    newCursorPosition = Math.max(3, cursorPosition - 1);
+                }
+                
+                // Устанавливаем курсор
+                setTimeout(() => {
+                    const finalPosition = Math.min(newCursorPosition, formattedValue.length);
+                    target.setSelectionRange(finalPosition, finalPosition);
+                }, 0);
+            });
+            
+            // Обработка клавиш Backspace и Delete
+            input.addEventListener('keydown', (e) => {
+                const target = e.target;
+                const currentValue = target.value;
+                const cursorPosition = target.selectionStart;
+                const selectionEnd = target.selectionEnd;
+                
+                // Если выделен текст, разрешаем удаление
+                if (cursorPosition !== selectionEnd) {
+                    return;
+                }
+                
+                if (e.key === 'Backspace') {
+                    // Если пытаемся удалить +7, очищаем поле
+                    if (cursorPosition <= 3) {
+                        e.preventDefault();
+                        target.value = '+7';
+                        target.setSelectionRange(3, 3);
+                        return;
+                    }
+                    
+                    // Если курсор стоит перед символом форматирования, перепрыгиваем через него
+                    const charBeforeCursor = currentValue.charAt(cursorPosition - 1);
+                    if (charBeforeCursor === ' ' || charBeforeCursor === '(' || charBeforeCursor === ')' || charBeforeCursor === '-') {
+                        e.preventDefault();
+                        target.setSelectionRange(cursorPosition - 1, cursorPosition - 1);
+                    }
+                }
+            });
+            
+            // Обработка Ctrl+A (выделение всего текста)
+            input.addEventListener('keydown', (e) => {
+                if (e.ctrlKey && e.key === 'a') {
+                    e.preventDefault();
+                    input.select();
+                }
+            });
+            
+            // Обработка стрелок для правильного перемещения курсора
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+                    const target = e.target;
+                    const cursorPosition = target.selectionStart;
+                    const value = target.value;
+                    
+                    if (e.key === 'ArrowLeft') {
+                        // При движении влево, если следующий символ - форматирование, перепрыгиваем через него
+                        const charBeforeCursor = value.charAt(cursorPosition - 1);
+                        if (charBeforeCursor === ' ' || charBeforeCursor === '(' || charBeforeCursor === ')' || charBeforeCursor === '-') {
+                            e.preventDefault();
+                            target.setSelectionRange(cursorPosition - 1, cursorPosition - 1);
+                        }
+                    } else if (e.key === 'ArrowRight') {
+                        // При движении вправо, если следующий символ - форматирование, перепрыгиваем через него
+                        const charAfterCursor = value.charAt(cursorPosition);
+                        if (charAfterCursor === ' ' || charAfterCursor === '(' || charAfterCursor === ')' || charAfterCursor === '-') {
+                            e.preventDefault();
+                            target.setSelectionRange(cursorPosition + 1, cursorPosition + 1);
+                        }
+                    }
+                }
+            });
+            
+            // Двойной клик для выделения всего текста
+            input.addEventListener('dblclick', (e) => {
+                e.preventDefault();
+                input.select();
+            });
+            
+            // Клик в начало поля для установки курсора после +7
+            input.addEventListener('click', (e) => {
+                const target = e.target;
+                const cursorPosition = target.selectionStart;
+                
+                // Если кликнули в начало поля (до +7), устанавливаем курсор после +7
+                if (cursorPosition <= 3) {
+                    target.setSelectionRange(3, 3);
+                }
+            });
+            
+            // Фокус на поле для установки курсора в правильное место
+            input.addEventListener('focus', (e) => {
+                const target = e.target;
+                const cursorPosition = target.selectionStart;
+                
+                // Если курсор в начале поля, устанавливаем его после +7
+                if (cursorPosition <= 3) {
+                    target.setSelectionRange(3, 3);
+                }
+            });
+            
+            // Обработка вставки текста
+            input.addEventListener('paste', (e) => {
+                e.preventDefault();
+                const pastedText = (e.clipboardData || window.clipboardData).getData('text');
+                const digits = pastedText.replace(/\D/g, '');
+                
+                if (digits.length > 0) {
+                    let newDigits = digits;
+                    if (digits.startsWith('8')) {
+                        newDigits = '7' + digits.slice(1);
+                    } else if (digits.startsWith('7')) {
+                        newDigits = digits;
+                    } else {
+                        newDigits = '7' + digits;
+                    }
+                    
+                    // Ограничиваем длину
+                    if (newDigits.length > 11) {
+                        newDigits = newDigits.slice(0, 11);
+                    }
+                    
+                    // Форматируем номер
+                    let formattedValue = '+7';
+                    if (newDigits.length > 1) {
+                        const remainingDigits = newDigits.slice(1);
+                        if (remainingDigits.length > 0) {
+                            formattedValue += ' (' + remainingDigits.slice(0, 3);
+                            if (remainingDigits.length > 3) {
+                                formattedValue += ') ' + remainingDigits.slice(3, 6);
+                                if (remainingDigits.length > 6) {
+                                    formattedValue += '-' + remainingDigits.slice(6, 8);
+                                    if (remainingDigits.length > 8) {
+                                        formattedValue += '-' + remainingDigits.slice(8, 10);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                    target.value = formattedValue;
+                    target.setSelectionRange(formattedValue.length, formattedValue.length);
+                }
             });
         });
     }
+    
+
     
     initIINMask() {
         const iinInputs = document.querySelectorAll('input[placeholder="ИИН"]');
@@ -1212,7 +1436,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     console.log('Komek damu - Сайт загружен успешно!');
+    
+
 });
+
+
 
 // ===== ГЛОБАЛЬНЫЕ ФУНКЦИИ =====
 // Экспорт функций в глобальную область видимости
