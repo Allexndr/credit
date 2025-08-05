@@ -754,6 +754,26 @@
     font-size: 0.875rem;
 }
 
+.offices-list {
+    margin-bottom: 0.5rem;
+}
+
+.offices-list p {
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    line-height: 1.4;
+}
+
+.offices-list p:last-child {
+    margin-bottom: 0;
+}
+
+.offices-list strong {
+    color: var(--primary);
+    font-weight: 600;
+}
+
 .contact-social-links {
     display: flex;
     gap: 1rem;
