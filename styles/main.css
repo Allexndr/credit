@@ -1232,41 +1232,7 @@ input[type="tel"]:focus {
 }
 
 /* Изображение героя */
-.hero__image {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    position: relative;
-    margin-top: -6rem;
-    z-index: 2;
-}
 
-.hero__image-container {
-    position: relative;
-    max-width: 900px;
-    width: 100%;
-    overflow: hidden;
-    border-radius: var(--radius-xl);
-    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.1);
-}
-
-.hero__img {
-    width: 100%;
-    height: auto;
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-xl);
-    max-height: none;
-    object-fit: cover;
-    filter: brightness(1.1) contrast(1.1);
-    transition: all 0.3s ease;
-}
-
-.hero__img:hover {
-    filter: brightness(1.2) contrast(1.15);
-    transform: scale(1.02);
-}
 
 /* ===== СЕКЦИИ ===== */
 section {
@@ -1776,13 +1742,7 @@ section {
         min-height: calc(100vh - 100px); /* Компенсируем отступ */
     }
     
-    .hero__image {
-        margin-top: -2rem;
-    }
-    
-    .hero__img {
-        filter: brightness(1.15) contrast(1.1);
-    }
+
 }
 
 /* ===== ПРИНУДИТЕЛЬНОЕ УБИРАНИЕ ОБВОДОК ===== */
