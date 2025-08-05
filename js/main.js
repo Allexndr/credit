@@ -1,4 +1,5 @@
 // ===== MAIN JAVASCRIPT =====
+// Версия 2 - исправлено мобильное меню
 
 // Функция для удаления аналитических панелей
 function removeAnalyticsPanels() {
@@ -82,6 +83,31 @@ if (burger) {
 // ===== УТИЛИТЫ =====
 function formatNumber(num) {
     return new Intl.NumberFormat('kk-KZ').format(num);
+}
+
+// Функция для выбора услуги
+function selectService(serviceName) {
+    // Открываем модальное окно заявки
+    openModal('application');
+    
+    // Устанавливаем выбранную услугу в форму
+    setTimeout(() => {
+        const serviceSelect = document.querySelector('#modal-application select[name="credit_type"]');
+        if (serviceSelect) {
+            // Маппинг названий услуг на значения select
+            const serviceMapping = {
+                'Беззалоговый кредит': 'consumer',
+                'Рефинансирование': 'refinancing',
+                'Залоговый кредит': 'consumer',
+                'Программа Өрлеу': 'business',
+                'Программа Jana Business': 'business',
+                'Программа Субсидирование торговли': 'business'
+            };
+            
+            const value = serviceMapping[serviceName] || 'consumer';
+            serviceSelect.value = value;
+        }
+    }, 100);
 }
 
 // Функции для модальных окон
@@ -262,15 +288,37 @@ class Header {
         
         console.log('Initializing mobile menu...');
         
-        burger.addEventListener('click', () => {
-            console.log('Burger clicked!');
-            this.toggleMobileMenu();
+        // Принудительно удаляем все существующие обработчики
+        const newBurger = burger.cloneNode(true);
+        burger.parentNode.replaceChild(newBurger, burger);
+        
+        // Получаем новый элемент
+        const freshBurger = document.getElementById('burger');
+        const freshNav = document.getElementById('nav');
+        
+        freshBurger.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Проверяем, что мы на мобильном устройстве
+            if (window.innerWidth <= 1023) {
+                console.log('Burger clicked on mobile!');
+                this.toggleMobileMenu();
+            } else {
+                console.log('Burger clicked on desktop - ignored');
+            }
         });
         
         // Закрытие меню при клике на ссылку
-        const navLinks = nav.querySelectorAll('.nav__link');
+        const navLinks = freshNav.querySelectorAll('.nav__link');
         navLinks.forEach(link => {
-            link.addEventListener('click', () => this.closeMobileMenu());
+            link.addEventListener('click', (e) => {
+                // Не закрываем меню для ссылок с якорями на текущей странице
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    this.closeMobileMenu();
+                }
+            });
         });
         
         // Добавляем обработчик для кнопки "Получить кредит" в мобильном меню
@@ -292,26 +340,164 @@ class Header {
             console.error('Mobile credit button not found!');
         }
         
+        // Добавляем обработчик для кнопки в мобильном меню
+        const mobileMenuBtn = freshNav.querySelector('.mobile-menu__actions .btn');
+        if (mobileMenuBtn) {
+            console.log('Found mobile menu button');
+            mobileMenuBtn.addEventListener('click', (e) => {
+                console.log('Mobile menu button clicked!');
+                e.preventDefault();
+                e.stopPropagation();
+                // Закрываем мобильное меню
+                this.closeMobileMenu();
+                // Открываем модальное окно
+                setTimeout(() => {
+                    openModal('application');
+                }, 100);
+            });
+        } else {
+            console.error('Mobile menu button not found!');
+        }
+        
         // Закрытие меню при клике вне его
         document.addEventListener('click', (e) => {
-            if (!nav.contains(e.target) && !burger.contains(e.target)) {
+            if (freshNav.classList.contains('active') && !freshNav.contains(e.target) && !freshBurger.contains(e.target)) {
+                this.closeMobileMenu();
+            }
+        });
+        
+        // Закрытие меню при изменении размера окна
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 1023 && freshNav.classList.contains('active')) {
+                this.closeMobileMenu();
+            }
+        });
+        
+        // Закрытие меню при нажатии Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && freshNav.classList.contains('active')) {
                 this.closeMobileMenu();
             }
         });
     }
     
     toggleMobileMenu() {
-        console.log('Toggling mobile menu...');
-        burger.classList.toggle('active');
-        nav.classList.toggle('active');
-        document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
-        console.log('Burger active:', burger.classList.contains('active'));
-        console.log('Nav active:', nav.classList.contains('active'));
+        console.log('=== TOGGLE MOBILE MENU ===');
+        const currentBurger = document.getElementById('burger');
+        const currentNav = document.getElementById('nav');
+        
+        if (!currentBurger || !currentNav) {
+            console.error('Burger or nav not found in toggleMobileMenu');
+            return;
+        }
+        
+        currentBurger.classList.toggle('active');
+        currentNav.classList.toggle('active');
+        
+        // Управляем прокруткой body
+        if (currentNav.classList.contains('active')) {
+            document.body.classList.add('mobile-menu-open');
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.classList.remove('mobile-menu-open');
+            document.body.style.overflow = '';
+        }
+        console.log('Burger active:', currentBurger.classList.contains('active'));
+        console.log('Nav active:', currentNav.classList.contains('active'));
+        
+        // Принудительно устанавливаем стили для мобильного меню только на мобильных устройствах
+        if (window.innerWidth <= 1023) {
+            if (currentNav.classList.contains('active')) {
+                currentNav.style.position = 'fixed';
+                currentNav.style.top = '0';
+                currentNav.style.left = '0';
+                currentNav.style.right = '0';
+                currentNav.style.bottom = '0';
+                currentNav.style.zIndex = '9999';
+                currentNav.style.display = 'flex';
+                currentNav.style.alignItems = 'center';
+                currentNav.style.justifyContent = 'center';
+                currentNav.style.opacity = '1';
+                currentNav.style.visibility = 'visible';
+                currentNav.style.backgroundColor = 'rgba(15, 23, 42, 0.98)';
+                currentNav.style.paddingTop = '80px';
+                currentNav.style.pointerEvents = 'auto';
+                
+                // Принудительно показываем элементы навигации
+                const navList = currentNav.querySelector('.nav__list');
+                if (navList) {
+                    navList.style.display = 'flex';
+                    navList.style.opacity = '1';
+                    navList.style.visibility = 'visible';
+                }
+                
+                // Принудительно показываем все ссылки
+                const navLinks = currentNav.querySelectorAll('.nav__link');
+                navLinks.forEach(link => {
+                    link.style.opacity = '1';
+                    link.style.visibility = 'visible';
+                    link.style.display = 'block';
+                });
+                
+                // Принудительно показываем мобильное меню
+                const mobileMenu = currentNav.querySelector('.mobile-menu');
+                if (mobileMenu) {
+                    mobileMenu.style.display = 'flex';
+                    mobileMenu.style.opacity = '1';
+                    mobileMenu.style.visibility = 'visible';
+                }
+                
+                // Принудительно показываем все элементы мобильного меню
+                const mobileMenuElements = currentNav.querySelectorAll('.mobile-menu__section, .mobile-menu__header, .mobile-menu__title, .mobile-menu__link, .mobile-menu__actions');
+                mobileMenuElements.forEach(element => {
+                    element.style.opacity = '1';
+                    element.style.visibility = 'visible';
+                    element.style.color = 'white';
+                });
+                
+                // Принудительно показываем кнопку в мобильном меню
+                const mobileMenuBtn = currentNav.querySelector('.mobile-menu__actions .btn');
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.style.opacity = '1';
+                    mobileMenuBtn.style.visibility = 'visible';
+                    mobileMenuBtn.style.background = 'var(--gradient-primary)';
+                    mobileMenuBtn.style.color = 'white';
+                }
+                
+                console.log('Mobile menu styles applied');
+            } else {
+                currentNav.style.opacity = '0';
+                currentNav.style.visibility = 'hidden';
+                currentNav.style.pointerEvents = 'none';
+                console.log('Mobile menu hidden');
+            }
+        } else {
+            // На десктопе сбрасываем все стили
+            nav.style.position = '';
+            nav.style.top = '';
+            nav.style.left = '';
+            nav.style.right = '';
+            nav.style.bottom = '';
+            nav.style.zIndex = '';
+            nav.style.display = '';
+            nav.style.alignItems = '';
+            nav.style.justifyContent = '';
+            nav.style.opacity = '';
+            nav.style.visibility = '';
+            nav.style.backgroundColor = '';
+            nav.style.paddingTop = '';
+            nav.style.pointerEvents = '';
+            console.log('Desktop: mobile menu styles reset');
+        }
     }
     
     closeMobileMenu() {
-        burger.classList.remove('active');
-        nav.classList.remove('active');
+        const currentBurger = document.getElementById('burger');
+        const currentNav = document.getElementById('nav');
+        
+        if (currentBurger) currentBurger.classList.remove('active');
+        if (currentNav) currentNav.classList.remove('active');
+        document.body.classList.remove('mobile-menu-open');
         document.body.style.overflow = '';
     }
     
@@ -707,6 +893,18 @@ class Forms {
             return;
         }
         
+        // Специальная обработка для формы калькулятора
+        if (form.id === 'calculator-form') {
+            this.handleCalculatorForm(form, formData);
+            return;
+        }
+        
+        // Специальная обработка для формы оценки кредитоспособности
+        if (form.id === 'credit-assessment-form') {
+            this.handleAssessmentForm(form, formData);
+            return;
+        }
+        
         // Отправка в WhatsApp
         this.sendToWhatsApp(form, formData);
         
@@ -726,7 +924,7 @@ class Forms {
     
     handleHeroForm(form, formData) {
         // Номер WhatsApp для чата
-        const phoneNumber = '77011061059';
+        const phoneNumber = '77011061039';
         
         // Формируем сообщение для hero формы
         let message = '=== 🚀 НОВАЯ ЗАЯВКА С ГЛАВНОЙ СТРАНИЦЫ ===\n';
@@ -773,50 +971,202 @@ class Forms {
         console.log('Hero form message:', message);
     }
     
+    handleCalculatorForm(form, formData) {
+        // Номер WhatsApp для чата
+        const phoneNumber = '77011061039';
+        
+        // Формируем сообщение для формы калькулятора
+        let message = '=== 🧮 НОВАЯ ЗАЯВКА НА РАСЧЁТ КРЕДИТА ===\n';
+        message += '==========================================\n\n';
+        
+        // Получаем данные из формы
+        const name = formData.get('name') || document.getElementById('calculator-name')?.value || 'Не указано';
+        const phone = formData.get('phone') || document.getElementById('calculator-phone')?.value || 'Не указано';
+        const consent = formData.get('consent') || document.getElementById('calculator-consent')?.checked || false;
+        
+        message += `👤 Имя: ${name}\n`;
+        message += `📞 Телефон: ${phone}\n`;
+        message += `✅ Согласие на обработку данных: ${consent ? 'Да' : 'Нет'}\n`;
+        message += `💳 Тип услуги: Расчёт кредита\n`;
+        
+        message += '\n==========================================\n';
+        message += '🕐 Время: ' + new Date().toLocaleString('ru-RU');
+        message += '\n==========================================\n\n';
+        message += '🏦 Komek damu - звоните!';
+        
+        // Кодируем сообщение для URL
+        const encodedMessage = encodeURIComponent(message);
+        
+        // Формируем ссылку WhatsApp
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+        
+        // Открываем WhatsApp
+        window.open(whatsappUrl, '_blank');
+        
+        // Показать уведомление об успешной отправке
+        this.showNotification('Спасибо! Ваша заявка на расчёт отправлена. Мы свяжемся с вами в течение 5 минут.', 'success');
+        
+        // Очистить форму
+        form.reset();
+        
+        console.log('Calculator form message:', message);
+    }
+    
+    handleAssessmentForm(form, formData) {
+        // Номер WhatsApp для чата
+        const phoneNumber = '77011061039';
+        
+        // Формируем сообщение для формы оценки кредитоспособности
+        let message = '=== 📊 НОВАЯ ЗАЯВКА НА ОЦЕНКУ КРЕДИТОСПОСОБНОСТИ ===\n';
+        message += '==================================================\n\n';
+        
+        // Получаем данные из формы
+        const creditType = document.getElementById('credit-type')?.selectedOptions[0]?.text || 'Не указано';
+        const monthlyIncome = document.getElementById('monthly-income')?.value || 'Не указано';
+        const currentDebt = document.getElementById('current-debt')?.value || 'Не указано';
+        const currentPayments = document.getElementById('current-payments')?.value || 'Не указано';
+        const overdueStatus = document.getElementById('overdue-status')?.selectedOptions[0]?.text || 'Не указано';
+        const creditHistory = document.getElementById('credit-history')?.selectedOptions[0]?.text || 'Не указано';
+        const incomeConfirmation = document.getElementById('income-confirmation')?.selectedOptions[0]?.text || 'Не указано';
+        const refinancingAmount = document.getElementById('refinancing-amount')?.value || 'Не указано';
+        const additionalAmount = document.getElementById('additional-amount')?.value || 'Не указано';
+        const loanTerm = document.getElementById('loan-term')?.selectedOptions[0]?.text || 'Не указано';
+        const interestRate = document.getElementById('interest-rate')?.selectedOptions[0]?.text || 'Не указано';
+        
+        message += `💳 Тип кредита: ${creditType}\n`;
+        message += `💵 Среднемесячный доход: ${monthlyIncome} ₸\n`;
+        message += `💸 Текущий долг: ${currentDebt} ₸\n`;
+        message += `💳 Платежи по кредитам: ${currentPayments} ₸\n`;
+        message += `⚠️ Просрочки: ${overdueStatus}\n`;
+        message += `📊 Кредитная история: ${creditHistory}\n`;
+        message += `📋 Подтверждение доходов: ${incomeConfirmation}\n`;
+        message += `🔄 Сумма рефинансирования: ${refinancingAmount} ₸\n`;
+        message += `➕ Дополнительная сумма: ${additionalAmount} ₸\n`;
+        message += `⏰ Срок займа: ${loanTerm}\n`;
+        message += `📈 Процентная ставка: ${interestRate}\n`;
+        
+        message += '\n==================================================\n';
+        message += '🕐 Время: ' + new Date().toLocaleString('ru-RU');
+        message += '\n==================================================\n\n';
+        message += '🏦 Komek damu - звоните!';
+        
+        // Кодируем сообщение для URL
+        const encodedMessage = encodeURIComponent(message);
+        
+        // Формируем ссылку WhatsApp
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+        
+        // Открываем WhatsApp
+        window.open(whatsappUrl, '_blank');
+        
+        // Показать уведомление об успешной отправке
+        this.showNotification('Спасибо! Ваша заявка на оценку кредитоспособности отправлена. Мы свяжемся с вами в течение 5 минут.', 'success');
+        
+        // Очистить форму
+        form.reset();
+        
+        console.log('Assessment form message:', message);
+    }
+    
     sendToWhatsApp(form, formData) {
         // Номер WhatsApp для чата
-        const phoneNumber = '77011061059';
+        const phoneNumber = '77011061039';
+        
+        // Определяем тип формы для правильного заголовка
+        let formType = 'credit';
+        let formTitle = '=== НОВАЯ ЗАЯВКА НА КРЕДИТ ===';
+        
+        if (form.id === 'partnerForm' || form.id === 'partner-application-form') {
+            formType = 'partner';
+            formTitle = '=== НОВАЯ ЗАЯВКА НА ПАРТНЁРСТВО ===';
+        } else if (form.id === 'business-consultation-form') {
+            formType = 'consultation';
+            formTitle = '=== НОВАЯ ЗАЯВКА НА КОНСУЛЬТАЦИЮ ===';
+        } else if (form.id === 'calculator-form') {
+            formType = 'calculator';
+            formTitle = '=== НОВАЯ ЗАЯВКА НА РАСЧЁТ ===';
+        } else if (form.id === 'credit-assessment-form') {
+            formType = 'assessment';
+            formTitle = '=== НОВАЯ ЗАЯВКА НА ОЦЕНКУ КРЕДИТОСПОСОБНОСТИ ===';
+        }
         
         // Формируем сообщение
-        let message = '=== НОВАЯ ЗАЯВКА НА КРЕДИТ ===\n';
+        let message = formTitle + '\n';
         message += '==============================\n\n';
         
         // Маппинг ASCII символов для типов кредитов
         const creditTypeEmojis = {
-            'consumer': '[ПОТРЕБИТЕЛЬСКИЙ]',      // Потребительский кредит
-            'mortgage': '[ИПОТЕКА]',       // Ипотека
-            'auto': '[АВТОКРЕДИТ]',          // Автокредит
-            'business': '[БИЗНЕС]',      // Бизнес кредит
-            'refinancing': '[РЕФИНАНСИРОВАНИЕ]',   // Рефинансирование
-            'express': '[ЭКСПРЕСС]'        // Экспресс-кредит
+            'consumer': '[ПОТРЕБИТЕЛЬСКИЙ]',
+            'mortgage': '[ИПОТЕКА]',
+            'auto': '[АВТОКРЕДИТ]',
+            'business': '[БИЗНЕС]',
+            'refinancing': '[РЕФИНАНСИРОВАНИЕ]',
+            'express': '[ЭКСПРЕСС]'
         };
 
-        // Маппинг полей для красивого отображения (ASCII символы)
+        // Маппинг полей для красивого отображения
         const fieldLabels = {
-            'name': '> Имя',
-            'phone': '> Телефон',
-            'email': '> Email',
-            'iin': '> ИИН',
-            'credit_type': '> Тип кредита',
-            'amount': '> Сумма',
-            'comment': '> Комментарий',
-            'consent': '> Согласие на обработку данных'
+            'name': '👤 Имя',
+            'fullName': '👤 ФИО',
+            'phone': '📞 Телефон',
+            'email': '📧 Email',
+            'iin': '🆔 ИИН',
+            'credit_type': '💳 Тип кредита',
+            'amount': '💰 Сумма',
+            'comment': '💬 Комментарий',
+            'consent': '✅ Согласие на обработку данных',
+            'client_type': '👥 Тип клиента',
+            'city': '🏙️ Город',
+            'partnershipType': '🤝 Тип партнёрства',
+            'experience': '💼 Опыт работы',
+            'motivation': '🎯 Мотивация',
+            'businessType': '🏢 Тип бизнеса',
+            'creditAmount': '💰 Требуемая сумма',
+            'purpose': '🎯 Цель кредитования',
+            'monthly-income': '💵 Среднемесячный доход',
+            'current-debt': '💸 Текущий долг',
+            'current-payments': '💳 Платежи по кредитам',
+            'overdue-status': '⚠️ Просрочки',
+            'credit-history': '📊 Кредитная история',
+            'income-confirmation': '📋 Подтверждение доходов',
+            'refinancing-amount': '🔄 Сумма рефинансирования',
+            'additional-amount': '➕ Дополнительная сумма',
+            'loan-term': '⏰ Срок займа',
+            'interest-rate': '📈 Процентная ставка'
         };
         
         // Собираем данные из FormData
         let creditTypeValue = '';
         let creditTypeText = '';
+        let clientType = '';
+        
         for (let [key, value] of formData.entries()) {
             if (value && fieldLabels[key]) {
                 // Для селектов получаем текст опции
-                if (key === 'credit_type' || key === 'amount') {
+                if (key === 'credit_type' || key === 'amount' || key === 'partnershipType' || 
+                    key === 'businessType' || key === 'creditAmount' || key === 'overdue-status' || 
+                    key === 'credit-history' || key === 'income-confirmation' || key === 'loan-term' || 
+                    key === 'interest-rate') {
                     const select = form.querySelector(`[name="${key}"]`);
                     if (select && select.selectedOptions[0]) {
                         if (key === 'credit_type') {
-                            creditTypeValue = select.value; // Сохраняем значение для смайлика
-                            creditTypeText = select.selectedOptions[0].text; // Сохраняем текст
+                            creditTypeValue = select.value;
+                            creditTypeText = select.selectedOptions[0].text;
                         }
                         value = select.selectedOptions[0].text;
+                    }
+                }
+                
+                // Для radio buttons (тип клиента)
+                if (key === 'client_type') {
+                    const radio = form.querySelector(`input[name="${key}"][value="${value}"]`);
+                    if (radio) {
+                        const label = radio.closest('label') || radio.parentElement;
+                        if (label) {
+                            const labelText = label.querySelector('.client-type-label') || label.textContent;
+                            value = labelText.trim();
+                            clientType = value;
+                        }
                     }
                 }
                 
@@ -825,16 +1175,22 @@ class Forms {
             }
         }
         
+        // Добавляем приветствие в зависимости от типа клиента
+        let greeting = 'Здравствуйте! ';
+        if (clientType) {
+            greeting += `Я ${clientType}. `;
+        }
+        
         // Обновляем заголовок с соответствующим префиксом
         if (creditTypeValue && creditTypeEmojis[creditTypeValue]) {
-            message = message.replace('=== НОВАЯ ЗАЯВКА НА КРЕДИТ ===', 
+            message = message.replace(formTitle, 
                 `=== ${creditTypeEmojis[creditTypeValue]} НОВАЯ ЗАЯВКА ===`);
         }
         
         message += '\n==============================\n';
-        message += '> Время: ' + new Date().toLocaleString('ru-RU');
+        message += '🕐 Время: ' + new Date().toLocaleString('ru-RU');
         message += '\n==============================\n\n';
-        message += '> Komek damu - звоните!';
+        message += '🏦 Komek damu - звоните!';
         
         // Кодируем сообщение для URL
         const encodedMessage = encodeURIComponent(message);
@@ -1405,13 +1761,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Удаляем аналитические панели при загрузке
     removeAnalyticsPanels();
     
-    // Инициализация всех компонентов
-    new Header();
-    new Calculator();
-    new CreditAssessment();
-    new Modal();
-    new Forms();
-    new ScrollAnimations();
+    // Инициализация всех компонентов (удаляем дублирование)
+    // new Header();
+    // new Calculator();
+    // new CreditAssessment();
+    // new Modal();
+    // new Forms();
+    // new ScrollAnimations();
     
     // Добавить класс loaded для плавного появления контента
     setTimeout(() => {
@@ -1638,8 +1994,65 @@ const pageTransition = new PageTransition();
 document.addEventListener('DOMContentLoaded', () => {
     pageTransition.hideOnLoad();
     
-    // Инициализируем навигацию
-    const navigation = new Navigation();
+    // Инициализируем все классы
+    const header = new Header();
+    const calculator = new Calculator();
+    const creditAssessment = new CreditAssessment();
+    const modal = new Modal();
+    const forms = new Forms();
+    const scrollAnimations = new ScrollAnimations();
+    
+    // Тест бургер-меню
+    const testBurger = document.getElementById('burger');
+    const testNav = document.getElementById('nav');
+    
+    if (testBurger && testNav) {
+        console.log('=== ТЕСТ БУРГЕР-МЕНЮ ===');
+        console.log('Burger element:', testBurger);
+        console.log('Nav element:', testNav);
+        console.log('Burger classes:', testBurger.className);
+        console.log('Nav classes:', testNav.className);
+    }
+    
+    // Делаем формы доступными глобально для функций на странице партнёрства
+    window.forms = forms;
+    
+    // Инициализируем слайдер партнёров
+    setTimeout(() => {
+        initPartnersSlider();
+        startAutoSlide();
+    }, 100);
+    
+    // Обработчик изменения размера окна
+    window.addEventListener('resize', () => {
+        const nav = document.getElementById('nav');
+        if (nav && window.innerWidth > 1023) {
+            // На десктопе сбрасываем все стили мобильного меню
+            nav.style.position = '';
+            nav.style.top = '';
+            nav.style.left = '';
+            nav.style.right = '';
+            nav.style.bottom = '';
+            nav.style.zIndex = '';
+            nav.style.display = '';
+            nav.style.alignItems = '';
+            nav.style.justifyContent = '';
+            nav.style.opacity = '';
+            nav.style.visibility = '';
+            nav.style.backgroundColor = '';
+            nav.style.paddingTop = '';
+            nav.style.pointerEvents = '';
+            nav.classList.remove('active');
+            
+            const burger = document.getElementById('burger');
+            if (burger) {
+                burger.classList.remove('active');
+            }
+            
+            document.body.style.overflow = '';
+            console.log('Window resized to desktop, mobile menu reset');
+        }
+    });
 });
 
 // Функция для переключения секций мобильного меню
@@ -1658,41 +2071,259 @@ window.toggleMobileSection = function(sectionId) {
     }
 };
 
-// Функция отправки калькулятора
+// Функция отправки калькулятора (устаревшая, теперь используется форма)
 window.submitCalculator = function() {
-    const name = document.getElementById('calculator-name').value;
-    const phone = document.getElementById('calculator-phone').value;
-    const iin = document.getElementById('calculator-iin').value;
-    const consent = document.getElementById('calculator-consent').checked;
-    
-    if (!name || !phone || !iin || !consent) {
-        alert('Пожалуйста, заполните все поля и согласитесь с обработкой персональных данных');
-        return;
+    const form = document.getElementById('calculator-form');
+    if (form) {
+        form.dispatchEvent(new Event('submit'));
     }
-    
-    // Формируем сообщение для WhatsApp
-    const message = `Здравствуйте! Мне нужен расчёт кредита.
+};
 
-Имя: ${name}
-Телефон: ${phone}
-ИИН: ${iin}
-
-Пожалуйста, свяжитесь со мной для персонального расчёта.`;
+// Функция отправки заявки на партнёрство
+window.submitPartnerApplication = function(event) {
+    event.preventDefault();
     
+    const form = event.target;
+    const formData = new FormData(form);
+    
+    // Номер WhatsApp для чата
+    const phoneNumber = '77011061039';
+    
+    // Формируем сообщение для заявки на партнёрство
+    let message = '=== 🤝 НОВАЯ ЗАЯВКА НА ПАРТНЁРСТВО ===\n';
+    message += '==========================================\n\n';
+    
+    // Получаем данные из формы
+    const fullName = formData.get('fullName') || 'Не указано';
+    const phone = formData.get('phone') || 'Не указано';
+    const partnershipType = formData.get('partnershipType') || 'Не указано';
+    const city = formData.get('city') || 'Не указано';
+    const experience = formData.get('experience') || 'Не указано';
+    const motivation = formData.get('motivation') || 'Не указано';
+    const consent = formData.get('consent') || false;
+    
+    // Получаем текст для типа партнёрства
+    const partnershipTypeText = form.querySelector('select[name="partnershipType"]')?.selectedOptions[0]?.text || partnershipType;
+    
+    message += `👤 ФИО: ${fullName}\n`;
+    message += `📞 Телефон: ${phone}\n`;
+    message += `🤝 Тип партнёрства: ${partnershipTypeText}\n`;
+    message += `🏙️ Город: ${city}\n`;
+    message += `💼 Опыт работы: ${experience}\n`;
+    message += `🎯 Мотивация: ${motivation}\n`;
+    message += `✅ Согласие на обработку данных: ${consent ? 'Да' : 'Нет'}\n`;
+    
+    message += '\n==========================================\n';
+    message += '🕐 Время: ' + new Date().toLocaleString('ru-RU');
+    message += '\n==========================================\n\n';
+    message += '🏦 Komek damu - звоните!';
+    
+    // Кодируем сообщение для URL
     const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/77011061039?text=${encodedMessage}`;
+    
+    // Формируем ссылку WhatsApp
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
     
     // Открываем WhatsApp
     window.open(whatsappUrl, '_blank');
     
-    // Очищаем форму
-    document.getElementById('calculator-name').value = '';
-    document.getElementById('calculator-phone').value = '+7';
-    document.getElementById('calculator-iin').value = '';
-    document.getElementById('calculator-consent').checked = false;
+    // Показать уведомление об успешной отправке
+    if (window.forms) {
+        window.forms.showNotification('Спасибо! Ваша заявка на партнёрство отправлена. Мы свяжемся с вами в течение 5 минут.', 'success');
+    }
     
-    alert('Спасибо! Мы свяжемся с вами в ближайшее время.');
+    // Закрыть модальное окно
+    const modal = form.closest('.modal');
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    
+    // Очистить форму
+    form.reset();
+    
+    console.log('Partner application message:', message);
 };
+
+// Функция отправки консультации по бизнесу
+window.submitBusinessConsultation = function(event) {
+    event.preventDefault();
+    
+    const form = event.target;
+    const formData = new FormData(form);
+    
+    // Номер WhatsApp для чата
+    const phoneNumber = '77011061039';
+    
+    // Формируем сообщение для консультации по бизнесу
+    let message = '=== 🏢 НОВАЯ ЗАЯВКА НА КОНСУЛЬТАЦИЮ ПО БИЗНЕСУ ===\n';
+    message += '==================================================\n\n';
+    
+    // Получаем данные из формы
+    const fullName = formData.get('fullName') || 'Не указано';
+    const phone = formData.get('phone') || 'Не указано';
+    const businessType = formData.get('businessType') || 'Не указано';
+    const creditAmount = formData.get('creditAmount') || 'Не указано';
+    const purpose = formData.get('purpose') || 'Не указано';
+    const consent = formData.get('consent') || false;
+    
+    // Получаем текст для полей
+    const businessTypeText = form.querySelector('select[name="businessType"]')?.selectedOptions[0]?.text || businessType;
+    const creditAmountText = form.querySelector('select[name="creditAmount"]')?.selectedOptions[0]?.text || creditAmount;
+    
+    message += `👤 ФИО: ${fullName}\n`;
+    message += `📞 Телефон: ${phone}\n`;
+    message += `🏢 Тип бизнеса: ${businessTypeText}\n`;
+    message += `💰 Требуемая сумма: ${creditAmountText}\n`;
+    message += `🎯 Цель кредитования: ${purpose}\n`;
+    message += `✅ Согласие на обработку данных: ${consent ? 'Да' : 'Нет'}\n`;
+    
+    message += '\n==================================================\n';
+    message += '🕐 Время: ' + new Date().toLocaleString('ru-RU');
+    message += '\n==================================================\n\n';
+    message += '🏦 Komek damu - звоните!';
+    
+    // Кодируем сообщение для URL
+    const encodedMessage = encodeURIComponent(message);
+    
+    // Формируем ссылку WhatsApp
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    
+    // Открываем WhatsApp
+    window.open(whatsappUrl, '_blank');
+    
+    // Показать уведомление об успешной отправке
+    if (window.forms) {
+        window.forms.showNotification('Спасибо! Ваша заявка на консультацию отправлена. Мы свяжемся с вами в течение 5 минут.', 'success');
+    }
+    
+    // Закрыть модальное окно
+    const modal = form.closest('.modal');
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    
+    // Очистить форму
+    form.reset();
+    
+    console.log('Business consultation message:', message);
+};
+
+// ===== СЛАЙДЕР ПАРТНЁРОВ =====
+let currentSlide = 0;
+let slidesPerView = 3;
+let totalSlides = 0;
+
+// Инициализация слайдера партнёров
+function initPartnersSlider() {
+    const track = document.querySelector('.partners-slider__track');
+    const slides = document.querySelectorAll('.partner-slide');
+    const dots = document.querySelectorAll('.partners-slider__dot');
+    
+    if (!track || slides.length === 0) return;
+    
+    // Определяем количество слайдов в зависимости от размера экрана
+    if (window.innerWidth <= 768) {
+        slidesPerView = 1;
+    } else if (window.innerWidth <= 1024) {
+        slidesPerView = 2;
+    } else {
+        slidesPerView = 3;
+    }
+    
+    totalSlides = Math.ceil(slides.length / slidesPerView);
+    
+    // Обновляем количество точек
+    updateDots();
+    
+    // Показываем первый слайд
+    goToSlide(0);
+}
+
+// Переход к слайду
+window.goToSlide = function(slideIndex) {
+    const track = document.querySelector('.partners-slider__track');
+    const slides = document.querySelectorAll('.partner-slide');
+    const dots = document.querySelectorAll('.partners-slider__dot');
+    
+    if (!track || slides.length === 0) return;
+    
+    currentSlide = Math.max(0, Math.min(slideIndex, totalSlides - 1));
+    
+    // Вычисляем смещение
+    const slideWidth = slides[0].offsetWidth + 48; // 48px - gap между слайдами
+    const offset = currentSlide * slideWidth * slidesPerView;
+    
+    // Применяем трансформацию
+    track.style.transform = `translateX(-${offset}px)`;
+    
+    // Обновляем активную точку
+    dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentSlide);
+    });
+    
+    // Обновляем состояние кнопок
+    updateSliderButtons();
+};
+
+// Слайд влево/вправо
+window.slidePartners = function(direction) {
+    if (direction === 'prev') {
+        goToSlide(currentSlide - 1);
+    } else {
+        goToSlide(currentSlide + 1);
+    }
+};
+
+// Обновление точек
+function updateDots() {
+    const dotsContainer = document.querySelector('.partners-slider__dots');
+    if (!dotsContainer) return;
+    
+    dotsContainer.innerHTML = '';
+    
+    for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('span');
+        dot.className = 'partners-slider__dot';
+        dot.onclick = () => goToSlide(i);
+        dotsContainer.appendChild(dot);
+    }
+}
+
+// Обновление состояния кнопок
+function updateSliderButtons() {
+    const prevBtn = document.querySelector('.partners-slider__btn--prev');
+    const nextBtn = document.querySelector('.partners-slider__btn--next');
+    
+    if (prevBtn) {
+        prevBtn.disabled = currentSlide === 0;
+    }
+    
+    if (nextBtn) {
+        nextBtn.disabled = currentSlide === totalSlides - 1;
+    }
+}
+
+// Автоматическое переключение слайдов
+function startAutoSlide() {
+    setInterval(() => {
+        if (currentSlide < totalSlides - 1) {
+            goToSlide(currentSlide + 1);
+        } else {
+            goToSlide(0);
+        }
+    }, 5000); // Переключаем каждые 5 секунд
+}
+
+// Обработчик изменения размера окна
+window.addEventListener('resize', () => {
+    setTimeout(() => {
+        initPartnersSlider();
+    }, 100);
+});
+
+
 
 // Также скрываем при событии load
 window.addEventListener('load', () => {
