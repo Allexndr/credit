@@ -1651,55 +1651,7 @@ section {
     display: none !important;
 }
 
-/* ===== ПРЕИМУЩЕСТВА ===== */
-.advantages {
-    padding: 5rem 0;
-    background: var(--bg-white);
-}
 
-.advantages__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
-}
-
-.advantage-card {
-    text-align: center;
-    padding: 2rem;
-    border-radius: 1rem;
-    background: var(--bg-light);
-    transition: var(--transition);
-}
-
-.advantage-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-md);
-}
-
-.advantage-card__icon {
-    width: 80px;
-    height: 80px;
-    background: var(--primary);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-white);
-    margin: 0 auto 1.5rem;
-}
-
-.advantage-card__title {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 1rem;
-}
-
-.advantage-card__description {
-    color: var(--text-secondary);
-    line-height: 1.6;
-}
 
 /* ===== АДАПТИВНОСТЬ ДЛЯ НОВЫХ СЕКЦИЙ ===== */
 @media (max-width: 768px) {
@@ -1708,9 +1660,7 @@ section {
         grid-template-columns: 1fr;
     }
     
-    .advantages__grid {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    }
+
     
     .damu-program-card,
     .business-credit-card {
