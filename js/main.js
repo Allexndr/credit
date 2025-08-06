@@ -112,31 +112,86 @@ function selectService(serviceName) {
 
 // Функции для модальных окон
 function openModal(modalId) {
+    console.log('Opening modal:', modalId);
+    
+    // Закрываем все другие модальные окна
+    const allModals = document.querySelectorAll('.modal');
+    allModals.forEach(m => {
+        m.classList.remove('active');
+        m.style.display = 'none';
+    });
+    
     const modal = document.getElementById(`modal-${modalId}`);
     if (modal) {
+        // Принудительно устанавливаем стили
+        modal.style.display = 'flex';
+        modal.style.zIndex = '99999';
+        modal.style.position = 'fixed';
+        modal.style.top = '0';
+        modal.style.left = '0';
+        modal.style.width = '100%';
+        modal.style.height = '100%';
+        modal.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+        
+        // Добавляем класс активного состояния
         modal.classList.add('active');
+        
+        // Блокируем прокрутку страницы
         document.body.style.overflow = 'hidden';
+        
+        // Фокусируемся на первом поле ввода
+        const firstInput = modal.querySelector('input, select, textarea');
+        if (firstInput) {
+            setTimeout(() => firstInput.focus(), 100);
+        }
+        
+        console.log('Modal opened successfully:', modalId);
+    } else {
+        console.error('Modal not found:', modalId);
     }
 }
 
 function closeModal(modalId) {
+    console.log('Closing modal:', modalId);
+    
     const modal = document.getElementById(`modal-${modalId}`);
     if (modal) {
+        // Убираем активное состояние
         modal.classList.remove('active');
+        
+        // Скрываем модальное окно
+        modal.style.display = 'none';
+        
+        // Восстанавливаем прокрутку страницы
         document.body.style.overflow = '';
+        
+        // Сбрасываем форму
+        const form = modal.querySelector('form');
+        if (form) {
+            form.reset();
+        }
+        
+        console.log('Modal closed successfully:', modalId);
+    } else {
+        console.error('Modal not found for closing:', modalId);
     }
 }
 
 function scrollToSection(sectionId) {
+    console.log('Scrolling to section:', sectionId);
     const section = document.getElementById(sectionId);
     if (section) {
+        console.log('Section found:', section);
         const headerHeight = header.offsetHeight;
         const targetPosition = section.offsetTop - headerHeight - 20;
+        console.log('Target position:', targetPosition);
         
         window.scrollTo({
             top: targetPosition,
             behavior: 'smooth'
         });
+    } else {
+        console.error('Section not found:', sectionId);
     }
 }
 
@@ -2328,4 +2383,261 @@ window.addEventListener('resize', () => {
 // Также скрываем при событии load
 window.addEventListener('load', () => {
     pageTransition.hideOnLoad();
-}); 
+});
+
+// ===== ВИДЕО ОТЗЫВЫ =====
+class VideoReviews {
+    constructor() {
+        this.modal = document.getElementById('videoModal');
+        this.overlay = document.getElementById('videoModalOverlay');
+        this.closeBtn = document.getElementById('videoModalClose');
+        this.player = document.getElementById('videoModalPlayer');
+        this.currentVideo = null;
+    }
+
+    init() {
+        this.initVideoCards();
+        this.initModal();
+        this.initLazyLoading();
+    }
+
+    initVideoCards() {
+        const videoCards = document.querySelectorAll('.video-review-card');
+        
+        videoCards.forEach(card => {
+            card.addEventListener('click', (e) => {
+                e.preventDefault();
+                const videoSrc = card.dataset.video;
+                this.openVideo(videoSrc);
+            });
+
+            // Добавляем hover эффект для кнопки воспроизведения
+            const playButton = card.querySelector('.video-play-button');
+            if (playButton) {
+                card.addEventListener('mouseenter', () => {
+                    playButton.style.transform = 'translate(-50%, -50%) scale(1.1)';
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    playButton.style.transform = 'translate(-50%, -50%) scale(1)';
+                });
+            }
+        });
+    }
+
+    initModal() {
+        // Закрытие по клику на оверлей
+        if (this.overlay) {
+            this.overlay.addEventListener('click', () => {
+                this.closeVideo();
+            });
+        }
+
+        // Закрытие по клику на кнопку
+        if (this.closeBtn) {
+            this.closeBtn.addEventListener('click', () => {
+                this.closeVideo();
+            });
+        }
+
+        // Закрытие по Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.modal.classList.contains('active')) {
+                this.closeVideo();
+            }
+        });
+    }
+
+    initLazyLoading() {
+        // Создаем Intersection Observer для ленивой загрузки
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const video = entry.target;
+                    this.loadVideoThumbnail(video);
+                    observer.unobserve(video);
+                }
+            });
+        }, {
+            rootMargin: '50px'
+        });
+
+        // Наблюдаем за всеми видео
+        const videos = document.querySelectorAll('.video-preview');
+        videos.forEach(video => {
+            observer.observe(video);
+        });
+    }
+
+    loadVideoThumbnail(video) {
+        // Создаем canvas для генерации превью
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = 400;
+        canvas.height = 300;
+
+        // Создаем градиентный фон
+        const gradient = ctx.createLinearGradient(0, 0, 400, 300);
+        gradient.addColorStop(0, '#f1f5f9');
+        gradient.addColorStop(1, '#e2e8f0');
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, 400, 300);
+
+        // Рисуем иконку воспроизведения
+        ctx.fillStyle = '#1e3a8a';
+        ctx.beginPath();
+        ctx.arc(200, 150, 40, 0, 2 * Math.PI);
+        ctx.fill();
+
+        // Рисуем треугольник
+        ctx.fillStyle = 'white';
+        ctx.beginPath();
+        ctx.moveTo(180, 140);
+        ctx.lineTo(180, 160);
+        ctx.lineTo(200, 150);
+        ctx.closePath();
+        ctx.fill();
+
+        // Устанавливаем превью
+        video.poster = canvas.toDataURL();
+    }
+
+    openVideo(videoSrc) {
+        if (!this.modal || !this.player) return;
+
+        // Устанавливаем источник видео
+        this.player.src = videoSrc;
+        this.currentVideo = videoSrc;
+
+        // Показываем модальное окно
+        this.modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        // Фокусируемся на кнопке закрытия для доступности
+        setTimeout(() => {
+            this.closeBtn.focus();
+        }, 100);
+    }
+
+    closeVideo() {
+        if (!this.modal || !this.player) return;
+
+        // Останавливаем видео
+        this.player.pause();
+        this.player.currentTime = 0;
+        this.player.src = '';
+
+        // Скрываем модальное окно
+        this.modal.classList.remove('active');
+        document.body.style.overflow = '';
+
+        // Сбрасываем текущее видео
+        this.currentVideo = null;
+    }
+}
+
+// Инициализация видео отзывов
+const videoReviews = new VideoReviews();
+document.addEventListener('DOMContentLoaded', () => {
+    videoReviews.init();
+    
+    // Инициализация маски для телефона
+    initPhoneMask();
+});
+
+// Функция для форматирования номера телефона
+function initPhoneMask() {
+    const phoneInputs = document.querySelectorAll('input[type="tel"]');
+    
+    phoneInputs.forEach(input => {
+        input.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, ''); // Убираем все не-цифры
+            
+            if (value.length === 0) {
+                e.target.value = '';
+                return;
+            }
+            
+            // Если номер начинается с 7, убираем его и добавляем +7
+            if (value.startsWith('7')) {
+                value = value.substring(1);
+            }
+            
+            // Если номер не начинается с 7, добавляем +7
+            if (!value.startsWith('7') && value.length > 0) {
+                value = '7' + value;
+            }
+            
+            // Форматируем номер
+            let formatted = '+7';
+            if (value.length > 1) {
+                formatted += ' (' + value.substring(1, 4);
+                if (value.length > 4) {
+                    formatted += ') ' + value.substring(4, 7);
+                    if (value.length > 7) {
+                        formatted += '-' + value.substring(7, 9);
+                        if (value.length > 9) {
+                            formatted += '-' + value.substring(9, 11);
+                        }
+                    }
+                }
+            }
+            
+            e.target.value = formatted;
+            
+            // Устанавливаем курсор в конец
+            const len = e.target.value.length;
+            e.target.setSelectionRange(len, len);
+        });
+        
+        // При фокусе устанавливаем курсор в конец
+        input.addEventListener('focus', function(e) {
+            const len = e.target.value.length;
+            e.target.setSelectionRange(len, len);
+        });
+    });
+}
+
+// Глобальный обработчик для закрытия модальных окон по Escape
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        const activeModal = document.querySelector('.modal.active');
+        if (activeModal) {
+            const modalId = activeModal.id.replace('modal-', '');
+            closeModal(modalId);
+        }
+    }
+});
+
+// Тестовая функция для проверки модального окна
+window.testModal = function() {
+    console.log('=== TESTING MODAL ===');
+    const modal = document.getElementById('modal-consultation');
+    if (modal) {
+        console.log('Modal found:', modal);
+        console.log('Modal classes:', modal.className);
+        console.log('Modal styles:', modal.style.cssText);
+        
+        // Принудительно показываем модальное окно
+        modal.style.display = 'flex';
+        modal.style.position = 'fixed';
+        modal.style.top = '0';
+        modal.style.left = '0';
+        modal.style.width = '100%';
+        modal.style.height = '100%';
+        modal.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+        modal.style.zIndex = '99999';
+        modal.style.alignItems = 'center';
+        modal.style.justifyContent = 'center';
+        modal.style.padding = '20px';
+        
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        console.log('Modal forced to show');
+        console.log('Modal classes now:', modal.className);
+        console.log('Modal styles now:', modal.style.cssText);
+    } else {
+        console.error('Modal not found!');
+    }
+}; 
