@@ -59,9 +59,7 @@
                         <li class="nav__item">
                             <a href="#calculator" class="nav__link">Калькулятор</a>
                         </li>
-                        <li class="nav__item">
-                            <a href="#credit-assessment" class="nav__link">Расчёт возможностей</a>
-                        </li>
+                        <!-- Удалено: секция credit-assessment больше не существует -->
                         <li class="nav__item">
                             <a href="#about" class="nav__link">О нас</a>
                         </li>
@@ -233,12 +231,12 @@
                         <button class="btn btn--primary btn--large" onclick="scrollToSection('calculator')">
                             Рассчитать кредит
                         </button>
-                        <button class="btn btn--outline btn--large" onclick="scrollToSection('services')">
+                        <button class="btn btn--outline btn--large" onclick="scrollToSection('consumer-solutions')">
                             Все услуги
                         </button>
-                        <button class="btn btn--accent btn--large" onclick="openModal('consultation')">
+                        <a href="https://wa.me/77011061039?text=Здравствуйте! Меня интересует консультация по кредиту" class="btn btn--accent" target="_blank">
                             Получить консультацию
-                        </button>
+                        </a>
                     </div>
                     
                     <!-- Форма заявки на главной странице -->
@@ -250,7 +248,7 @@
                                     <input type="text" name="name" class="form-input" placeholder="Ваше имя" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" value="+7" required>
+                                    <input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required>
                                 </div>
                                 <div class="form-group">
                                     <div class="client-type-selector">
@@ -279,7 +277,12 @@
                     </div>
                 </div>
                 
-
+                <!-- Hero изображение -->
+                <div class="hero__image">
+                    <div class="hero__image-container">
+                        <img src="image.png" alt="Успешное получение кредита" class="hero__img">
+                    </div>
+                </div>
 
             </div>
         </div>
@@ -409,15 +412,6 @@
     <section class="damu-programs" id="damu-programs">
         <div class="container">
             <div class="section__header">
-                <div class="damu-logo">
-                    <div class="damu-logo__icon">
-                        <img src="ChatGPT Image Jul 18, 2025, 04_44_48 PM.png" alt="Komek Damu" class="damu-logo__img">
-                    </div>
-                    <div class="damu-logo__text">
-                        <span class="damu-logo__title">KOMEK DAMU</span>
-                        <span class="damu-logo__rate">кредитование 12,6%</span>
-                    </div>
-                </div>
                 <h2 class="section__title">Программы DAMU</h2>
                 <p class="section__description">
                     Государственные программы поддержки бизнеса с минимальными ставками
@@ -515,15 +509,73 @@
         </div>
     </section>
 
-
-
-
-
-
-
-
-
-
+    <!-- Кредиты для бизнеса -->
+    <section class="business-credit" id="business-credit">
+        <div class="container">
+            <div class="section__header">
+                <h2 class="section__title">Решения для Бизнеса</h2>
+                <p class="section__description">
+                    Кредитные решения для индивидуальных предпринимателей и малого бизнеса
+                </p>
+            </div>
+            
+            <div class="business-credit__grid">
+                <!-- Беззалоговый кредит для ИП -->
+                <div class="business-credit-card">
+                    <div class="business-credit-card__image">
+                        <img src="image copy.png" alt="Беззалоговый кредит для ИП">
+                    </div>
+                    <div class="business-credit-card__content">
+                        <h3 class="business-credit-card__title">Беззалоговый кредит для ИП</h3>
+                        <div class="business-credit-card__features">
+                            <div class="business-feature">
+                                <span class="business-feature__check">✓</span>
+                                <span class="business-feature__text">Сумма займа от 500 000т до 30 000 000T</span>
+                            </div>
+                            <div class="business-feature">
+                                <span class="business-feature__check">✓</span>
+                                <span class="business-feature__text">Срок займа от 6 до 60 месяцев</span>
+                            </div>
+                            <div class="business-feature">
+                                <span class="business-feature__check">✓</span>
+                                <span class="business-feature__text">Без справок и залога — решение за день</span>
+                            </div>
+                        </div>
+                        <button class="btn btn--outline btn--business" onclick="selectService('Беззалоговый кредит для ИП')">
+                            Онлайн консультация →
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Залоговый кредит для ИП -->
+                <div class="business-credit-card">
+                    <div class="business-credit-card__image">
+                        <img src="image copy 2.png" alt="Залоговый кредит для ИП">
+                    </div>
+                    <div class="business-credit-card__content">
+                        <h3 class="business-credit-card__title">Залоговый кредит для ИП</h3>
+                        <div class="business-credit-card__features">
+                            <div class="business-feature">
+                                <span class="business-feature__check">✓</span>
+                                <span class="business-feature__text">Сумма займа от 500 000т до 100 000 000T</span>
+                            </div>
+                            <div class="business-feature">
+                                <span class="business-feature__check">✓</span>
+                                <span class="business-feature__text">Максимум суммы — минимум хлопот</span>
+                            </div>
+                            <div class="business-feature">
+                                <span class="business-feature__check">✓</span>
+                                <span class="business-feature__text">ИП старше 1 года — одобрение за 1 день</span>
+                            </div>
+                        </div>
+                        <button class="btn btn--outline btn--business" onclick="selectService('Залоговый кредит для ИП')">
+                            Бесплатное рассмотрение →
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Ипотечные программы -->
     <section class="mortgage-programs" id="mortgage-programs">
@@ -820,189 +872,182 @@
         </div>
     </section>
 
-    <!-- Категории клиентов -->
-    <section class="client-categories">
-        <div class="container">
-            <div class="section__header">
-                <h2 class="section__title">Мы помогаем разным категориям клиентов — подбираем решение индивидуально</h2>
-                <p class="section__description">
-                    Независимо от вашей ситуации, мы найдем банк, который одобрит кредит
-                </p>
-            </div>
-            
-            <div class="categories__grid">
-                <div class="category-card">
-                    <div class="category-card__icon">
-                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none">
-                            <circle cx="12" cy="12" r="10" stroke="#059669" stroke-width="2"/>
-                            <path d="M8 12h8M12 8v8" stroke="#059669" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <h3 class="category-card__title">Без подтверждения доходов</h3>
-                    <p class="category-card__description">
-                        Работаем с самозанятыми, ИП и теми, кто получает зарплату неофициально. 
-                        Найдем банки, которые одобряют кредиты по справке о доходах или без документов.
-                    </p>
-                    <ul class="category-card__features">
-                        <li>✓ Справка о доходах по форме банка</li>
-                        <li>✓ Кредиты для самозанятых</li>
-                        <li>✓ Без справок о работе</li>
-                    </ul>
-                </div>
-                
-                <div class="category-card">
-                    <div class="category-card__icon">
-                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" stroke="#059669" stroke-width="2"/>
-                            <path d="M12 6v6l4 2" stroke="#059669" stroke-width="2" stroke-linecap="round"/>
-                            <path d="M8 8l8 8M16 8l-8 8" stroke="#dc2626" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <h3 class="category-card__title">С негативной кредитной историей</h3>
-                    <p class="category-card__description">
-                        Были просрочки, банкротство или отказы? У нас есть банки-партнеры, 
-                        которые работают с проблемной кредитной историей и дают второй шанс.
-                    </p>
-                    <ul class="category-card__features">
-                        <li>✓ После банкротства</li>
-                        <li>✓ С текущими просрочками</li>
-                        <li>✓ После многих отказов</li>
-                    </ul>
-                </div>
-                
-                <div class="category-card">
-                    <div class="category-card__icon">
-                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke="#059669" stroke-width="2"/>
-                            <circle cx="12" cy="7" r="4" stroke="#059669" stroke-width="2"/>
-                            <path d="M16 11l3 3-3 3" stroke="#059669" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                                            <h3 class="category-card__title">Возраст от 21 до 63 лет</h3>
-                    <p class="category-card__description">
-                        Молодым специалистам поможем получить первый кредит, 
-                        людям предпенсионного возраста найдем лояльные банки.
-                    </p>
-                    <ul class="category-card__features">
-                        <li>✓ Молодые специалисты от 21 года</li>
-                        <li>✓ Люди предпенсионного возраста до 63 лет</li>
-                        <li>✓ Гибкие возрастные требования</li>
-                    </ul>
-                </div>
-                
-                <div class="category-card">
-                    <div class="category-card__icon">
-                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none">
-                            <circle cx="12" cy="12" r="10" stroke="#059669" stroke-width="2"/>
-                            <path d="M12 6v6l4 2" stroke="#059669" stroke-width="2" stroke-linecap="round"/>
-                            <path d="M9 12l2 2 4-4" stroke="#059669" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <h3 class="category-card__title">Кредит без залога</h3>
-                    <p class="category-card__description">
-                        Нужны деньги, но нет недвижимости или авто в залог? 
-                        Поможем получить крупную сумму только под поручительство или без обеспечения.
-                    </p>
-                    <ul class="category-card__features">
-                        <li>✓ До 25 млн тенге без залога</li>
-                        <li>✓ Только под поручительство</li>
-                        <li>✓ Экспресс-одобрение за час</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="categories__cta">
-                <div class="cta-card">
-                    <h3>Не подходите ни под одну категорию?</h3>
-                    <p>Не беда! Мы работаем с любыми ситуациями и всегда найдем индивидуальное решение. 
-                    Отправьте заявку — проконсультируем бесплатно.</p>
-                    <!-- <button class="btn btn--primary" onclick="openModal('application')">
-                        Получить консультацию
-                    </button> -->
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Удалено: секция "Категории клиентов" -->
+    <!-- Удалено: секция "Отзывы клиентов" -->
 
-    <!-- Отзывы клиентов -->
-    <section class="reviews">
+    <!-- Видео отзывы -->
+    <section class="video-reviews">
         <div class="container">
             <div class="section__header">
-                <h2 class="section__title">Отзывы клиентов</h2>
+                <h2 class="section__title">Видео отзывы наших клиентов</h2>
                 <p class="section__description">
-                    Каждый день мы помогаем людям получить лучшие условия и сэкономить
+                    Реальные истории успеха от людей, которым мы помогли получить кредит
                 </p>
             </div>
             
-            <div class="reviews__grid">
-                <div class="review-card">
-                    <div class="review-card__rating">
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                    </div>
-                    <p class="review-card__text">
-                        "Мне помогли даже с плохой кредитной историей — одобрили в Jusan Bank за один день! 
-                        Была в шоке, что так быстро. Спасибо менеджеру Адиле!"
-                    </p>
-                    <div class="review-card__author">
-                        <div class="author-avatar">АА</div>
-                        <div class="author-info">
-                            <span class="author-name">Айнур А.</span>
-                            <span class="author-city">Алматы</span>
+            <div class="video-reviews__grid">
+                <div class="video-review-card" data-video="IMG_1671.MP4">
+                    <div class="video-review-card__preview">
+                        <video class="video-preview" preload="none" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f1f5f9'/%3E%3Ccircle cx='200' cy='150' r='40' fill='%231e3a8a'/%3E%3Cpolygon points='180,140 180,160 200,150' fill='white'/%3E%3C/svg%3E">
+                            <source src="IMG_1671.MP4" type="video/mp4">
+                        </video>
+                        <div class="video-play-button">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="12" fill="rgba(30, 58, 138, 0.9)"/>
+                                <polygon points="8,6 8,18 18,12" fill="white"/>
+                            </svg>
                         </div>
+                    </div>
+                    <div class="video-review-card__info">
+                        <h4>Отзыв клиента #1</h4>
+                        <p>Реальная история получения кредита</p>
                     </div>
                 </div>
-                
-                <div class="review-card">
-                    <div class="review-card__rating">
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                    </div>
-                    <p class="review-card__text">
-                        "Обратился за рефинансом. Снизили платёж на 60 000 тенге и объединили два кредита в один. 
-                        Всё быстро, прозрачно и без лишних справок."
-                    </p>
-                    <div class="review-card__author">
-                        <div class="author-avatar">ЕБ</div>
-                        <div class="author-info">
-                            <span class="author-name">Ербол Б.</span>
-                            <span class="author-city">Шымкент</span>
+
+                <div class="video-review-card" data-video="IMG_1672.MP4">
+                    <div class="video-review-card__preview">
+                        <video class="video-preview" preload="none" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f1f5f9'/%3E%3Ccircle cx='200' cy='150' r='40' fill='%231e3a8a'/%3E%3Cpolygon points='180,140 180,160 200,150' fill='white'/%3E%3C/svg%3E">
+                            <source src="IMG_1672.MP4" type="video/mp4">
+                        </video>
+                        <div class="video-play-button">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="12" fill="rgba(30, 58, 138, 0.9)"/>
+                                <polygon points="8,6 8,18 18,12" fill="white"/>
+                            </svg>
                         </div>
+                    </div>
+                    <div class="video-review-card__info">
+                        <h4>Отзыв клиента #2</h4>
+                        <p>История успешного рефинансирования</p>
                     </div>
                 </div>
-                
-                <div class="review-card">
-                    <div class="review-card__rating">
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                    </div>
-                    <p class="review-card__text">
-                        "Отправила только телефон — мне сразу подобрали банк, оформили заявку и всё объяснили. 
-                        Очень удобно и бесплатно!"
-                    </p>
-                    <div class="review-card__author">
-                        <div class="author-avatar">ГТ</div>
-                        <div class="author-info">
-                            <span class="author-name">Гаухар Т.</span>
-                            <span class="author-city">Семей</span>
+
+                <div class="video-review-card" data-video="IMG_1674.MP4">
+                    <div class="video-review-card__preview">
+                        <video class="video-preview" preload="none" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f1f5f9'/%3E%3Ccircle cx='200' cy='150' r='40' fill='%231e3a8a'/%3E%3Cpolygon points='180,140 180,160 200,150' fill='white'/%3E%3C/svg%3E">
+                            <source src="IMG_1674.MP4" type="video/mp4">
+                        </video>
+                        <div class="video-play-button">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="12" fill="rgba(30, 58, 138, 0.9)"/>
+                                <polygon points="8,6 8,18 18,12" fill="white"/>
+                            </svg>
                         </div>
+                    </div>
+                    <div class="video-review-card__info">
+                        <h4>Отзыв клиента #3</h4>
+                        <p>Кредит для самозанятого</p>
+                    </div>
+                </div>
+
+                <div class="video-review-card" data-video="IMG_1675.MP4">
+                    <div class="video-review-card__preview">
+                        <video class="video-preview" preload="none" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f1f5f9'/%3E%3Ccircle cx='200' cy='150' r='40' fill='%231e3a8a'/%3E%3Cpolygon points='180,140 180,160 200,150' fill='white'/%3E%3C/svg%3E">
+                            <source src="IMG_1675.MP4" type="video/mp4">
+                        </video>
+                        <div class="video-play-button">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="12" fill="rgba(30, 58, 138, 0.9)"/>
+                                <polygon points="8,6 8,18 18,12" fill="white"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="video-review-card__info">
+                        <h4>Отзыв клиента #4</h4>
+                        <p>Быстрое одобрение кредита</p>
+                    </div>
+                </div>
+
+                <div class="video-review-card" data-video="IMG_1676.MP4">
+                    <div class="video-review-card__preview">
+                        <video class="video-preview" preload="none" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f1f5f9'/%3E%3Ccircle cx='200' cy='150' r='40' fill='%231e3a8a'/%3E%3Cpolygon points='180,140 180,160 200,150' fill='white'/%3E%3C/svg%3E">
+                            <source src="IMG_1676.MP4" type="video/mp4">
+                        </video>
+                        <div class="video-play-button">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="12" fill="rgba(30, 58, 138, 0.9)"/>
+                                <polygon points="8,6 8,18 18,12" fill="white"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="video-review-card__info">
+                        <h4>Отзыв клиента #5</h4>
+                        <p>Кредит с плохой кредитной историей</p>
+                    </div>
+                </div>
+
+                <div class="video-review-card" data-video="IMG_1677.MP4">
+                    <div class="video-review-card__preview">
+                        <video class="video-preview" preload="none" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f1f5f9'/%3E%3Ccircle cx='200' cy='150' r='40' fill='%231e3a8a'/%3E%3Cpolygon points='180,140 180,160 200,150' fill='white'/%3E%3C/svg%3E">
+                            <source src="IMG_1677.MP4" type="video/mp4">
+                        </video>
+                        <div class="video-play-button">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="12" fill="rgba(30, 58, 138, 0.9)"/>
+                                <polygon points="8,6 8,18 18,12" fill="white"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="video-review-card__info">
+                        <h4>Отзыв клиента #6</h4>
+                        <p>Кредит без справок о доходах</p>
+                    </div>
+                </div>
+
+                <div class="video-review-card" data-video="IMG_1678.MP4">
+                    <div class="video-review-card__preview">
+                        <video class="video-preview" preload="none" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f1f5f9'/%3E%3Ccircle cx='200' cy='150' r='40' fill='%231e3a8a'/%3E%3Cpolygon points='180,140 180,160 200,150' fill='white'/%3E%3C/svg%3E">
+                            <source src="IMG_1678.MP4" type="video/mp4">
+                        </video>
+                        <div class="video-play-button">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="12" fill="rgba(30, 58, 138, 0.9)"/>
+                                <polygon points="8,6 8,18 18,12" fill="white"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="video-review-card__info">
+                        <h4>Отзыв клиента #7</h4>
+                        <p>Ипотечный кредит</p>
+                    </div>
+                </div>
+
+                <div class="video-review-card" data-video="IMG_1679.MP4">
+                    <div class="video-review-card__preview">
+                        <video class="video-preview" preload="none" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f1f5f9'/%3E%3Ccircle cx='200' cy='150' r='40' fill='%231e3a8a'/%3E%3Cpolygon points='180,140 180,160 200,150' fill='white'/%3E%3C/svg%3E">
+                            <source src="IMG_1679.MP4" type="video/mp4">
+                        </video>
+                        <div class="video-play-button">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="12" fill="rgba(30, 58, 138, 0.9)"/>
+                                <polygon points="8,6 8,18 18,12" fill="white"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="video-review-card__info">
+                        <h4>Отзыв клиента #8</h4>
+                        <p>Бизнес-кредит для ИП</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-
-
+    <!-- Модальное окно для видео -->
+    <div class="video-modal" id="videoModal">
+        <div class="video-modal__overlay" id="videoModalOverlay"></div>
+        <div class="video-modal__content">
+            <button class="video-modal__close" id="videoModalClose">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            <video class="video-modal__player" id="videoModalPlayer" controls>
+                <source src="" type="video/mp4">
+                Ваш браузер не поддерживает воспроизведение видео.
+            </video>
+        </div>
+    </div>
 
     <!-- Контакты -->
     <section class="contact" id="contact">
@@ -1177,7 +1222,7 @@
                                 <li><a href="#consumer-solutions" class="footer__link">Потребительские кредиты</a></li>
                                 <li><a href="#mortgage-programs" class="footer__link">Ипотека</a></li>
                                 <li><a href="#calculator" class="footer__link">Калькулятор</a></li>
-                                <li><a href="#credit-assessment" class="footer__link">Расчёт возможностей</a></li>
+                                <!-- Удалено: секция credit-assessment больше не существует -->
                             </ul>
                         </div>
                         
