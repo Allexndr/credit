@@ -293,6 +293,20 @@
     box-shadow: var(--shadow-md);
 }
 
+.calculator__images {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+}
+
+.calculator__image {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
 .form-group {
     margin-bottom: 2rem;
 }
