@@ -245,12 +245,12 @@ class Header {
     
     init() {
         this.handleScroll();
-        this.initMobileMenu();
+        // this.initMobileMenu(); // Отключено - теперь используется mobile-menu.js
         this.initSmoothScroll();
         this.initDropdown();
         
         window.addEventListener('scroll', () => this.handleScroll());
-        window.addEventListener('resize', () => this.closeMobileMenu());
+        // window.addEventListener('resize', () => this.closeMobileMenu()); // Отключено
     }
     
     initDropdown() {
@@ -273,12 +273,12 @@ class Header {
                     
                     // Закрываем dropdown
                     item.classList.remove('active');
-                    // Закрываем основное мобильное меню
-                    if (window.innerWidth <= 1023) {
-                        nav.classList.remove('active');
-                        burger.classList.remove('active');
-                        document.body.style.overflow = '';
-                    }
+                            // Закрываем основное мобильное меню
+        // if (window.innerWidth <= 1023) {
+        //     nav.classList.remove('active');
+        //     burger.classList.remove('active');
+        //     document.body.style.overflow = '';
+        // }
                     
                     // Прокручиваем к соответствующей секции
                     setTimeout(() => {
@@ -335,106 +335,10 @@ class Header {
         }
     }
     
-    initMobileMenu() {
-        if (!burger || !nav) {
-            console.error('Burger or nav elements not found!');
-            return;
-        }
-        
-        console.log('Initializing mobile menu...');
-        
-        // Принудительно удаляем все существующие обработчики
-        const newBurger = burger.cloneNode(true);
-        burger.parentNode.replaceChild(newBurger, burger);
-        
-        // Получаем новый элемент
-        const freshBurger = document.getElementById('burger');
-        const freshNav = document.getElementById('nav');
-        
-        freshBurger.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            // Проверяем, что мы на мобильном устройстве
-            if (window.innerWidth <= 1023) {
-                console.log('Burger clicked on mobile!');
-                this.toggleMobileMenu();
-            } else {
-                console.log('Burger clicked on desktop - ignored');
-            }
-        });
-        
-        // Закрытие меню при клике на ссылку
-        const navLinks = freshNav.querySelectorAll('.nav__link');
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                // Не закрываем меню для ссылок с якорями на текущей странице
-                const href = link.getAttribute('href');
-                if (href && href.startsWith('#')) {
-                    this.closeMobileMenu();
-                }
-            });
-        });
-        
-        // Добавляем обработчик для кнопки "Получить кредит" в мобильном меню
-        const mobileButton = document.getElementById('mobile-credit-btn');
-        if (mobileButton) {
-            console.log('Found mobile credit button');
-            mobileButton.addEventListener('click', (e) => {
-                console.log('Mobile credit button clicked!');
-                e.preventDefault();
-                e.stopPropagation();
-                // Закрываем мобильное меню
-                this.closeMobileMenu();
-                // Открываем модальное окно
-                setTimeout(() => {
-                    openModal('application');
-                }, 100);
-            });
-        } else {
-            console.error('Mobile credit button not found!');
-        }
-        
-        // Добавляем обработчик для кнопки в мобильном меню
-        const mobileMenuBtn = freshNav.querySelector('.mobile-menu__actions .btn');
-        if (mobileMenuBtn) {
-            console.log('Found mobile menu button');
-            mobileMenuBtn.addEventListener('click', (e) => {
-                console.log('Mobile menu button clicked!');
-                e.preventDefault();
-                e.stopPropagation();
-                // Закрываем мобильное меню
-                this.closeMobileMenu();
-                // Открываем модальное окно
-                setTimeout(() => {
-                    openModal('application');
-                }, 100);
-            });
-        } else {
-            console.error('Mobile menu button not found!');
-        }
-        
-        // Закрытие меню при клике вне его
-        document.addEventListener('click', (e) => {
-            if (freshNav.classList.contains('active') && !freshNav.contains(e.target) && !freshBurger.contains(e.target)) {
-                this.closeMobileMenu();
-            }
-        });
-        
-        // Закрытие меню при изменении размера окна
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 1023 && freshNav.classList.contains('active')) {
-                this.closeMobileMenu();
-            }
-        });
-        
-        // Закрытие меню при нажатии Escape
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && freshNav.classList.contains('active')) {
-                this.closeMobileMenu();
-            }
-        });
-    }
+    // initMobileMenu() {
+    //     // Отключено - теперь используется mobile-menu.js
+    //     // Весь метод закомментирован для избежания конфликтов
+    // }
     
     toggleMobileMenu() {
         console.log('=== TOGGLE MOBILE MENU ===');
