@@ -946,6 +946,19 @@
     padding: 5rem 0;
 }
 
+.mortgage-section__image {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.mortgage-section__image img {
+    max-width: 300px;
+    height: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
 .mortgage-programs__grid {
     display: grid;
     grid-template-columns: 1fr;
