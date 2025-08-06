@@ -82,7 +82,7 @@
 }
 
 .partner-hero__img {
-    max-width: 100%;
+    max-width: 80%;
     height: auto;
     border-radius: 20px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
@@ -531,6 +531,11 @@
         font-size: 2.5rem;
     }
     
+    .partner-hero__img {
+        max-width: 70%;
+        max-height: 300px;
+    }
+    
     .partner-stats {
         grid-template-columns: 1fr;
         gap: 20px;
@@ -578,6 +583,11 @@
 @media (max-width: 480px) {
     .partner-hero__title {
         font-size: 2rem;
+    }
+    
+    .partner-hero__img {
+        max-width: 60%;
+        max-height: 250px;
     }
     
     .partnership-cta__title {
