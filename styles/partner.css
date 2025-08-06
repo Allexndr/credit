@@ -786,11 +786,12 @@
 }
 
 .partners-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 40px;
-    margin-top: 60px;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
+    margin-top: 60px;
+    gap: 40px;
+    flex-wrap: wrap;
 }
 
 .partner-logo {
@@ -798,41 +799,33 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 30px 20px;
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-}
-
-.partner-logo:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
-    border-color: #3b82f6;
+    padding: 20px 15px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
 }
 
 .partner-logo__icon {
-    margin-bottom: 16px;
+    margin-bottom: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 80px;
-    height: 80px;
-    border-radius: 12px;
-    background: #f8fafc;
-    transition: all 0.3s ease;
+    width: 60px;
+    height: 60px;
+    background: transparent;
+    overflow: hidden;
 }
 
-.partner-logo:hover .partner-logo__icon {
-    background: #eff6ff;
-    transform: scale(1.05);
+.partner-logo__icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .partner-logo__name {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #1e293b;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
     line-height: 1.4;
 }
 
@@ -843,29 +836,9 @@
     }
     
     .partners-grid {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 20px;
+        justify-content: center;
+        gap: 30px;
         margin-top: 40px;
-    }
-    
-    .partner-logo {
-        padding: 20px 15px;
-    }
-    
-    .partner-logo__icon {
-        width: 60px;
-        height: 60px;
-    }
-    
-    .partner-logo__name {
-        font-size: 0.875rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .partners-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
     }
     
     .partner-logo {
@@ -879,5 +852,25 @@
     
     .partner-logo__name {
         font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .partners-grid {
+        justify-content: center;
+        gap: 20px;
+    }
+    
+    .partner-logo {
+        padding: 10px 8px;
+    }
+    
+    .partner-logo__icon {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .partner-logo__name {
+        font-size: 0.7rem;
     }
 }
