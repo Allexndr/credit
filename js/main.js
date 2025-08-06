@@ -2542,58 +2542,228 @@ document.addEventListener('DOMContentLoaded', () => {
     videoReviews.init();
     
     // Инициализация маски для телефона
-    initPhoneMask();
+    initGlobalPhoneMask();
+    
+    // Дополнительная инициализация для страницы партнеров
+    if (window.location.pathname.includes('komek-damu-partner.html') || window.location.pathname.endsWith('/')) {
+        // Повторно инициализируем маску для телефона на странице партнеров
+        setTimeout(() => {
+            initGlobalPhoneMask();
+        }, 100);
+    }
 });
 
-// Функция для форматирования номера телефона
-function initPhoneMask() {
+// Глобальная функция для форматирования номера телефона
+function initGlobalPhoneMask() {
     const phoneInputs = document.querySelectorAll('input[type="tel"]');
     
     phoneInputs.forEach(input => {
+        // Устанавливаем начальное значение
+        if (!input.value) {
+            input.value = '+7';
+        }
+        
         input.addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, ''); // Убираем все не-цифры
+            const target = e.target;
+            let value = target.value;
+            const oldValue = target.value;
+            const cursorPosition = target.selectionStart;
             
-            if (value.length === 0) {
-                e.target.value = '';
+            // Если поле пустое, добавляем +7
+            if (!value) {
+                target.value = '+7';
+                target.setSelectionRange(3, 3);
                 return;
             }
             
-            // Если номер начинается с 7, убираем его и добавляем +7
-            if (value.startsWith('7')) {
-                value = value.substring(1);
+            // Если пользователь удалил +7, добавляем обратно
+            if (!value.startsWith('+7')) {
+                value = '+7' + value.replace(/\D/g, '');
             }
             
-            // Если номер не начинается с 7, добавляем +7
-            if (!value.startsWith('7') && value.length > 0) {
-                value = '7' + value;
+            // Удаляем все нецифровые символы кроме +7
+            let digits = value.replace(/\D/g, '');
+            
+            // Если номер начинается с 8, заменяем на 7
+            if (digits.startsWith('8')) {
+                digits = '7' + digits.slice(1);
+            }
+            
+            // Если номер не начинается с 7, добавляем 7 в начало
+            if (!digits.startsWith('7')) {
+                digits = '7' + digits;
+            }
+            
+            // Ограничиваем длину до 11 цифр (7 + 10 цифр номера)
+            if (digits.length > 11) {
+                digits = digits.slice(0, 11);
             }
             
             // Форматируем номер
-            let formatted = '+7';
-            if (value.length > 1) {
-                formatted += ' (' + value.substring(1, 4);
-                if (value.length > 4) {
-                    formatted += ') ' + value.substring(4, 7);
-                    if (value.length > 7) {
-                        formatted += '-' + value.substring(7, 9);
-                        if (value.length > 9) {
-                            formatted += '-' + value.substring(9, 11);
+            let formattedValue = '+7';
+            if (digits.length > 1) {
+                const remainingDigits = digits.slice(1);
+                if (remainingDigits.length > 0) {
+                    formattedValue += ' (' + remainingDigits.slice(0, 3);
+                    if (remainingDigits.length > 3) {
+                        formattedValue += ') ' + remainingDigits.slice(3, 6);
+                        if (remainingDigits.length > 6) {
+                            formattedValue += '-' + remainingDigits.slice(6, 8);
+                            if (remainingDigits.length > 8) {
+                                formattedValue += '-' + remainingDigits.slice(8, 10);
+                            }
                         }
                     }
                 }
             }
             
-            e.target.value = formatted;
+            // Обновляем значение
+            target.value = formattedValue;
             
-            // Устанавливаем курсор в конец
-            const len = e.target.value.length;
-            e.target.setSelectionRange(len, len);
+            // Вычисляем новую позицию курсора
+            let newCursorPosition = cursorPosition;
+            
+            // Если добавилась цифра (длина увеличилась)
+            if (formattedValue.length > oldValue.length) {
+                // Находим позицию последней добавленной цифры
+                const addedDigit = formattedValue.charAt(cursorPosition - 1);
+                if (/\d/.test(addedDigit)) {
+                    newCursorPosition = cursorPosition;
+                } else {
+                    // Если добавился символ форматирования, перемещаем курсор после него
+                    newCursorPosition = cursorPosition + 1;
+                }
+            } else if (formattedValue.length < oldValue.length) {
+                // Если удалилась цифра
+                newCursorPosition = Math.max(3, cursorPosition - 1);
+            }
+            
+            // Устанавливаем курсор
+            setTimeout(() => {
+                const finalPosition = Math.min(newCursorPosition, formattedValue.length);
+                target.setSelectionRange(finalPosition, finalPosition);
+            }, 0);
         });
         
-        // При фокусе устанавливаем курсор в конец
+        // Обработка клавиш Backspace и Delete
+        input.addEventListener('keydown', function(e) {
+            const target = e.target;
+            const currentValue = target.value;
+            const cursorPosition = target.selectionStart;
+            const selectionEnd = target.selectionEnd;
+            
+            // Если выделен текст, разрешаем удаление
+            if (cursorPosition !== selectionEnd) {
+                return;
+            }
+            
+            if (e.key === 'Backspace') {
+                // Если пытаемся удалить +7, очищаем поле
+                if (cursorPosition <= 3) {
+                    e.preventDefault();
+                    target.value = '+7';
+                    target.setSelectionRange(3, 3);
+                    return;
+                }
+                
+                // Если курсор стоит перед символом форматирования, перепрыгиваем через него
+                const charBeforeCursor = currentValue.charAt(cursorPosition - 1);
+                if (charBeforeCursor === ' ' || charBeforeCursor === '(' || charBeforeCursor === ')' || charBeforeCursor === '-') {
+                    e.preventDefault();
+                    target.setSelectionRange(cursorPosition - 1, cursorPosition - 1);
+                }
+            }
+        });
+        
+        // Обработка стрелок для правильного перемещения курсора
+        input.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+                const target = e.target;
+                const cursorPosition = target.selectionStart;
+                const value = target.value;
+                
+                if (e.key === 'ArrowLeft') {
+                    // При движении влево, если следующий символ - форматирование, перепрыгиваем через него
+                    const charBeforeCursor = value.charAt(cursorPosition - 1);
+                    if (charBeforeCursor === ' ' || charBeforeCursor === '(' || charBeforeCursor === ')' || charBeforeCursor === '-') {
+                        e.preventDefault();
+                        target.setSelectionRange(cursorPosition - 1, cursorPosition - 1);
+                    }
+                } else if (e.key === 'ArrowRight') {
+                    // При движении вправо, если следующий символ - форматирование, перепрыгиваем через него
+                    const charAfterCursor = value.charAt(cursorPosition);
+                    if (charAfterCursor === ' ' || charAfterCursor === '(' || charAfterCursor === ')' || charAfterCursor === '-') {
+                        e.preventDefault();
+                        target.setSelectionRange(cursorPosition + 1, cursorPosition + 1);
+                    }
+                }
+            }
+        });
+        
+        // Клик в начало поля для установки курсора после +7
+        input.addEventListener('click', function(e) {
+            const target = e.target;
+            const cursorPosition = target.selectionStart;
+            
+            // Если кликнули в начало поля (до +7), устанавливаем курсор после +7
+            if (cursorPosition <= 3) {
+                target.setSelectionRange(3, 3);
+            }
+        });
+        
+        // Фокус на поле для установки курсора в правильное место
         input.addEventListener('focus', function(e) {
-            const len = e.target.value.length;
-            e.target.setSelectionRange(len, len);
+            const target = e.target;
+            const cursorPosition = target.selectionStart;
+            
+            // Если курсор в начале поля, устанавливаем его после +7
+            if (cursorPosition <= 3) {
+                target.setSelectionRange(3, 3);
+            }
+        });
+        
+        // Обработка вставки текста
+        input.addEventListener('paste', function(e) {
+            e.preventDefault();
+            const pastedText = (e.clipboardData || window.clipboardData).getData('text');
+            const digits = pastedText.replace(/\D/g, '');
+            
+            if (digits.length > 0) {
+                let newDigits = digits;
+                if (digits.startsWith('8')) {
+                    newDigits = '7' + digits.slice(1);
+                } else if (digits.startsWith('7')) {
+                    newDigits = digits;
+                } else {
+                    newDigits = '7' + digits;
+                }
+                
+                // Ограничиваем длину
+                if (newDigits.length > 11) {
+                    newDigits = newDigits.slice(0, 11);
+                }
+                
+                // Форматируем номер
+                let formattedValue = '+7';
+                if (newDigits.length > 1) {
+                    const remainingDigits = newDigits.slice(1);
+                    if (remainingDigits.length > 0) {
+                        formattedValue += ' (' + remainingDigits.slice(0, 3);
+                        if (remainingDigits.length > 3) {
+                            formattedValue += ') ' + remainingDigits.slice(3, 6);
+                            if (remainingDigits.length > 6) {
+                                formattedValue += '-' + remainingDigits.slice(6, 8);
+                                if (remainingDigits.length > 8) {
+                                    formattedValue += '-' + remainingDigits.slice(8, 10);
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                target.value = formattedValue;
+                target.setSelectionRange(formattedValue.length, formattedValue.length);
+            }
         });
     });
 }
