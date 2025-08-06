@@ -1662,15 +1662,15 @@ section {
 
 /* ===== КРЕДИТЫ ДЛЯ БИЗНЕСА ===== */
 .business-credit {
-    padding: 5rem 0;
+    padding: 3rem 0;
     background: var(--bg-light);
 }
 
 .business-credit__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
 }
 
 .business-credit-card {
@@ -1690,7 +1690,7 @@ section {
 }
 
 .business-credit-card__image {
-    height: 200px;
+    height: 160px;
     overflow: hidden;
     position: relative;
 }
@@ -1707,30 +1707,30 @@ section {
 }
 
 .business-credit-card__content {
-    padding: 1.5rem;
+    padding: 1rem;
     flex: 1;
     display: flex;
     flex-direction: column;
 }
 
 .business-credit-card__title {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     font-weight: 700;
     color: var(--text-primary);
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
     line-height: 1.3;
 }
 
 .business-credit-card__features {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     flex: 1;
 }
 
 .business-feature {
     display: flex;
     align-items: flex-start;
-    gap: 0.75rem;
-    margin-bottom: 0.75rem;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .business-feature:last-child {
@@ -1747,15 +1747,15 @@ section {
 
 .business-feature__text {
     color: var(--text-secondary);
-    font-size: 0.9rem;
-    line-height: 1.4;
+    font-size: 0.85rem;
+    line-height: 1.3;
 }
 
 .btn--business {
     align-self: center;
     margin-top: auto;
-    padding: 0.75rem 1.5rem;
-    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
     font-weight: 600;
 }
 
@@ -1775,19 +1775,19 @@ section {
     }
     
     .business-credit-card__image {
-        height: 150px;
+        height: 120px;
     }
     
     .business-credit-card__content {
-        padding: 1rem;
+        padding: 0.75rem;
     }
     
     .business-credit-card__title {
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
     
     .business-feature__text {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
     }
     
     .damu-program-card,
