@@ -305,6 +305,7 @@
 .calculator__image {
     max-width: 100%;
     width: 100%;
+    max-height: 350px;
     height: auto;
     object-fit: cover;
     border-radius: var(--radius-lg);
