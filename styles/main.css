@@ -795,13 +795,6 @@ a:focus {
     align-items: center;
     gap: 0.25rem;
     font-size: 0.875rem;
-    background: rgba(37, 211, 102, 0.1);
-    border: 1px solid rgba(37, 211, 102, 0.3);
-}
-
-.header__phone--whatsapp:hover {
-    background: rgba(37, 211, 102, 0.2);
-    border-color: rgba(37, 211, 102, 0.5);
 }
 
 .header__phone--whatsapp span:first-child {
