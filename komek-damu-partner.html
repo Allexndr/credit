@@ -121,7 +121,7 @@
                             </div>
                             <div class="mobile-menu__content" id="mobile-business">
                                 <a href="index.html#damu-programs" class="mobile-menu__link">Программы DAMU</a>
-                                <a href="#" class="mobile-menu__link">Лизинг</a>
+                                <a href="javascript:void(0)" onclick="openWhatsApp('leasing')" class="mobile-menu__link">Лизинг</a>
                             </div>
                         </div>
                         
@@ -133,9 +133,9 @@
                                 </svg>
                             </div>
                             <div class="mobile-menu__content" id="mobile-partners">
-                                <a href="#partnership-formats" class="mobile-menu__link">Банковским менеджерам</a>
-                                <a href="#partnership-formats" class="mobile-menu__link">Агентам</a>
-                                <a href="#partnership-formats" class="mobile-menu__link">Аффилиатам</a>
+                                <a href="javascript:void(0)" onclick="openWhatsApp('bank-manager')" class="mobile-menu__link">Банковским менеджерам</a>
+                                <a href="javascript:void(0)" onclick="openWhatsApp('agent')" class="mobile-menu__link">Агентам</a>
+                                <a href="javascript:void(0)" onclick="openWhatsApp('affiliate')" class="mobile-menu__link">Аффилиатам</a>
                             </div>
                         </div>
                         
@@ -148,7 +148,7 @@
                             </div>
                             <div class="mobile-menu__content" id="mobile-info">
                                 <a href="index.html#about" class="mobile-menu__link">О компании</a>
-                                <a href="#" class="mobile-menu__link">Документы</a>
+                                <a href="javascript:void(0)" onclick="openWhatsApp('documents')" class="mobile-menu__link">Документы</a>
                                 <a href="index.html#contact" class="mobile-menu__link">Контакты</a>
                             </div>
                         </div>
@@ -240,7 +240,7 @@
                             <li>✓ Предварительная проверка</li>
                             <li>✓ Повышение конверсии</li>
                         </ul>
-                        <button class="btn btn--outline btn--large" onclick="selectPartnership('bank-manager')">
+                        <button class="btn btn--outline btn--large" onclick="openWhatsApp('bank-manager')">
                             Узнать детали →
                         </button>
                     </div>
@@ -265,7 +265,7 @@
                             <li>✓ Процент с каждой сделки</li>
                             <li>✓ Обучение и поддержка</li>
                         </ul>
-                        <button class="btn btn--outline btn--large" onclick="selectPartnership('agent')">
+                        <button class="btn btn--outline btn--large" onclick="openWhatsApp('agent')">
                             Узнать детали →
                         </button>
                     </div>
@@ -288,7 +288,7 @@
                             <li>✓ Детальная аналитика</li>
                             <li>✓ Высокие комиссии</li>
                         </ul>
-                        <button class="btn btn--primary btn--large" onclick="selectPartnership('affiliate')">
+                        <button class="btn btn--primary btn--large" onclick="openWhatsApp('affiliate')">
                             Узнать детали →
                         </button>
                     </div>
@@ -339,7 +339,7 @@
                             </div>
                         </div>
                         
-                        <button class="btn btn--primary btn--large" onclick="openModal('business-consultation')">
+                        <button class="btn btn--primary btn--large" onclick="openWhatsApp('business-consultation')">
                             Получить консультацию по программе
                         </button>
                     </div>
@@ -493,7 +493,7 @@
                         <label class="form__checkbox">
                             <input type="checkbox" name="agreement" required>
                             <span class="form__checkmark"></span>
-                            Я соглашаюсь с <a href="#" class="text-link">условиями партнёрского соглашения</a> и <a href="#" class="text-link">политикой конфиденциальности</a>
+                            Я соглашаюсь с <a href="javascript:void(0)" onclick="openWhatsApp('agreement')" class="text-link">условиями партнёрского соглашения</a> и <a href="javascript:void(0)" onclick="openWhatsApp('privacy')" class="text-link">политикой конфиденциальности</a>
                         </label>
                     </div>
                     
@@ -688,6 +688,45 @@
     <!-- JavaScript -->
     <script src="js/main.js?v=2"></script>
     <script>
+        // Функция для открытия WhatsApp с разными сообщениями
+        function openWhatsApp(type) {
+            const phoneNumber = '77011061039';
+            let message = '';
+            
+            switch(type) {
+                case 'bank-manager':
+                    message = 'Здравствуйте! Меня интересует партнёрство для банковских менеджеров. Хотел бы узнать подробности о комиссиях и условиях сотрудничества.';
+                    break;
+                case 'agent':
+                    message = 'Здравствуйте! Меня интересует партнёрство в качестве агента. Хотел бы узнать о комиссиях и работе в своём регионе.';
+                    break;
+                case 'affiliate':
+                    message = 'Здравствуйте! Меня интересует аффилиатная программа. Хотел бы узнать о комиссиях и условиях сотрудничества.';
+                    break;
+                case 'business-consultation':
+                    message = 'Здравствуйте! Меня интересует консультация по программам DAMU и Baiterek для бизнеса. Хотел бы получить подробную информацию.';
+                    break;
+                case 'leasing':
+                    message = 'Здравствуйте! Меня интересует лизинг. Хотел бы узнать о программах лизинга и условиях.';
+                    break;
+                case 'documents':
+                    message = 'Здравствуйте! Мне нужны документы для оформления кредита/партнёрства. Хотел бы получить список необходимых документов.';
+                    break;
+                case 'agreement':
+                    message = 'Здравствуйте! Мне нужны условия партнёрского соглашения. Хотел бы получить документ для ознакомления.';
+                    break;
+                case 'privacy':
+                    message = 'Здравствуйте! Мне нужна политика конфиденциальности. Хотел бы получить документ для ознакомления.';
+                    break;
+                default:
+                    message = 'Здравствуйте! Меня интересует партнёрская программа Komek Damu. Хотел бы получить консультацию.';
+            }
+            
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            window.open(whatsappUrl, '_blank');
+        }
+        
         // Функции для партнёрской страницы
         function selectPartnership(type) {
             const modal = document.getElementById('partnership-modal');
@@ -711,7 +750,7 @@
                             <li>Знание кредитных продуктов</li>
                             <li>Готовность к обучению</li>
                         </ul>
-                        <button class="btn btn--primary" onclick="scrollToSection('partner-form'); closeModal('partnership-modal');">
+                        <button class="btn btn--primary" onclick="openWhatsApp('bank-manager'); closeModal('partnership-modal');">
                             Подать заявку
                         </button>
                     `
@@ -732,7 +771,7 @@
                             <li>Желание развиваться</li>
                             <li>Наличие клиентской базы - плюс</li>
                         </ul>
-                        <button class="btn btn--primary" onclick="scrollToSection('partner-form'); closeModal('partnership-modal');">
+                        <button class="btn btn--primary" onclick="openWhatsApp('agent'); closeModal('partnership-modal');">
                             Подать заявку
                         </button>
                     `
@@ -754,7 +793,7 @@
                             <li>SMM-специалистов</li>
                             <li>Всех, кто хочет пассивный доход</li>
                         </ul>
-                        <button class="btn btn--primary" onclick="scrollToSection('partner-form'); closeModal('partnership-modal');">
+                        <button class="btn btn--primary" onclick="openWhatsApp('affiliate'); closeModal('partnership-modal');">
                             Подать заявку
                         </button>
                     `
@@ -791,11 +830,31 @@
         document.getElementById('partnerForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Здесь можно добавить отправку данных на сервер
-            alert('Спасибо за заявку! Мы свяжемся с вами в ближайшее время.');
+            // Получаем данные из формы
+            const formData = new FormData(e.target);
+            const name = formData.get('name') || 'Не указано';
+            const phone = formData.get('phone') || 'Не указано';
+            const city = formData.get('city') || 'Не указано';
+            const partnerType = formData.get('partnerType') || 'Не указано';
+            const experience = formData.get('experience') || 'Не указано';
+            
+            // Формируем сообщение для WhatsApp
+            let message = 'Здравствуйте! Новая заявка на партнёрство:\n\n';
+            message += `👤 Имя: ${name}\n`;
+            message += `📞 Телефон: ${phone}\n`;
+            message += `🏙️ Город: ${city}\n`;
+            message += `🤝 Тип партнёрства: ${partnerType}\n`;
+            message += `💼 Опыт работы: ${experience}\n\n`;
+            message += 'Пожалуйста, свяжитесь со мной для обсуждения деталей сотрудничества.';
+            
+            // Открываем WhatsApp
+            const phoneNumber = '77011061039';
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            window.open(whatsappUrl, '_blank');
             
             // Очистить форму
-            this.reset();
+            e.target.reset();
         });
         
         // Функции для модального окна консультации
@@ -810,8 +869,28 @@
         function submitBusinessConsultation(event) {
             event.preventDefault();
             
-            // Здесь можно добавить отправку данных на сервер
-            alert('Спасибо за заявку на консультацию! Наш специалист свяжется с вами в течение рабочего дня.');
+            // Получаем данные из формы
+            const formData = new FormData(event.target);
+            const fullName = formData.get('fullName') || 'Не указано';
+            const phone = formData.get('phone') || 'Не указано';
+            const businessType = formData.get('businessType') || 'Не указано';
+            const creditAmount = formData.get('creditAmount') || 'Не указано';
+            const purpose = formData.get('purpose') || 'Не указано';
+            
+            // Формируем сообщение для WhatsApp
+            let message = 'Здравствуйте! Новая заявка на консультацию по программам DAMU:\n\n';
+            message += `👤 ФИО: ${fullName}\n`;
+            message += `📞 Телефон: ${phone}\n`;
+            message += `🏢 Тип бизнеса: ${businessType}\n`;
+            message += `💰 Требуемая сумма: ${creditAmount}\n`;
+            message += `🎯 Цель кредитования: ${purpose}\n\n`;
+            message += 'Пожалуйста, свяжитесь со мной для подробной консультации.';
+            
+            // Открываем WhatsApp
+            const phoneNumber = '77011061039';
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            window.open(whatsappUrl, '_blank');
             
             // Закрыть модальное окно
             closeModal('business-consultation');
