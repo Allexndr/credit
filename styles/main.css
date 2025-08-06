@@ -2043,37 +2043,55 @@ a[href*="become-partner"] {
     margin-top: 1rem;
 }
 
-/* Показываем мобильное меню только на мобильных устройствах */
+/* Простые стили для мобильного меню */
 @media (max-width: 1023px) {
     .mobile-menu {
         display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 2rem 0;
     }
     
-    /* Показываем nav__list в активном мобильном меню */
-    .header__nav.active .nav__list {
+    /* Активное состояние навигации */
+    .header__nav.active {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        z-index: 9999 !important;
         display: flex !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-        z-index: 10000 !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background: rgba(15, 23, 42, 0.98) !important;
+        padding-top: 80px !important;
     }
     
-    /* Показываем мобильное меню в активном состоянии */
+    /* Скрываем обычную навигацию на мобильных */
+    .header__nav.active .nav__list {
+        display: none !important;
+    }
+    
+    /* Показываем мобильное меню */
     .header__nav.active .mobile-menu {
         display: flex !important;
         opacity: 1 !important;
         visibility: visible !important;
+        color: white !important;
     }
     
     /* Стили для элементов мобильного меню */
     .header__nav.active .mobile-menu__section {
         opacity: 1 !important;
         visibility: visible !important;
+        color: white !important;
     }
     
     .header__nav.active .mobile-menu__header {
         opacity: 1 !important;
         visibility: visible !important;
         color: white !important;
+        cursor: pointer !important;
     }
     
     .header__nav.active .mobile-menu__title {
@@ -2098,7 +2116,6 @@ a[href*="become-partner"] {
         visibility: visible !important;
         background: var(--gradient-primary) !important;
         color: white !important;
-        box-shadow: 0 4px 12px rgba(30, 58, 138, 0.4) !important;
     }
 }
 
