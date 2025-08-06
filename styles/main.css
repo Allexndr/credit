@@ -1584,8 +1584,8 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 60px;
-    height: 60px;
+    width: 100px;
+    height: 100px;
     background: transparent;
     overflow: hidden;
 }
@@ -1597,7 +1597,7 @@ section {
 }
 
 .partner-logo__name {
-    font-size: 0.875rem;
+    font-size: 1rem;
     font-weight: 500;
     color: #374151;
     line-height: 1.4;
@@ -1620,12 +1620,12 @@ section {
     }
     
     .partner-logo__icon {
-        width: 50px;
-        height: 50px;
+        width: 80px;
+        height: 80px;
     }
     
     .partner-logo__name {
-        font-size: 0.75rem;
+        font-size: 0.875rem;
     }
 }
 
@@ -1640,12 +1640,12 @@ section {
     }
     
     .partner-logo__icon {
-        width: 40px;
-        height: 40px;
+        width: 60px;
+        height: 60px;
     }
     
     .partner-logo__name {
-        font-size: 0.7rem;
+        font-size: 0.8rem;
     }
 }
 
