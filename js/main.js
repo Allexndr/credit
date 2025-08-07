@@ -87,27 +87,13 @@ function formatNumber(num) {
 
 // Функция для выбора услуги
 function selectService(serviceName) {
-    // Открываем модальное окно заявки
-    openModal('application');
+    // Формируем сообщение для WhatsApp
+    const message = `Здравствуйте! Меня интересует услуга: ${serviceName}. Хотел бы получить консультацию.`;
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/77011061039?text=${encodedMessage}`;
     
-    // Устанавливаем выбранную услугу в форму
-    setTimeout(() => {
-        const serviceSelect = document.querySelector('#modal-application select[name="credit_type"]');
-        if (serviceSelect) {
-            // Маппинг названий услуг на значения select
-            const serviceMapping = {
-                'Беззалоговый кредит': 'consumer',
-                'Рефинансирование': 'refinancing',
-                'Залоговый кредит': 'consumer',
-                'Программа Өрлеу': 'business',
-                'Программа Jana Business': 'business',
-                'Программа Субсидирование торговли': 'business'
-            };
-            
-            const value = serviceMapping[serviceName] || 'consumer';
-            serviceSelect.value = value;
-        }
-    }, 100);
+    // Открываем WhatsApp
+    window.open(whatsappUrl, '_blank');
 }
 
 // Функции для модальных окон
@@ -199,12 +185,15 @@ function scrollToSection(sectionId) {
 
 // Функция выбора типа партнёрства
 function selectPartnership(type) {
-    // Здесь можно добавить логику для открытия модального окна
-    // или перехода на специальную страницу для конкретного типа партнёрства
     console.log('Выбран тип партнёрства:', type);
     
-    // Пока что просто открываем общую форму заявки на партнёрство
-    openModal('partner-application');
+    // Формируем сообщение для WhatsApp
+    const message = `Здравствуйте! Меня интересует партнёрство типа: ${type}. Хотел бы получить подробную информацию о сотрудничестве.`;
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/77011061039?text=${encodedMessage}`;
+    
+    // Открываем WhatsApp
+    window.open(whatsappUrl, '_blank');
 }
 
 // ===== ВАЛИДАЦИЯ ФОРМ =====
@@ -475,71 +464,7 @@ class Header {
 }
 
 // ===== КАЛЬКУЛЯТОР КРЕДИТА =====
-class Calculator {
-    constructor() {
-        this.amountSlider = document.getElementById('amount');
-        this.termSlider = document.getElementById('term');
-        this.rateSlider = document.getElementById('rate');
-        
-        this.amountValue = document.getElementById('amount-value');
-        this.termValue = document.getElementById('term-value');
-        this.rateValue = document.getElementById('rate-value');
-        
-        this.monthlyPayment = document.getElementById('monthly-payment');
-        this.overpayment = document.getElementById('overpayment');
-        this.totalAmount = document.getElementById('total-amount');
-        
-        if (this.amountSlider) {
-            this.init();
-        }
-    }
-    
-    init() {
-        this.updateValues();
-        this.calculate();
-        
-        this.amountSlider.addEventListener('input', () => this.handleInput());
-        this.termSlider.addEventListener('input', () => this.handleInput());
-        this.rateSlider.addEventListener('input', () => this.handleInput());
-    }
-    
-    handleInput() {
-        this.updateValues();
-        this.calculate();
-    }
-    
-    updateValues() {
-        this.amountValue.textContent = formatNumber(this.amountSlider.value);
-        this.termValue.textContent = this.termSlider.value;
-        this.rateValue.textContent = this.rateSlider.value;
-    }
-    
-    calculate() {
-        const amount = parseFloat(this.amountSlider.value);
-        const termMonths = parseInt(this.termSlider.value);
-        const annualRate = parseFloat(this.rateSlider.value);
-        
-        // Ежемесячная процентная ставка
-        const monthlyRate = annualRate / 100 / 12;
-        
-        // Аннуитетный платеж
-        let monthlyPaymentValue;
-        if (monthlyRate === 0) {
-            monthlyPaymentValue = amount / termMonths;
-        } else {
-            monthlyPaymentValue = amount * (monthlyRate * Math.pow(1 + monthlyRate, termMonths)) / 
-                                  (Math.pow(1 + monthlyRate, termMonths) - 1);
-        }
-        
-        const totalAmountValue = monthlyPaymentValue * termMonths;
-        const overpaymentValue = totalAmountValue - amount;
-        
-        // Обновление значений
-        this.monthlyPayment.textContent = formatNumber(Math.round(monthlyPaymentValue)) + ' ₸';
-        this.overpayment.textContent = formatNumber(Math.round(overpaymentValue)) + ' ₸';
-        this.totalAmount.textContent = formatNumber(Math.round(totalAmountValue)) + ' ₸';
-    }
-}
+
 
 // ===== РАСЧЁТ ВОЗМОЖНОСТЕЙ =====
 class CreditAssessment {
@@ -852,11 +777,7 @@ class Forms {
             return;
         }
         
-        // Специальная обработка для формы калькулятора
-        if (form.id === 'calculator-form') {
-            this.handleCalculatorForm(form, formData);
-            return;
-        }
+
         
         // Специальная обработка для формы оценки кредитоспособности
         if (form.id === 'credit-assessment-form') {
@@ -922,54 +843,12 @@ class Forms {
         // Очистить форму
         form.reset();
         
-        // Прокрутить к калькулятору для дальнейшего взаимодействия
-        setTimeout(() => {
-            scrollToSection('calculator');
-        }, 1000);
+
         
         console.log('Hero form message:', message);
     }
     
-    handleCalculatorForm(form, formData) {
-        // Номер WhatsApp для чата
-        const phoneNumber = '77011061039';
-        
-        // Формируем сообщение для формы калькулятора
-        let message = '=== 🧮 НОВАЯ ЗАЯВКА НА РАСЧЁТ КРЕДИТА ===\n';
-        message += '==========================================\n\n';
-        
-        // Получаем данные из формы
-        const name = formData.get('name') || document.getElementById('calculator-name')?.value || 'Не указано';
-        const phone = formData.get('phone') || document.getElementById('calculator-phone')?.value || 'Не указано';
-        const consent = formData.get('consent') || document.getElementById('calculator-consent')?.checked || false;
-        
-        message += `👤 Имя: ${name}\n`;
-        message += `📞 Телефон: ${phone}\n`;
-        message += `✅ Согласие на обработку данных: ${consent ? 'Да' : 'Нет'}\n`;
-        message += `💳 Тип услуги: Расчёт кредита\n`;
-        
-        message += '\n==========================================\n';
-        message += '🕐 Время: ' + new Date().toLocaleString('ru-RU');
-        message += '\n==========================================\n\n';
-        message += '🏦 Komek damu - звоните!';
-        
-        // Кодируем сообщение для URL
-        const encodedMessage = encodeURIComponent(message);
-        
-        // Формируем ссылку WhatsApp
-        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-        
-        // Открываем WhatsApp
-        window.open(whatsappUrl, '_blank');
-        
-        // Показать уведомление об успешной отправке
-        this.showNotification('Спасибо! Ваша заявка на расчёт отправлена. Мы свяжемся с вами в течение 5 минут.', 'success');
-        
-        // Очистить форму
-        form.reset();
-        
-        console.log('Calculator form message:', message);
-    }
+
     
     handleAssessmentForm(form, formData) {
         // Номер WhatsApp для чата
@@ -1041,9 +920,7 @@ class Forms {
         } else if (form.id === 'business-consultation-form') {
             formType = 'consultation';
             formTitle = '=== НОВАЯ ЗАЯВКА НА КОНСУЛЬТАЦИЮ ===';
-        } else if (form.id === 'calculator-form') {
-            formType = 'calculator';
-            formTitle = '=== НОВАЯ ЗАЯВКА НА РАСЧЁТ ===';
+
         } else if (form.id === 'credit-assessment-form') {
             formType = 'assessment';
             formTitle = '=== НОВАЯ ЗАЯВКА НА ОЦЕНКУ КРЕДИТОСПОСОБНОСТИ ===';
@@ -1955,7 +1832,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Инициализируем все классы
     const header = new Header();
-    const calculator = new Calculator();
+
     const creditAssessment = new CreditAssessment();
     const modal = new Modal();
     const forms = new Forms();
@@ -2030,13 +1907,7 @@ window.toggleMobileSection = function(sectionId) {
     }
 };
 
-// Функция отправки калькулятора (устаревшая, теперь используется форма)
-window.submitCalculator = function() {
-    const form = document.getElementById('calculator-form');
-    if (form) {
-        form.dispatchEvent(new Event('submit'));
-    }
-};
+
 
 // Функция отправки заявки на партнёрство
 window.submitPartnerApplication = function(event) {
@@ -2714,4 +2585,130 @@ window.testModal = function() {
     } else {
         console.error('Modal not found!');
     }
-}; 
+};
+
+// ===== РАСКРЫВАЮЩИЕСЯ ФОРМЫ =====
+
+class ExpandableForms {
+    constructor() {
+        this.expandedForms = new Set();
+    }
+
+    init() {
+        this.createExpandableForms();
+        this.bindEvents();
+    }
+
+    createExpandableForms() {
+        // Формы удалены, поэтому ничего не создаем
+        return;
+    }
+
+    getButtonText(container) {
+        // Формы удалены, возвращаем пустую строку
+        return '';
+    }
+
+    bindEvents() {
+        // Обработчики для кнопок раскрытия
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.expand-form-btn')) {
+                const btn = e.target.closest('.expand-form-btn');
+                const formId = btn.dataset.formId;
+                this.toggleForm(formId);
+            }
+        });
+
+        // Обработчики для модальных окон (чтобы формы сразу были видны)
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('[onclick*="openModal"]') || e.target.closest('[onclick*="closeModal"]')) {
+                // При открытии/закрытии модальных окон показываем формы
+                setTimeout(() => {
+                    this.showModalForms();
+                }, 100);
+            }
+        });
+    }
+
+    toggleForm(formId) {
+        const btn = document.querySelector(`[data-form-id="${formId}"]`);
+        const formWrapper = document.querySelector(`.form-wrapper[data-form-id="${formId}"]`);
+        
+        if (!btn || !formWrapper) return;
+
+        const isExpanded = this.expandedForms.has(formId);
+        
+        if (isExpanded) {
+            // Скрываем форму
+            this.collapseForm(formId);
+        } else {
+            // Показываем форму
+            this.expandForm(formId);
+        }
+    }
+
+    expandForm(formId) {
+        const btn = document.querySelector(`[data-form-id="${formId}"]`);
+        const formWrapper = document.querySelector(`.form-wrapper[data-form-id="${formId}"]`);
+        
+        if (!btn || !formWrapper) return;
+
+        // Добавляем классы для анимации
+        btn.classList.add('expanded');
+        formWrapper.classList.add('expanded');
+        
+        // Сохраняем состояние
+        this.expandedForms.add(formId);
+        
+        // Плавная прокрутка к форме
+        setTimeout(() => {
+            formWrapper.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'nearest' 
+            });
+        }, 300);
+    }
+
+    collapseForm(formId) {
+        const btn = document.querySelector(`[data-form-id="${formId}"]`);
+        const formWrapper = document.querySelector(`.form-wrapper[data-form-id="${formId}"]`);
+        
+        if (!btn || !formWrapper) return;
+
+        // Убираем классы
+        btn.classList.remove('expanded');
+        formWrapper.classList.remove('expanded');
+        
+        // Удаляем из состояния
+        this.expandedForms.delete(formId);
+    }
+
+    showModalForms() {
+        // Показываем все формы в модальных окнах
+        const modalFormWrappers = document.querySelectorAll('.modal .form-wrapper');
+        modalFormWrappers.forEach(wrapper => {
+            wrapper.classList.add('expanded');
+        });
+    }
+
+    // Метод для программного раскрытия формы
+    expandFormById(formId) {
+        this.expandForm(formId);
+    }
+
+    // Метод для программного скрытия формы
+    collapseFormById(formId) {
+        this.collapseForm(formId);
+    }
+}
+
+// Инициализация раскрывающихся форм - ВРЕМЕННО ОТКЛЮЧЕНО
+/*
+document.addEventListener('DOMContentLoaded', () => {
+    const expandableForms = new ExpandableForms();
+    expandableForms.init();
+    
+    // Делаем доступным глобально
+    window.expandableForms = expandableForms;
+});
+*/ 

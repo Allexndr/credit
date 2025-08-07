@@ -158,30 +158,7 @@ body {
         justify-content: center;
     }
     
-    /* Форма заявки в hero на мобильных */
-    .hero__application-form {
-        margin-top: 1.5rem;
-    }
-    
-    .application-form {
-        padding: 1.5rem;
-        max-width: 100%;
-    }
-    
-    .application-form__title {
-        font-size: 1.25rem;
-        margin-bottom: 1rem;
-    }
-    
-    .client-type-selector {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-    
-    .client-type-option {
-        justify-content: center;
-        padding: 0.5rem;
-    }
+
     
     /* Услуги */
     .services__grid {
@@ -392,15 +369,7 @@ body {
         display: block !important;
     }
     
-    /* Форма заявки в hero на планшетах */
-    .application-form {
-        max-width: 500px;
-        margin: 0 auto;
-    }
-    
-    .client-type-selector {
-        justify-content: center;
-    }
+
     
     /* Услуги */
     .services__grid {

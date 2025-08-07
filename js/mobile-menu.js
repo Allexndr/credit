@@ -59,15 +59,25 @@ document.addEventListener('DOMContentLoaded', function() {
     const buttons = nav.querySelectorAll('.btn');
     buttons.forEach(button => {
         button.addEventListener('click', function(e) {
+            // Если это кнопка "Получить кредит", не предотвращаем действие по умолчанию
+            if (button.textContent.includes('Получить кредит')) {
+                closeMobileMenu();
+                return;
+            }
             e.preventDefault();
             closeMobileMenu();
-            setTimeout(() => {
-                if (typeof openModal === 'function') {
-                    openModal('application');
-                }
-            }, 100);
         });
     });
+    
+    // Закрытие меню при клике на кнопку закрытия
+    const closeBtn = nav.querySelector('.mobile-menu-close');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            closeMobileMenu();
+        });
+    }
     
     // Закрытие меню при клике вне его
     document.addEventListener('click', function(e) {
