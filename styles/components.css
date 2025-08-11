@@ -2250,6 +2250,8 @@
     font-size: 0.875rem;
     font-weight: 600;
     z-index: 10;
+    display: block !important;
+    content: "Выгодно" !important;
 }
 
 /* Изображение больше и без обрезки */
@@ -2357,7 +2359,7 @@
     content: none !important;
 }
 
-/* Убираем все псевдоэлементы */
+/* Убираем все псевдоэлементы, кроме лейбла "Выгодно" */
 .consumer-solution-card__image::before,
 .consumer-solution-card__image::after,
 .consumer-solution-card__image img::before,

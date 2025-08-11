@@ -3016,7 +3016,7 @@ svg::before, svg::after {
 
 /* Убираем все возможные стрелочки и маркеры у всех элементов */
 *::before, *::after {
-    content: none !important;
+    /* content: none !important; - убираем это правило */
 }
 
 /* Специально для изображений - убираем все */
