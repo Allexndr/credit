@@ -1741,18 +1741,17 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 2rem;
+    gap: 2.5rem;
     flex-wrap: nowrap;
     width: 100%;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
-    overflow-x: auto;
-    padding: 0 1rem;
+    padding: 0 2rem;
 }
 
 .partner-logo {
-    width: 140px;
-    height: 90px;
+    width: 160px;
+    height: 100px;
     object-fit: contain;
     flex-shrink: 0;
 }
@@ -2939,5 +2938,32 @@ a[href*="become-partner"] {
     
     .form-wrapper.expanded {
         margin-top: 15px;
+    }
+}
+
+/* Стили для больших экранов */
+@media (min-width: 1200px) {
+    .partners-grid {
+        gap: 3rem;
+        max-width: 1600px;
+        padding: 0 3rem;
+    }
+    
+    .partner-logo {
+        width: 180px;
+        height: 110px;
+    }
+}
+
+@media (min-width: 1600px) {
+    .partners-grid {
+        gap: 3.5rem;
+        max-width: 1800px;
+        padding: 0 4rem;
+    }
+    
+    .partner-logo {
+        width: 200px;
+        height: 120px;
     }
 }
