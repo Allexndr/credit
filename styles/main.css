@@ -1770,8 +1770,38 @@ section {
         overflow-x: visible;
         padding: 0 1rem;
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1rem;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto auto auto;
+        gap: 1.5rem;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    
+    .partner-logo {
+        width: 120px;
+        height: 80px;
+        flex-shrink: 0;
+        margin: 0 auto;
+    }
+    
+    /* Последний банк по центру снизу */
+    .partner-logo:last-child {
+        grid-column: 1 / -1;
+        justify-self: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .partners-grid {
+        justify-content: center;
+        gap: 1.25rem;
+        overflow-x: visible;
+        padding: 0 0.5rem;
+        flex-wrap: wrap;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto auto auto;
+        gap: 1.25rem;
+        max-width: 350px;
     }
     
     .partner-logo {
@@ -1780,38 +1810,31 @@ section {
         flex-shrink: 0;
         margin: 0 auto;
     }
-}
-
-@media (max-width: 480px) {
-    .partners-grid {
-        justify-content: center;
-        gap: 1rem;
-        overflow-x: visible;
-        padding: 0 0.5rem;
-        flex-wrap: wrap;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-    }
     
-    .partner-logo {
-        width: 90px;
-        height: 65px;
-        flex-shrink: 0;
-        margin: 0 auto;
+    .partner-logo:last-child {
+        grid-column: 1 / -1;
+        justify-self: center;
     }
 }
 
 @media (max-width: 360px) {
     .partners-grid {
-        gap: 0.75rem;
+        gap: 1rem;
         padding: 0 0.25rem;
         grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto auto auto;
+        max-width: 300px;
     }
     
     .partner-logo {
-        width: 80px;
-        height: 60px;
+        width: 90px;
+        height: 65px;
         margin: 0 auto;
+    }
+    
+    .partner-logo:last-child {
+        grid-column: 1 / -1;
+        justify-self: center;
     }
 }
 
