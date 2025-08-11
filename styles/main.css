@@ -2967,3 +2967,43 @@ a[href*="become-partner"] {
         height: 120px;
     }
 }
+
+/* Глобальные стили для удаления элементов выделения */
+* {
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+    -khtml-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-focus-ring-color: transparent !important;
+}
+
+/* Разрешаем выделение текста в нужных местах */
+p, h1, h2, h3, h4, h5, h6, span, div, button, a, input, textarea, label {
+    -webkit-user-select: text !important;
+    -moz-user-select: text !important;
+    -ms-user-select: text !important;
+    user-select: text !important;
+}
+
+/* Убираем все возможные угловые маркеры у изображений */
+img, svg {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    resize: none !important;
+    cursor: default !important;
+    -webkit-user-drag: none !important;
+    -webkit-touch-callout: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-focus-ring-color: transparent !important;
+}
+
+img::before, img::after,
+svg::before, svg::after {
+    display: none !important;
+}
+
+/* ===== ОБЩИЕ СТИЛИ ===== */

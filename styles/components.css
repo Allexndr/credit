@@ -2252,17 +2252,17 @@
     z-index: 10;
 }
 
-/* Изображение чуть меньше и без обрезки */
+/* Изображение больше и без обрезки */
 .consumer-solution-card__image {
     width: 100%;
-    height: 188px; /* было 180px */
+    height: 220px; /* увеличил с 188px до 220px */
     margin-bottom: 1.5rem;
     border-radius: var(--radius-md);
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 8px;
+    padding: 12px; /* увеличил padding */
     box-sizing: border-box;
     pointer-events: none; /* чтобы не было выделения/фокуса */
 }
@@ -2290,6 +2290,38 @@
 .consumer-solution-card__image img::before,
 .consumer-solution-card__image img::after {
     display: none !important;
+}
+
+/* Агрессивно убираем все угловые маркеры и элементы выделения */
+.consumer-solution-card__image *,
+.consumer-solution-card__image *::before,
+.consumer-solution-card__image *::after {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    resize: none !important;
+    cursor: default !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+}
+
+/* Убираем все возможные элементы выделения браузера */
+.consumer-solution-card__image img {
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+    -khtml-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-focus-ring-color: transparent !important;
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    resize: none !important;
+    cursor: default !important;
 }
 
 /* Блок параметров одной высоты */
@@ -2398,7 +2430,7 @@
     }
     
     .consumer-solution-card__image {
-        height: 150px;
+        height: 180px; /* увеличил с 150px до 180px для мобильных */
         margin-bottom: 1rem;
     }
     
