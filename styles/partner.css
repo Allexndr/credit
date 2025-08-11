@@ -1167,3 +1167,38 @@
         font-size: 0.8rem;
     }
 }
+
+/* Закругление углов для изображений на партнерской странице */
+.partner-hero__img,
+.partnership-cta__img,
+.partner-logo__icon img,
+.logo__image {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* Дополнительное закругление для контейнеров изображений */
+.partner-hero__image,
+.partnership-cta__img,
+.partner-logo__icon {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* Закругление для логотипа в шапке */
+.logo__image {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Закругление для изображений в специальных предложениях */
+.special-offer__card img {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* Закругление для изображений в FAQ секции */
+.faq-item img {
+    border-radius: 8px;
+    overflow: hidden;
+}

@@ -2340,14 +2340,7 @@ a[href*="become-partner"] {
     color: var(--text-white);
 }
 
-.mobile-menu__arrow {
-    transition: transform 0.3s ease;
-    color: var(--text-white);
-}
 
-.mobile-menu__section.active .mobile-menu__arrow {
-    transform: rotate(180deg);
-}
 
 .mobile-menu__content {
     max-height: 0;
@@ -2873,16 +2866,7 @@ a[href*="become-partner"] {
 }
 
 /* Иконка стрелки */
-.expand-form-btn .arrow-icon {
-    width: 16px;
-    height: 16px;
-    transition: var(--transition);
-    fill: currentColor;
-}
 
-.expand-form-btn.expanded .arrow-icon {
-    transform: rotate(180deg);
-}
 
 /* Контейнер формы */
 .form-wrapper {
@@ -3047,4 +3031,52 @@ img, svg, .consumer-solution-card__image, .consumer-solution-card__image img {
     -moz-transform: none !important;
     -ms-transform: none !important;
     transform: none !important;
+}
+
+/* Закругление углов для всех изображений в карточках */
+.consumer-solution-card__image img,
+.business-credit-card__image img,
+.damu-program-card__image img,
+.mortgage-card__image img,
+.video-review-card__preview img,
+.partner-logo img {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* Дополнительное закругление для контейнеров изображений */
+.consumer-solution-card__image,
+.business-credit-card__image,
+.damu-program-card__image,
+.mortgage-card__image,
+.video-review-card__preview,
+.partner-logo {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* Закругление для изображений в hero секции */
+.hero__image img {
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.hero__image {
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+/* Закругление для изображений в других секциях */
+.service-card__image img,
+.about__image img,
+.contact__image img {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.service-card__image,
+.about__image,
+.contact__image {
+    border-radius: 12px;
+    overflow: hidden;
 }
