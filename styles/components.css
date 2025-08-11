@@ -2208,12 +2208,14 @@
     grid-template-columns: 1fr;
     gap: 2rem;
     margin-top: 3rem;
+    align-items: stretch;
 }
 
 @media (min-width: 768px) {
     .consumer-solutions__grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 2rem;
+        align-items: stretch;
     }
 }
 
@@ -2226,30 +2228,15 @@
     transition: var(--transition);
     border: 1px solid var(--border-color);
     position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
-.consumer-solution-card__badge {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: var(--primary);
-    color: var(--text-white);
-    padding: 0.5rem 1rem;
-    border-radius: var(--radius-md);
-    font-size: 0.875rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.consumer-solution-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
-}
-
+/* Изображение чуть меньше и без обрезки */
 .consumer-solution-card__image {
     width: 100%;
-    height: 185px;
+    height: 180px;
     margin-bottom: 1.5rem;
     border-radius: var(--radius-md);
     overflow: hidden;
@@ -2258,12 +2245,39 @@
     justify-content: center;
     padding: 8px;
     box-sizing: border-box;
+    pointer-events: none; /* чтобы не было выделения/фокуса */
 }
 
 .consumer-solution-card__image img {
     width: 100%;
     height: 100%;
     object-fit: contain;
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    -webkit-user-drag: none;
+    user-select: none;
+}
+
+/* Блок параметров одной высоты */
+.consumer-solution-card__parameters {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: var(--bg-light);
+    border-radius: var(--radius-md);
+    min-height: 84px;
+}
+
+/* Зона преимуществ занимает свободное место, кнопка внизу */
+.consumer-solution-card__features {
+    margin-bottom: 2rem;
+    flex: 1 1 auto;
+}
+
+.consumer-solution-card .btn {
+    margin-top: auto;
 }
 
 .consumer-solution-card__title {
@@ -2271,10 +2285,6 @@
     font-weight: 600;
     color: var(--primary);
     margin-bottom: 1.5rem;
-}
-
-.consumer-solution-card__features {
-    margin-bottom: 2rem;
 }
 
 .solution-feature {
@@ -2301,15 +2311,6 @@
     color: var(--text-secondary);
     font-size: 0.95rem;
     line-height: 1.4;
-}
-
-.consumer-solution-card__parameters {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 1.5rem;
-    padding: 1rem;
-    background: var(--bg-light);
-    border-radius: var(--radius-md);
 }
 
 .parameter-item {
