@@ -2264,12 +2264,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 25px; /* увеличил padding с 20px до 25px для большего углубления */
+    padding: 35px; /* увеличил padding с 25px до 35px для большего углубления */
     box-sizing: border-box;
     pointer-events: none; /* чтобы не было выделения/фокуса */
-    /* Добавляем небольшой отступ внутрь, чтобы скрыть стрелочки */
-    margin: 0 -5px; /* отрицательный margin для расширения блока */
-    width: calc(100% + 10px); /* расширяем блок на 10px */
+    /* Добавляем больший отступ внутрь, чтобы скрыть стрелочки */
+    margin: 0 -10px; /* увеличил отрицательный margin с -5px до -10px */
+    width: calc(100% + 20px); /* расширяем блок на 20px вместо 10px */
 }
 
 .consumer-solution-card__image img {
@@ -2284,8 +2284,8 @@
     /* Убираем все возможные стрелочки/маркеры */
     resize: none !important;
     cursor: default !important;
-    /* Добавляем небольшое углубление */
-    transform: scale(0.95); /* уменьшаем изображение на 5% */
+    /* Добавляем большее углубление */
+    transform: scale(0.9); /* уменьшил изображение с 0.95 до 0.9 (на 10%) */
 }
 
 /* Убираем все возможные стрелочки/маркеры у изображений */
@@ -2483,9 +2483,10 @@
     .consumer-solution-card__image {
         height: 220px; /* увеличил с 180px до 220px для мобильных */
         margin-bottom: 1rem;
-        padding: 20px; /* увеличил padding для мобильных */
-        margin: 0 -3px; /* небольшой отрицательный margin для мобильных */
-        width: calc(100% + 6px); /* расширяем блок на 6px для мобильных */
+        padding: 25px; /* увеличил padding для мобильных */
+        margin: 0 -5px; /* увеличил отрицательный margin для мобильных */
+        width: calc(100% + 10px); /* расширяем блок на 10px для мобильных */
+        transform: scale(0.9); /* добавляем углубление и для мобильных */
     }
     
     .consumer-solution-card__title {
