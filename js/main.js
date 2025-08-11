@@ -2712,3 +2712,74 @@ document.addEventListener('DOMContentLoaded', () => {
     window.expandableForms = expandableForms;
 });
 */ 
+
+// Функция для удаления всех стрелочек и маркеров выделения
+function removeAllSelectionMarkers() {
+    // Убираем все outline и border у изображений
+    const allImages = document.querySelectorAll('img, svg');
+    allImages.forEach(img => {
+        img.style.outline = 'none';
+        img.style.border = 'none';
+        img.style.boxShadow = 'none';
+        img.style.resize = 'none';
+        img.style.cursor = 'default';
+        img.style.webkitUserDrag = 'none';
+        img.style.webkitTouchCallout = 'none';
+        img.style.webkitTapHighlightColor = 'transparent';
+        img.style.webkitFocusRingColor = 'transparent';
+        img.style.webkitAppearance = 'none';
+        img.style.mozAppearance = 'none';
+        img.style.appearance = 'none';
+        
+        // Убираем все атрибуты, которые могут вызывать стрелочки
+        img.removeAttribute('draggable');
+        img.removeAttribute('contenteditable');
+        img.removeAttribute('tabindex');
+    });
+    
+    // Убираем все псевдоэлементы
+    const style = document.createElement('style');
+    style.textContent = `
+        *::before, *::after {
+            content: none !important;
+        }
+        img::before, img::after,
+        svg::before, svg::after {
+            display: none !important;
+            content: none !important;
+            width: 0 !important;
+            height: 0 !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+        }
+        .consumer-solution-card__image::before,
+        .consumer-solution-card__image::after,
+        .consumer-solution-card__image img::before,
+        .consumer-solution-card__image img::after {
+            display: none !important;
+            content: none !important;
+            width: 0 !important;
+            height: 0 !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+// Запускаем функцию при загрузке страницы
+document.addEventListener('DOMContentLoaded', function() {
+    removeAllSelectionMarkers();
+    
+    // Запускаем функцию каждые 100мс для гарантии
+    setInterval(removeAllSelectionMarkers, 100);
+    
+    // Запускаем функцию при изменении DOM
+    const observer = new MutationObserver(removeAllSelectionMarkers);
+    observer.observe(document.body, { 
+        childList: true, 
+        subtree: true 
+    });
+});
+
+// Функция для выбора услуги

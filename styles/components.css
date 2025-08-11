@@ -2324,6 +2324,52 @@
     cursor: default !important;
 }
 
+/* Максимально агрессивно убираем все стрелочки и маркеры */
+.consumer-solution-card__image,
+.consumer-solution-card__image *,
+.consumer-solution-card__image *::before,
+.consumer-solution-card__image *::after {
+    outline: 0 !important;
+    outline-offset: 0 !important;
+    outline-style: none !important;
+    outline-width: 0 !important;
+    outline-color: transparent !important;
+    border: 0 !important;
+    border-width: 0 !important;
+    border-style: none !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    resize: none !important;
+    cursor: default !important;
+    -webkit-user-drag: none !important;
+    -webkit-touch-callout: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-focus-ring-color: transparent !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    -webkit-transform: none !important;
+    -moz-transform: none !important;
+    -ms-transform: none !important;
+    transform: none !important;
+    content: none !important;
+}
+
+/* Убираем все псевдоэлементы */
+.consumer-solution-card__image::before,
+.consumer-solution-card__image::after,
+.consumer-solution-card__image img::before,
+.consumer-solution-card__image img::after {
+    display: none !important;
+    content: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
 /* Блок параметров одной высоты */
 .consumer-solution-card__parameters {
     display: flex;

@@ -2978,6 +2978,10 @@ a[href*="become-partner"] {
     user-select: none !important;
     -webkit-tap-highlight-color: transparent !important;
     -webkit-focus-ring-color: transparent !important;
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    resize: none !important;
 }
 
 /* Разрешаем выделение текста в нужных местах */
@@ -2999,11 +3003,47 @@ img, svg {
     -webkit-touch-callout: none !important;
     -webkit-tap-highlight-color: transparent !important;
     -webkit-focus-ring-color: transparent !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
 }
 
 img::before, img::after,
 svg::before, svg::after {
     display: none !important;
+    content: none !important;
 }
 
-/* ===== ОБЩИЕ СТИЛИ ===== */
+/* Убираем все возможные стрелочки и маркеры у всех элементов */
+*::before, *::after {
+    content: none !important;
+}
+
+/* Специально для изображений - убираем все */
+img, svg, .consumer-solution-card__image, .consumer-solution-card__image img {
+    outline: 0 !important;
+    outline-offset: 0 !important;
+    outline-style: none !important;
+    outline-width: 0 !important;
+    outline-color: transparent !important;
+    border: 0 !important;
+    border-width: 0 !important;
+    border-style: none !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    resize: none !important;
+    cursor: default !important;
+    -webkit-user-drag: none !important;
+    -webkit-touch-callout: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-focus-ring-color: transparent !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    -webkit-transform: none !important;
+    -moz-transform: none !important;
+    -ms-transform: none !important;
+    transform: none !important;
+}
