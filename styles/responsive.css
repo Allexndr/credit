@@ -85,9 +85,47 @@ body {
         justify-content: center !important;
         text-align: center;
         margin: 0 auto;
-        overflow-x: auto;
+        overflow-x: visible;
         padding: 0 1rem;
-        flex-wrap: nowrap !important;
+        flex-wrap: wrap !important;
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 1rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* Дополнительные стили для банков на мобильных */
+    .partners-grid .partner-logo {
+        flex-shrink: 0 !important;
+        width: 90px !important;
+        height: 65px !important;
+        margin: 0 auto !important;
+    }
+    
+    /* Стили для очень маленьких экранов */
+    @media (max-width: 480px) {
+        .partners-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 0.75rem !important;
+        }
+        
+        .partners-grid .partner-logo {
+            width: 80px !important;
+            height: 60px !important;
+        }
+    }
+    
+    @media (max-width: 360px) {
+        .partners-grid {
+            gap: 0.5rem !important;
+            padding: 0 0.5rem !important;
+        }
+        
+        .partners-grid .partner-logo {
+            width: 70px !important;
+            height: 55px !important;
+        }
     }
     
     /* Центрируем все карточки */
