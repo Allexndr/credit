@@ -2326,11 +2326,9 @@
     cursor: default !important;
 }
 
-/* Максимально агрессивно убираем все стрелочки и маркеры */
+/* Максимально агрессивно убираем все стрелочки и маркеры только у изображений */
 .consumer-solution-card__image,
-.consumer-solution-card__image *,
-.consumer-solution-card__image *::before,
-.consumer-solution-card__image *::after {
+.consumer-solution-card__image img {
     outline: 0 !important;
     outline-offset: 0 !important;
     outline-style: none !important;

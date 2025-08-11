@@ -2978,10 +2978,11 @@ a[href*="become-partner"] {
     user-select: none !important;
     -webkit-tap-highlight-color: transparent !important;
     -webkit-focus-ring-color: transparent !important;
-    outline: none !important;
+    /* Убираю эти правила, которые вызывают галочки */
+    /* outline: none !important;
     border: none !important;
     box-shadow: none !important;
-    resize: none !important;
+    resize: none !important; */
 }
 
 /* Разрешаем выделение текста в нужных местах */
@@ -3014,7 +3015,7 @@ svg::before, svg::after {
     content: none !important;
 }
 
-/* Убираем все возможные стрелочки и маркеры у всех элементов */
+/* Убираем все возможные стрелочки и маркеры у всех элементов, кроме лейбла "Выгодно" */
 *::before, *::after {
     /* content: none !important; - убираем это правило */
 }
