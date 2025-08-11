@@ -2264,9 +2264,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px; /* увеличил padding с 12px до 20px */
+    padding: 25px; /* увеличил padding с 20px до 25px для большего углубления */
     box-sizing: border-box;
     pointer-events: none; /* чтобы не было выделения/фокуса */
+    /* Добавляем небольшой отступ внутрь, чтобы скрыть стрелочки */
+    margin: 0 -5px; /* отрицательный margin для расширения блока */
+    width: calc(100% + 10px); /* расширяем блок на 10px */
 }
 
 .consumer-solution-card__image img {
@@ -2281,6 +2284,8 @@
     /* Убираем все возможные стрелочки/маркеры */
     resize: none !important;
     cursor: default !important;
+    /* Добавляем небольшое углубление */
+    transform: scale(0.95); /* уменьшаем изображение на 5% */
 }
 
 /* Убираем все возможные стрелочки/маркеры у изображений */
@@ -2478,7 +2483,9 @@
     .consumer-solution-card__image {
         height: 220px; /* увеличил с 180px до 220px для мобильных */
         margin-bottom: 1rem;
-        padding: 16px; /* увеличил padding для мобильных */
+        padding: 20px; /* увеличил padding для мобильных */
+        margin: 0 -3px; /* небольшой отрицательный margin для мобильных */
+        width: calc(100% + 6px); /* расширяем блок на 6px для мобильных */
     }
     
     .consumer-solution-card__title {
