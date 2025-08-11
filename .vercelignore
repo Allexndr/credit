@@ -1,0 +1,12 @@
+# Исключаем ненужные файлы при деплое на Vercel
+.git
+.gitignore
+README.md
+docs/
+*.log
+.DS_Store
+Thumbs.db
+node_modules/
+.env
+.env.local
+.env.production
