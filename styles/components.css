@@ -850,7 +850,7 @@
 .contact__form-container .b24-form-field-input:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+    box-shadow: 0 0 0 3px  #2F64CA;
 }
 
 .contact__form-container .b24-form-btn {
@@ -1208,13 +1208,14 @@
 }
 
 .mortgage-programs__cta {
-    background: var(--gradient-primary);
+    background: white;
     border-radius: var(--radius-xl);
     padding: 3rem 2rem;
     text-align: center;
-    color: var(--text-white);
+    color: var(--text-primary);
     position: relative;
     overflow: hidden;
+    border: 1px solid var(--border-color);
 }
 
 .mortgage-programs__cta::before {
@@ -1237,11 +1238,12 @@
     font-size: 1.75rem;
     font-weight: 700;
     margin-bottom: 1rem;
+    color: var(--text-primary);
 }
 
 .cta-content p {
-    font-size: 1.125rem;
-    opacity: 0.9;
+    font-size: 1.25rem;
+    color: var(--text-secondary);
     margin-bottom: 2rem;
     max-width: 600px;
     margin-left: auto;

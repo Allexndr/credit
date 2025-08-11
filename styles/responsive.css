@@ -26,10 +26,183 @@ body {
     /* Общие адаптации */
     .container {
         padding: 0 1rem;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        margin: 0 auto;
+        text-align: center;
     }
     
     section {
         padding: 3rem 0;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+    }
+    
+    /* Центрируем все содержимое секций */
+    .section__header {
+        text-align: center;
+        margin: 0 auto;
+        max-width: 100%;
+    }
+    
+    /* Центрируем все сетки */
+    .damu-programs__grid,
+    .business-credit__grid,
+    .consumer-solutions__grid,
+    .mortgage-programs__grid,
+    .video-reviews__grid,
+    .about__features,
+    .stats-grid,
+    .partners-grid {
+        justify-items: center !important;
+        text-align: center;
+        margin: 0 auto;
+        padding: 0;
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    /* Специальные стили для секции партнеров */
+    .partners-section {
+        text-align: center;
+        background: white !important;
+    }
+    
+    .partners-section .section__header {
+        text-align: center;
+        margin: 0 auto 2rem auto;
+    }
+    
+    .partners-section .section__title {
+        text-align: center;
+        margin: 0 auto;
+    }
+    
+    .partners-grid {
+        justify-content: center !important;
+        text-align: center;
+        margin: 0 auto;
+        overflow-x: auto;
+        padding: 0 1rem;
+        flex-wrap: nowrap !important;
+    }
+    
+    /* Центрируем все карточки */
+    .damu-program-card,
+    .business-credit-card,
+    .consumer-solution-card,
+    .mortgage-card,
+    .video-review-card,
+    .feature-card,
+    .stat-item,
+    .partner-logo {
+        margin: 0 auto !important;
+        text-align: center;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    
+    /* Принудительно центрируем содержимое карточек программ DAMU */
+    .damu-program-card * {
+        text-align: center !important;
+    }
+    
+    .damu-program-card__header {
+        justify-content: center !important;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .damu-program-card__title {
+        text-align: center !important;
+        margin: 0 auto;
+    }
+    
+    .damu-program-card__rate {
+        text-align: center !important;
+        margin: 0 auto;
+    }
+    
+    .damu-program-card__conditions {
+        text-align: center !important;
+        margin: 0 auto;
+    }
+    
+    .condition-item {
+        justify-content: center !important;
+        flex-direction: column;
+        text-align: center !important;
+        gap: 0.5rem;
+    }
+    
+    .condition-label,
+    .condition-value {
+        text-align: center !important;
+        margin: 0 auto;
+        width: 100%;
+    }
+    
+    /* Центрируем кнопки в карточках */
+    .damu-program-card .btn {
+        margin: 0 auto !important;
+        display: block;
+        text-align: center !important;
+    }
+    
+    /* Дополнительные стили для центрирования */
+    .hero__content,
+    .hero__actions,
+    .hero__features {
+        text-align: center;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .feature {
+        justify-content: center;
+        text-align: center;
+        margin: 0 auto;
+    }
+    
+    .btn {
+        margin: 0 auto;
+        display: block;
+        text-align: center !important;
+    }
+    
+    /* Центрируем все изображения */
+    .hero__image,
+    .business-credit-card__image,
+    .consumer-solution-card__image {
+        margin: 0 auto;
+        text-align: center;
+    }
+    
+    /* Исправляем кнопки на мобильных */
+    .btn {
+        margin: 0 auto;
+        display: block;
+        width: 100% !important;
+        max-width: 100% !important;
+        white-space: normal !important;
+        word-wrap: break-word !important;
+        line-height: 1.3 !important;
+        min-height: auto !important;
+    }
+    
+    /* Специальные стили для кнопок в карточках */
+    .damu-program-card .btn,
+    .business-credit-card .btn,
+    .consumer-solution-card .btn,
+    .mortgage-card .btn {
+        font-size: 0.85rem !important;
+        padding: 0.75rem 1rem !important;
+        text-align: center;
     }
     
     .section__title {
@@ -43,8 +216,15 @@ body {
         left: 0;
         right: 0;
         z-index: 1000;
-        background: #0f172a;
+        background: #2F64CA !important; /* Тот же цвет что и на десктопе */
+        backdrop-filter: blur(20px);
+        border-bottom: none;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .header.scrolled {
+        background: #1e4ba3 !important; /* Тот же цвет при скролле что и на десктопе */
+        box-shadow: 0 4px 20px rgba(47, 100, 202, 0.4);
     }
     
     .header__inner {
@@ -608,5 +788,104 @@ body {
         width: 0 !important;
         height: 0 !important;
         overflow: hidden !important;
+    }
+} 
+
+/* Глобальные стили для центрирования на мобильных */
+@media (max-width: 767px) {
+    /* Центрируем контейнер */
+    .container {
+        text-align: center;
+    }
+    
+    /* Центрируем заголовки секций */
+    .section__header {
+        text-align: center;
+        margin: 0 auto;
+    }
+    
+    .section__title {
+        text-align: center;
+        margin: 0 auto;
+    }
+    
+    /* Центрируем сетки программ DAMU */
+    .damu-programs__grid {
+        justify-items: center !important;
+        text-align: center;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    
+    /* Центрируем карточки программ DAMU */
+    .damu-program-card {
+        margin: 0 auto !important;
+        text-align: center;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        display: block;
+    }
+    
+    /* Центрируем сетки других блоков */
+    .business-credit__grid,
+    .consumer-solutions__grid,
+    .mortgage-programs__grid {
+        justify-items: center !important;
+        text-align: center;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    
+    /* Центрируем карточки других блоков */
+    .business-credit-card,
+    .consumer-solution-card,
+    .mortgage-card {
+        margin: 0 auto !important;
+        text-align: center;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        display: block;
+    }
+    
+    /* Центрируем кнопки */
+    .btn {
+        margin: 0 auto;
+        display: block;
+    }
+    
+    /* Центрируем изображения */
+    .hero__image,
+    .business-credit-card__image,
+    .consumer-solution-card__image {
+        margin: 0 auto;
+        text-align: center;
+    }
+    
+    /* Исправляем кнопки на мобильных */
+    .btn {
+        margin: 0 auto;
+        display: block;
+        width: 100% !important;
+        max-width: 100% !important;
+        white-space: normal !important;
+        word-wrap: break-word !important;
+        line-height: 1.3 !important;
+        min-height: auto !important;
+    }
+    
+    /* Специальные стили для кнопок в карточках */
+    .damu-program-card .btn,
+    .business-credit-card .btn,
+    .consumer-solution-card .btn,
+    .mortgage-card .btn {
+        font-size: 0.85rem !important;
+        padding: 0.75rem 1rem !important;
+        text-align: center;
     }
 } 

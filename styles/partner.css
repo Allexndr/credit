@@ -1,5 +1,64 @@
 /* Стили для партнёрской страницы Komek Damu */
 
+/* Стили для кнопок в шапке на странице партнера */
+@media (max-width: 1023px) {
+    .btn--home-mobile {
+        display: inline-block;
+        color: rgba(255, 255, 255, 0.9);
+        text-decoration: none;
+        font-size: 11px;
+        font-weight: 500;
+        padding: 6px 8px;
+        border-radius: 4px;
+        transition: color 0.2s ease;
+        white-space: nowrap;
+        position: absolute;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1001;
+    }
+    
+    .btn--home-mobile:hover {
+        color: white;
+    }
+    
+    .btn--partner-mobile {
+        display: inline-block;
+        color: rgba(255, 255, 255, 0.9);
+        text-decoration: none;
+        font-size: 11px;
+        font-weight: 500;
+        padding: 6px 8px;
+        border-radius: 4px;
+        transition: color 0.2s ease;
+        white-space: nowrap;
+        position: absolute;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1001;
+    }
+    
+    .btn--partner-mobile:hover {
+        color: white;
+    }
+}
+
+@media (max-width: 480px) {
+    .btn--home-mobile {
+        font-size: 10px;
+        padding: 4px 6px;
+        right: 8px;
+    }
+    
+    .btn--partner-mobile {
+        font-size: 10px;
+        padding: 4px 6px;
+        right: 8px;
+    }
+}
+
 /* Главная секция партнёрской программы */
 .partner-hero {
     background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
@@ -48,18 +107,21 @@
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: 24px;
+    color: white;
 }
 
 .partner-hero__description {
     font-size: 1.25rem;
     margin-bottom: 16px;
     opacity: 0.9;
+    color: white;
 }
 
 .partner-hero__subtitle {
     font-size: 1rem;
     margin-bottom: 40px;
     opacity: 0.8;
+    color: white;
 }
 
 .text-link {
