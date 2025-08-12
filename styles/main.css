@@ -2522,6 +2522,7 @@ a[href*="become-partner"] {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     padding: 2rem 0;
+    min-height: 400px;
 }
 
 .video-gallery__track {
@@ -2563,7 +2564,9 @@ a[href*="become-partner"] {
     justify-content: center;
     box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3);
     transition: all 0.3s ease;
-    z-index: 10;
+    z-index: 100;
+    opacity: 1;
+    visibility: visible;
 }
 
 .video-gallery__arrow:hover {

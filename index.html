@@ -1535,6 +1535,14 @@
         const nextBtn = document.getElementById('videoGalleryNext');
         const indicatorsContainer = document.getElementById('videoGalleryIndicators');
         
+        console.log('Video gallery init:', {
+            track: track,
+            prevBtn: prevBtn,
+            nextBtn: nextBtn,
+            indicators: indicatorsContainer,
+            cardCount: track ? track.children.length : 0
+        });
+        
         if (!track || !prevBtn || !nextBtn) return;
         
         let currentIndex = 0;
