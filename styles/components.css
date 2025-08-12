@@ -699,8 +699,8 @@
 
 .contact-item__icon {
     flex-shrink: 0;
-    width: 3rem;
-    height: 3rem;
+    width: 4.5rem; /* Увеличиваем размер в 1.5 раза (3 * 1.5) */
+    height: 4.5rem; /* Увеличиваем размер в 1.5 раза (3 * 1.5) */
     background: var(--gradient-secondary);
     border-radius: var(--radius-md);
     display: flex;
@@ -729,7 +729,7 @@
 
 .contact-item__content span {
     color: var(--text-secondary);
-    font-size: 0.875rem;
+    font-size: 1.3125rem; /* Увеличиваем размер в 1.5 раза (0.875 * 1.5) */
 }
 
 .offices-list {
@@ -1348,7 +1348,7 @@
     gap: 0.5rem;
     color: var(--text-light);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 1.35rem; /* Увеличиваем размер в 1.5 раза (0.9 * 1.5) */
     transition: var(--transition-fast);
 }
 
@@ -1370,8 +1370,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 60px; /* Увеличиваем размер в 1.5 раза (40 * 1.5) */
+    height: 60px; /* Увеличиваем размер в 1.5 раза (40 * 1.5) */
     background: rgba(255, 255, 255, 0.1);
     border-radius: 50%;
     color: var(--text-light);
