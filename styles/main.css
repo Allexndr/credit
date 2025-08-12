@@ -199,7 +199,7 @@ div[id*="dashboard"] {
 
 /* Основные элементы */
 html {
-    font-size: 16px;
+    font-size: 18px;
     scroll-behavior: smooth;
     line-height: 1.15;
     -webkit-text-size-adjust: 100%;
@@ -281,19 +281,19 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Основной заголовок страницы */
 h1 {
-    font-size: 2.5rem;
+    font-size: 3rem;
     font-weight: 700;
 }
 
 /* Заголовки секций */
 h2 {
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: 600;
 }
 
 /* Подзаголовки и карточки */
 h3 {
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 600;
 }
 
@@ -1741,17 +1741,18 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 2.5rem;
+    gap: 0;
     flex-wrap: nowrap;
     width: 100%;
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 2rem;
+    overflow-x: auto;
 }
 
 .partner-logo {
-    width: 160px;
-    height: 100px;
+    width: 140px;
+    height: 90px;
     object-fit: contain;
     flex-shrink: 0;
 }
@@ -1764,14 +1765,14 @@ section {
     
     .partners-grid {
         justify-content: center;
-        gap: 1.5rem;
+        gap: 0;
         flex-wrap: wrap;
         overflow-x: visible;
         padding: 0 1rem;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: auto auto auto;
-        gap: 1.5rem;
+        gap: 0;
         max-width: 400px;
         margin: 0 auto;
     }
@@ -1793,13 +1794,13 @@ section {
 @media (max-width: 480px) {
     .partners-grid {
         justify-content: center;
-        gap: 1.25rem;
+        gap: 0;
         overflow-x: visible;
         padding: 0 0.5rem;
         flex-wrap: wrap;
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: auto auto auto;
-        gap: 1.25rem;
+        gap: 0;
         max-width: 350px;
     }
     
@@ -2507,6 +2508,139 @@ a[href*="become-partner"] {
     background: var(--bg-secondary);
 }
 
+/* ===== Видео галерея ===== */
+.video-gallery {
+    position: relative;
+    margin-top: 3rem;
+    overflow: hidden;
+}
+
+.video-gallery__container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 2rem 0;
+}
+
+.video-gallery__track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    gap: 2rem;
+    padding: 0 2rem;
+}
+
+.video-review-card {
+    flex: 0 0 350px;
+    min-width: 350px;
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(30, 58, 138, 0.15);
+    transition: all 0.3s ease;
+}
+
+.video-review-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px rgba(30, 58, 138, 0.25);
+}
+
+/* Стрелки навигации */
+.video-gallery__arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border: none;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3);
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.video-gallery__arrow:hover {
+    background: linear-gradient(135deg, #1e40af, #2563eb);
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 6px 20px rgba(30, 58, 138, 0.4);
+}
+
+.video-gallery__arrow--prev {
+    left: 20px;
+}
+
+.video-gallery__arrow--next {
+    right: 20px;
+}
+
+.video-gallery__arrow svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+    stroke-width: 3;
+    fill: none;
+}
+
+/* Индикаторы */
+.video-gallery__indicators {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 2rem;
+}
+
+.video-gallery__indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(30, 58, 138, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.video-gallery__indicator.active {
+    background: #1e3a8a;
+    transform: scale(1.2);
+}
+
+.video-gallery__indicator:hover {
+    background: rgba(30, 58, 138, 0.6);
+}
+
+/* Адаптивность для галереи */
+@media (max-width: 768px) {
+    .video-gallery__arrow {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .video-gallery__arrow--prev {
+        left: 10px;
+    }
+    
+    .video-gallery__arrow--next {
+        right: 10px;
+    }
+    
+    .video-review-card {
+        flex: 0 0 280px;
+        min-width: 280px;
+    }
+    
+    .video-gallery__track {
+        padding: 0 1rem;
+        gap: 1.5rem;
+    }
+}
+
+/* Старые стили для сетки (оставляем для совместимости) */
 .video-reviews__grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -3079,4 +3213,225 @@ img, svg, .consumer-solution-card__image, .consumer-solution-card__image img {
 .contact__image {
     border-radius: 12px;
     overflow: hidden;
+}
+
+/* ===== Форма консультации ===== */
+.consultation-form {
+    max-width: 600px;
+    margin: 2rem auto 0;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(30, 58, 138, 0.15);
+    backdrop-filter: blur(10px);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 0.75rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    background: white;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+    transform: translateY(-2px);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: var(--text-light);
+    font-weight: 400;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-note {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+.consultation-form .btn {
+    width: 100%;
+    padding: 1.25rem 2rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.consultation-form .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(30, 58, 138, 0.25);
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .consultation-form {
+        padding: 1.5rem;
+        margin: 1.5rem 1rem 0;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 1rem;
+        padding: 0.875rem 1rem;
+    }
+}
+
+/* ===== Социальные карточки (контакты) ===== */
+.social-cards {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(160px, 1fr));
+    gap: 16px;
+    margin-top: 12px;
+}
+
+.social-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 16px;
+    border-radius: 14px;
+    background: linear-gradient(145deg, rgba(255,255,255,0.9), rgba(240,244,255,0.9));
+    color: var(--primary);
+    text-decoration: none;
+    box-shadow: 0 8px 20px rgba(30, 58, 138, 0.12);
+    overflow: hidden;
+    isolation: isolate;
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.social-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(120px 80px at 20% 0%, rgba(47,100,202,0.18), transparent),
+                radial-gradient(120px 80px at 80% 100%, rgba(17,24,39,0.12), transparent);
+    z-index: -1;
+}
+
+.social-card:hover { transform: translateY(-4px); box-shadow: 0 14px 28px rgba(30, 58, 138, 0.18); }
+
+.social-card__icon { 
+    width: 56px; 
+    height: 56px; 
+    border-radius: 12px; 
+    display: grid; 
+    place-items: center; 
+    margin-bottom: 10px; 
+    color: #fff; 
+    background: rgba(255,255,255,0.1);
+}
+.social-card__name { font-weight: 600; color: var(--primary); }
+
+.social-card--instagram .social-card__icon { background: linear-gradient(135deg,#F58529,#DD2A7B,#8134AF,#515BD4); }
+.social-card--whatsapp .social-card__icon { background: linear-gradient(135deg,#25D366,#128C7E); }
+.social-card--tiktok .social-card__icon { background: linear-gradient(135deg,#000000,#25F4EE,#FE2C55); }
+.social-card--brand { background: linear-gradient(145deg, #ffffff, #edf2ff); }
+.social-card__logo { width: 96px; height: 96px; margin-bottom: 12px; }
+.social-card__logo-img { width: 64px; height: 64px; object-fit: contain; }
+
+@media (max-width: 768px) { .social-cards { grid-template-columns: repeat(2, 1fr); } }
+
+/* ===== Уведомление об успешной отправке ===== */
+.success-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+    z-index: 10000;
+    animation: slideInRight 0.5s ease-out;
+    max-width: 350px;
+}
+
+.success-content {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.success-content svg {
+    color: white;
+    flex-shrink: 0;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .success-message {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+        animation: slideInTop 0.5s ease-out;
+    }
+    
+    @keyframes slideInTop {
+        from {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
 }

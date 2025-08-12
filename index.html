@@ -474,7 +474,7 @@
                     <div class="business-credit-card__image">
                         <img src="money-photo/without-nalgo-credit-for-ip.png" alt="Беззалоговый кредит для ИП">
                     </div>
-                    <h3 class="business-credit-card__title">БЗК - Беззалоговый кредит для ИП</h3>
+                    <h3 class="business-credit-card__title">Беззалоговый кредит для ИП</h3>
                     <div class="business-credit-card__parameters">
                         <div class="parameter-item">
                             <span class="parameter-label">Сумма</span>
@@ -499,7 +499,7 @@
                             <span class="solution-feature__text">Минимальный пакет документов</span>
                         </div>
                     </div>
-                    <button class="btn btn--outline btn--business" onclick="selectService('БЗК - Беззалоговый кредит для ИП')">
+                    <button class="btn btn--outline btn--business" onclick="selectService('Беззалоговый кредит для ИП')">
                         Онлайн консультация
                     </button>
                 </div>
@@ -712,10 +712,51 @@
             <div class="mortgage-programs__cta">
                 <div class="cta-content">
                     <h3>Нужна консультация?</h3>
-                    <p>Наши специалисты помогут выбрать оптимальную программу ипотечного кредитования</p>
-                    <!-- <button class="btn btn--primary btn--large" onclick="openModal('application')">
-                        Получить консультацию
-                    </button> -->
+                    <p>Заполните форму и получите бесплатную консультацию по ипотеке</p>
+                    
+                    <form class="consultation-form" id="consultationForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="consultation-name">ФИО *</label>
+                                <input type="text" id="consultation-name" name="name" required placeholder="Введите ваше полное имя">
+                            </div>
+                            <div class="form-group">
+                                <label for="consultation-phone">Телефон *</label>
+                                <input type="tel" id="consultation-phone" name="phone" required placeholder="+7 (___) ___-__-__">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="consultation-email">E-mail</label>
+                                <input type="email" id="consultation-phone" name="email" placeholder="your@email.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="consultation-amount">Желаемая сумма</label>
+                                <select id="consultation-amount" name="amount">
+                                    <option value="">Выберите сумму</option>
+                                    <option value="до 5 млн">до 5 млн ₸</option>
+                                    <option value="5-10 млн">5-10 млн ₸</option>
+                                    <option value="10-25 млн">10-25 млн ₸</option>
+                                    <option value="25-50 млн">25-50 млн ₸</option>
+                                    <option value="более 50 млн">более 50 млн ₸</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="consultation-message">Сообщение</label>
+                            <textarea id="consultation-message" name="message" rows="3" placeholder="Опишите вашу ситуацию или задайте вопрос"></textarea>
+                        </div>
+                        
+                        <div class="form-note">
+                            <small>* — обязательные поля для заполнения</small>
+                        </div>
+                        
+                        <button type="submit" class="btn btn--primary btn--large">
+                            Получить консультацию
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -853,149 +894,122 @@
                 </p>
             </div>
             
-            <div class="video-reviews__grid">
-                <div class="video-review-card" data-video="videos/IMG_1671.MP4">
-                    <div class="video-review-card__preview">
-                        <video class="video-preview" preload="none" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f1f5f9'/%3E%3Ccircle cx='200' cy='150' r='40' fill='%231e3a8a'/%3E%3Cpolygon points='180,140 180,160 200,150' fill='white'/%3E%3C/svg%3E">
-                            <source src="videos/IMG_1671.MP4" type="video/mp4">
-                        </video>
-                        <div class="video-play-button">
-                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
-                                <circle cx="12" cy="12" r="12" fill="rgba(30, 58, 138, 0.9)"/>
-                                <polygon points="8,6 8,18 18,12" fill="white"/>
-                            </svg>
+            <div class="video-gallery">
+                <div class="video-gallery__container">
+                    <div class="video-gallery__track" id="videoGalleryTrack">
+                        <div class="video-review-card" data-video="videos/IMG_1671.MP4">
+                            <div class="video-review-card__preview">
+                                <video class="video-preview" preload="none" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f1f5f9'/%3E%3Ccircle cx='200' cy='150' r='40' fill='%231e3a8a'/%3E%3Cpolygon points='180,140 180,160 200,150' fill='white'/%3E%3C/svg%3E">
+                                    <source src="videos/IMG_1671.MP4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="video-review-card__info">
+                                <h4>Отзыв клиента #1</h4>
+                                <p>Реальная история получения кредита</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="video-review-card__info">
-                        <h4>Отзыв клиента #1</h4>
-                        <p>Реальная история получения кредита</p>
+
+                        <div class="video-review-card" data-video="videos/IMG_1672.MP4">
+                            <div class="video-review-card__preview">
+                                <video class="video-preview" preload="none" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f1f5f9'/%3E%3Ccircle cx='200' cy='150' r='40' fill='%231e3a8a'/%3E%3Cpolygon points='180,140 180,160 200,150' fill='white'/%3E%3C/svg%3E">
+                                    <source src="videos/IMG_1672.MP4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="video-review-card__info">
+                                <h4>Отзыв клиента #2</h4>
+                                <p>История успешного рефинансирования</p>
+                            </div>
+                        </div>
+
+                        <div class="video-review-card" data-video="videos/IMG_1674.MP4">
+                            <div class="video-review-card__preview">
+                                <video class="video-preview" preload="none" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f1f5f9'/%3E%3Ccircle cx='200' cy='150' r='40' fill='%231e3a8a'/%3E%3Cpolygon points='180,140 180,160 200,150' fill='white'/%3E%3C/svg%3E">
+                                    <source src="videos/IMG_1674.MP4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="video-review-card__info">
+                                <h4>Отзыв клиента #3</h4>
+                                <p>Кредит для самозанятого</p>
+                            </div>
+                        </div>
+
+                        <div class="video-review-card" data-video="videos/IMG_1675.MP4">
+                            <div class="video-review-card__preview">
+                                <video class="video-preview" preload="none" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f1f5f9'/%3E%3Ccircle cx='200' cy='150' r='40' fill='%231e3a8a'/%3E%3Cpolygon points='180,140 180,160 200,150' fill='white'/%3E%3C/svg%3E">
+                                    <source src="videos/IMG_1675.MP4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="video-review-card__info">
+                                <h4>Отзыв клиента #4</h4>
+                                <p>Быстрое одобрение кредита</p>
+                            </div>
+                        </div>
+
+                        <div class="video-review-card" data-video="videos/IMG_1676.MP4">
+                            <div class="video-review-card__preview">
+                                <video class="video-preview" preload="none" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f1f5f9'/%3E%3Ccircle cx='200' cy='150' r='40' fill='%231e3a8a'/%3E%3Cpolygon points='180,140 180,160 200,150' fill='white'/%3E%3C/svg%3E">
+                                    <source src="videos/IMG_1676.MP4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="video-review-card__info">
+                                <h4>Отзыв клиента #5</h4>
+                                <p>Кредит с плохой кредитной историей</p>
+                            </div>
+                        </div>
+
+                        <div class="video-review-card" data-video="videos/IMG_1677.MP4">
+                            <div class="video-review-card__preview">
+                                <video class="video-preview" preload="none" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f1f5f9'/%3E%3Ccircle cx='200' cy='150' r='40' fill='%231e3a8a'/%3E%3Cpolygon points='180,140 180,160 200,150' fill='white'/%3E%3C/svg%3E">
+                                    <source src="videos/IMG_1677.MP4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="video-review-card__info">
+                                <h4>Отзыв клиента #6</h4>
+                                <p>Кредит без справок о доходах</p>
+                            </div>
+                        </div>
+
+                        <div class="video-review-card" data-video="videos/IMG_1678.MP4">
+                            <div class="video-review-card__preview">
+                                <video class="video-preview" preload="none" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f1f5f9'/%3E%3Ccircle cx='200' cy='150' r='40' fill='%231e3a8a'/%3E%3Cpolygon points='180,140 180,160 200,150' fill='white'/%3E%3C/svg%3E">
+                                    <source src="videos/IMG_1678.MP4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="video-review-card__info">
+                                <h4>Отзыв клиента #7</h4>
+                                <p>Ипотечный кредит</p>
+                            </div>
+                        </div>
+
+                        <div class="video-review-card" data-video="videos/IMG_1679.MP4">
+                            <div class="video-review-card__preview">
+                                <video class="video-preview" preload="none" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f1f5f9'/%3E%3Ccircle cx='200' cy='150' r='40' fill='%231e3a8a'/%3E%3Cpolygon points='180,140 180,160 200,150' fill='white'/%3E%3C/svg%3E">
+                                    <source src="videos/IMG_1679.MP4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="video-review-card__info">
+                                <h4>Отзыв клиента #8</h4>
+                                <p>Бизнес-кредит для ИП</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <div class="video-review-card" data-video="videos/IMG_1672.MP4">
-                    <div class="video-review-card__preview">
-                        <video class="video-preview" preload="none" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f1f5f9'/%3E%3Ccircle cx='200' cy='150' r='40' fill='%231e3a8a'/%3E%3Cpolygon points='180,140 180,160 200,150' fill='white'/%3E%3C/svg%3E">
-                            <source src="videos/IMG_1672.MP4" type="video/mp4">
-                        </video>
-                        <div class="video-play-button">
-                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
-                                <circle cx="12" cy="12" r="12" fill="rgba(30, 58, 138, 0.9)"/>
-                                <polygon points="8,6 8,18 18,12" fill="white"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="video-review-card__info">
-                        <h4>Отзыв клиента #2</h4>
-                        <p>История успешного рефинансирования</p>
-                    </div>
-                </div>
-
-                <div class="video-review-card" data-video="videos/IMG_1674.MP4">
-                    <div class="video-review-card__preview">
-                        <video class="video-preview" preload="none" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f1f5f9'/%3E%3Ccircle cx='200' cy='150' r='40' fill='%231e3a8a'/%3E%3Cpolygon points='180,140 180,160 200,150' fill='white'/%3E%3C/svg%3E">
-                            <source src="videos/IMG_1674.MP4" type="video/mp4">
-                        </video>
-                        <div class="video-play-button">
-                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
-                                <circle cx="12" cy="12" r="12" fill="rgba(30, 58, 138, 0.9)"/>
-                                <polygon points="8,6 8,18 18,12" fill="white"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="video-review-card__info">
-                        <h4>Отзыв клиента #3</h4>
-                        <p>Кредит для самозанятого</p>
-                    </div>
-                </div>
-
-                <div class="video-review-card" data-video="videos/IMG_1675.MP4">
-                    <div class="video-review-card__preview">
-                        <video class="video-preview" preload="none" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f1f5f9'/%3E%3Ccircle cx='200' cy='150' r='40' fill='%231e3a8a'/%3E%3Cpolygon points='180,140 180,160 200,150' fill='white'/%3E%3C/svg%3E">
-                            <source src="videos/IMG_1675.MP4" type="video/mp4">
-                        </video>
-                        <div class="video-play-button">
-                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
-                                <circle cx="12" cy="12" r="12" fill="rgba(30, 58, 138, 0.9)"/>
-                                <polygon points="8,6 8,18 18,12" fill="white"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="video-review-card__info">
-                        <h4>Отзыв клиента #4</h4>
-                        <p>Быстрое одобрение кредита</p>
-                    </div>
-                </div>
-
-                <div class="video-review-card" data-video="videos/IMG_1676.MP4">
-                    <div class="video-review-card__preview">
-                        <video class="video-preview" preload="none" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f1f5f9'/%3E%3Ccircle cx='200' cy='150' r='40' fill='%231e3a8a'/%3E%3Cpolygon points='180,140 180,160 200,150' fill='white'/%3E%3C/svg%3E">
-                            <source src="videos/IMG_1676.MP4" type="video/mp4">
-                        </video>
-                        <div class="video-play-button">
-                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
-                                <circle cx="12" cy="12" r="12" fill="rgba(30, 58, 138, 0.9)"/>
-                                <polygon points="8,6 8,18 18,12" fill="white"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="video-review-card__info">
-                        <h4>Отзыв клиента #5</h4>
-                        <p>Кредит с плохой кредитной историей</p>
-                    </div>
-                </div>
-
-                <div class="video-review-card" data-video="videos/IMG_1677.MP4">
-                    <div class="video-review-card__preview">
-                        <video class="video-preview" preload="none" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f1f5f9'/%3E%3Ccircle cx='200' cy='150' r='40' fill='%231e3a8a'/%3E%3Cpolygon points='180,140 180,160 200,150' fill='white'/%3E%3C/svg%3E">
-                            <source src="videos/IMG_1677.MP4" type="video/mp4">
-                        </video>
-                        <div class="video-play-button">
-                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
-                                <circle cx="12" cy="12" r="12" fill="rgba(30, 58, 138, 0.9)"/>
-                                <polygon points="8,6 8,18 18,12" fill="white"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="video-review-card__info">
-                        <h4>Отзыв клиента #6</h4>
-                        <p>Кредит без справок о доходах</p>
-                    </div>
-                </div>
-
-                <div class="video-review-card" data-video="videos/IMG_1678.MP4">
-                    <div class="video-review-card__preview">
-                        <video class="video-preview" preload="none" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f1f5f9'/%3E%3Ccircle cx='200' cy='150' r='40' fill='%231e3a8a'/%3E%3Cpolygon points='180,140 180,160 200,150' fill='white'/%3E%3C/svg%3E">
-                            <source src="videos/IMG_1678.MP4" type="video/mp4">
-                        </video>
-                        <div class="video-play-button">
-                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
-                                <circle cx="12" cy="12" r="12" fill="rgba(30, 58, 138, 0.9)"/>
-                                <polygon points="8,6 8,18 18,12" fill="white"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="video-review-card__info">
-                        <h4>Отзыв клиента #7</h4>
-                        <p>Ипотечный кредит</p>
-                    </div>
-                </div>
-
-                <div class="video-review-card" data-video="videos/IMG_1679.MP4">
-                    <div class="video-review-card__preview">
-                        <video class="video-preview" preload="none" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f1f5f9'/%3E%3Ccircle cx='200' cy='150' r='40' fill='%231e3a8a'/%3E%3Cpolygon points='180,140 180,160 200,150' fill='white'/%3E%3C/svg%3E">
-                            <source src="videos/IMG_1679.MP4" type="video/mp4">
-                        </video>
-                        <div class="video-play-button">
-                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
-                                <circle cx="12" cy="12" r="12" fill="rgba(30, 58, 138, 0.9)"/>
-                                <polygon points="8,6 8,18 18,12" fill="white"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="video-review-card__info">
-                        <h4>Отзыв клиента #8</h4>
-                        <p>Бизнес-кредит для ИП</p>
-                    </div>
+                
+                <!-- Стрелки навигации -->
+                <button class="video-gallery__arrow video-gallery__arrow--prev" id="videoGalleryPrev" aria-label="Предыдущий видеоотзыв">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                </button>
+                <button class="video-gallery__arrow video-gallery__arrow--next" id="videoGalleryNext" aria-label="Следующий видеоотзыв">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </button>
+                
+                <!-- Индикаторы -->
+                <div class="video-gallery__indicators" id="videoGalleryIndicators">
+                    <!-- Индикаторы будут добавлены JavaScript'ом -->
                 </div>
             </div>
         </div>
@@ -1071,25 +1085,29 @@
                         </div>
                         <div class="contact-item__content">
                             <h4>Социальные сети</h4>
-                            <div class="contact-social-links">
-                                <a href="https://wa.me/77011061039" class="contact-social-link" target="_blank" rel="noopener">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
-                                    </svg>
-                                    WhatsApp
+                            <div class="social-cards">
+                                <a href="https://www.instagram.com/aiymkalip?igsh=MW4zOGY3MXBwZTRyYg==" class="social-card social-card--instagram" target="_blank" rel="noopener">
+                                    <div class="social-card__icon" aria-hidden="true">
+                                        <img src="videos/Instagram_logo_2022.svg.png" alt="Instagram" class="social-card__logo-img"/>
+                                    </div>
+                                    <span class="social-card__name">Instagram</span>
                                 </a>
-                                <a href="https://www.tiktok.com/@damu_kredit?_t=ZM-8ye8kPuXQmb&_r=1" class="contact-social-link" target="_blank" rel="noopener">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
-                                    </svg>
-                                    TikTok
+                                <a href="https://wa.me/77011061039" class="social-card social-card--whatsapp" target="_blank" rel="noopener">
+                                    <div class="social-card__icon" aria-hidden="true">
+                                        <img src="videos/WhatsApp.svg.png" alt="WhatsApp" class="social-card__logo-img"/>
+                                    </div>
+                                    <span class="social-card__name">WhatsApp</span>
                                 </a>
-                                <a href="https://www.instagram.com/aiymkalip?igsh=MW4zOGY3MXBwZTRyYg==" class="contact-social-link" target="_blank" rel="noopener">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" stroke="currentColor" stroke-width="2"/>
-                                    </svg>
-                                    Instagram
+                                <a href="https://www.tiktok.com/@damu_kredit?_t=ZM-8ye8kPuXQmb&_r=1" class="social-card social-card--tiktok" target="_blank" rel="noopener">
+                                    <div class="social-card__icon" aria-hidden="true">
+                                        <img src="videos/Ionicons_logo-tiktok.svg.png" alt="TikTok" class="social-card__logo-img"/>
+                                    </div>
+                                    <span class="social-card__name">TikTok</span>
                                 </a>
+                                <div class="social-card social-card--brand" aria-hidden="true">
+                                    <img src="videos/komek_damu_blue.png" alt="Komek Damu" class="social-card__logo"/>
+                                    <span class="social-card__name">Komek Damu</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1479,7 +1497,233 @@
                 link.style.outline = 'none';
             });
         }, 100);
+        
+        // Инициализация формы консультации
+        initConsultationForm();
+        
+        // Инициализация видео галереи
+        initVideoGallery();
     });
+    
+    // Функция инициализации видео галереи
+    function initVideoGallery() {
+        const track = document.getElementById('videoGalleryTrack');
+        const prevBtn = document.getElementById('videoGalleryPrev');
+        const nextBtn = document.getElementById('videoGalleryNext');
+        const indicatorsContainer = document.getElementById('videoGalleryIndicators');
+        
+        if (!track || !prevBtn || !nextBtn) return;
+        
+        let currentIndex = 0;
+        const cardWidth = 350; // Ширина карточки + отступ
+        const gap = 32; // Отступ между карточками
+        const totalWidth = cardWidth + gap;
+        const maxIndex = Math.max(0, track.children.length - Math.floor(track.parentElement.offsetWidth / totalWidth));
+        
+        // Создаем индикаторы
+        createIndicators();
+        
+        // Обработчики для стрелок
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateGallery();
+            }
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            if (currentIndex < maxIndex) {
+                currentIndex++;
+                updateGallery();
+            }
+        });
+        
+        // Функция обновления галереи
+        function updateGallery() {
+            const translateX = -currentIndex * totalWidth;
+            track.style.transform = `translateX(${translateX}px)`;
+            
+            // Обновляем индикаторы
+            updateIndicators();
+            
+            // Обновляем состояние стрелок
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex === maxIndex;
+            
+            // Визуальная обратная связь для отключенных стрелок
+            if (prevBtn.disabled) {
+                prevBtn.style.opacity = '0.5';
+                prevBtn.style.cursor = 'not-allowed';
+            } else {
+                prevBtn.style.opacity = '1';
+                prevBtn.style.cursor = 'pointer';
+            }
+            
+            if (nextBtn.disabled) {
+                nextBtn.style.opacity = '0.5';
+                nextBtn.style.cursor = 'not-allowed';
+            } else {
+                nextBtn.style.opacity = '1';
+                nextBtn.style.cursor = 'pointer';
+            }
+        }
+        
+        // Функция создания индикаторов
+        function createIndicators() {
+            const totalSlides = Math.ceil(track.children.length / Math.floor(track.parentElement.offsetWidth / totalWidth));
+            
+            for (let i = 0; i < totalSlides; i++) {
+                const indicator = document.createElement('div');
+                indicator.className = 'video-gallery__indicator';
+                indicator.addEventListener('click', () => {
+                    currentIndex = i;
+                    updateGallery();
+                });
+                indicatorsContainer.appendChild(indicator);
+            }
+            
+            updateIndicators();
+        }
+        
+        // Функция обновления индикаторов
+        function updateIndicators() {
+            const indicators = indicatorsContainer.querySelectorAll('.video-gallery__indicator');
+            indicators.forEach((indicator, index) => {
+                if (index === currentIndex) {
+                    indicator.classList.add('active');
+                } else {
+                    indicator.classList.remove('active');
+                }
+            });
+        }
+        
+        // Инициализация состояния стрелок
+        updateGallery();
+        
+        // Обработка изменения размера окна
+        window.addEventListener('resize', () => {
+            const newMaxIndex = Math.max(0, track.children.length - Math.floor(track.parentElement.offsetWidth / totalWidth));
+            if (currentIndex > newMaxIndex) {
+                currentIndex = newMaxIndex;
+            }
+            updateGallery();
+        });
+    }
+    
+    // Функция инициализации формы консультации
+    function initConsultationForm() {
+        const form = document.getElementById('consultationForm');
+        if (!form) return;
+        
+        // Обработчик отправки формы
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            sendConsultationToWhatsApp();
+        });
+        
+        // Форматирование телефона
+        const phoneInput = document.getElementById('consultation-phone');
+        if (phoneInput) {
+            phoneInput.addEventListener('input', function(e) {
+                formatPhoneNumber(e.target);
+            });
+        }
+    }
+    
+    // Функция отправки консультации в WhatsApp
+    function sendConsultationToWhatsApp() {
+        const form = document.getElementById('consultationForm');
+        const formData = new FormData(form);
+        
+        // Собираем данные из формы
+        const name = formData.get('name') || 'Не указано';
+        const phone = formData.get('phone') || 'Не указано';
+        const email = formData.get('email') || 'Не указано';
+        const amount = formData.get('amount') || 'Не указано';
+        const message = formData.get('message') || 'Не указано';
+        
+        // Формируем сообщение для WhatsApp
+        const whatsappMessage = `🔵 *ЗАЯВКА НА КОНСУЛЬТАЦИЮ ПО ИПОТЕКЕ*
+
+👤 *ФИО:* ${name}
+📱 *Телефон:* ${phone}
+📧 *E-mail:* ${email}
+💰 *Желаемая сумма:* ${amount}
+💬 *Сообщение:* ${message}
+
+🌐 *Источник:* сайт komek-damu.kz
+⏰ *Время заявки:* ${new Date().toLocaleString('ru-RU')}
+
+Пожалуйста, свяжитесь со мной для консультации по ипотечному кредитованию.`;
+        
+        // Кодируем сообщение для URL
+        const encodedMessage = encodeURIComponent(whatsappMessage);
+        
+        // Открываем WhatsApp с готовым сообщением
+        const whatsappUrl = `https://wa.me/77011061039?text=${encodedMessage}`;
+        window.open(whatsappUrl, '_blank');
+        
+        // Показываем уведомление об успешной отправке
+        showSuccessMessage();
+        
+        // Очищаем форму
+        form.reset();
+    }
+    
+    // Функция форматирования номера телефона
+    function formatPhoneNumber(input) {
+        let value = input.value.replace(/\D/g, '');
+        
+        if (value.startsWith('8')) {
+            value = '7' + value.slice(1);
+        } else if (!value.startsWith('7')) {
+            value = '7' + value;
+        }
+        
+        if (value.length > 11) {
+            value = value.slice(0, 11);
+        }
+        
+        let formattedValue = '+7';
+        if (value.length > 1) {
+            const remainingDigits = value.slice(1);
+            if (remainingDigits.length > 0) {
+                formattedValue += ' (' + remainingDigits.slice(0, 3);
+                if (remainingDigits.length > 3) {
+                    formattedValue += ') ' + remainingDigits.slice(3, 6);
+                    if (remainingDigits.length > 6) {
+                        formattedValue += '-' + remainingDigits.slice(6, 8);
+                        if (remainingDigits.length > 8) {
+                            formattedValue += '-' + remainingDigits.slice(8, 10);
+                        }
+                    }
+                }
+            }
+        }
+        
+        input.value = formattedValue;
+    }
+    
+    // Функция показа сообщения об успехе
+    function showSuccessMessage() {
+        const successDiv = document.createElement('div');
+        successDiv.className = 'success-message';
+        successDiv.innerHTML = `
+            <div class="success-content">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Заявка отправлена! Открываем WhatsApp...</span>
+            </div>
+        `;
+        
+        document.body.appendChild(successDiv);
+        
+        // Убираем сообщение через 5 секунд
+        setTimeout(() => {
+            successDiv.remove();
+        }, 5000);
+    }
     </script>
     
 

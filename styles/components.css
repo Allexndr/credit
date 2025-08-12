@@ -2397,10 +2397,10 @@
 }
 
 .consumer-solution-card__title {
-    font-size: 1.25rem;
-    font-weight: 600;
+    font-size: 1.5rem;
+    font-weight: 700;
     color: var(--primary);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
 }
 
 .solution-feature {
@@ -2440,22 +2440,23 @@
 
 .parameter-label {
     display: block;
-    font-size: 0.875rem;
+    font-size: 1rem;
     color: var(--text-secondary);
     margin-bottom: 0.5rem;
 }
 
 .parameter-value {
     display: block;
-    font-size: 1rem;
-    font-weight: 700;
+    font-size: 1.25rem;
+    font-weight: 800;
     color: var(--primary);
 }
 
 .btn--solution {
     width: 100%;
-    padding: 1rem 1.5rem;
-    font-weight: 500;
+    padding: 1.1rem 1.75rem;
+    font-size: 1.05rem;
+    font-weight: 600;
     border-color: var(--primary);
     color: var(--primary);
     transition: var(--transition);
