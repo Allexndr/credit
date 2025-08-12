@@ -2532,10 +2532,10 @@ a[href*="become-partner"] {
 }
 
 .video-review-card {
-    flex: 0 0 350px;
-    min-width: 350px;
+    flex: 0 0 400px;
+    min-width: 400px;
     background: white;
-    border-radius: 16px;
+    border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 8px 25px rgba(30, 58, 138, 0.15);
     transition: all 0.3s ease;
@@ -2665,7 +2665,7 @@ a[href*="become-partner"] {
 .video-review-card__preview {
     position: relative;
     width: 100%;
-    height: 200px;
+    height: 280px;
     background: var(--bg-light);
     overflow: hidden;
 }
@@ -2681,35 +2681,48 @@ a[href*="become-partner"] {
     transform: scale(1.05);
 }
 
-.video-play-button {
+.video-play-overlay {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 2;
-    transition: var(--transition);
+    transition: all 0.3s ease;
+    color: white;
+    background: linear-gradient(135deg, rgba(30, 58, 138, 0.9), rgba(59, 130, 246, 0.9));
+    border-radius: 50%;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 25px rgba(30, 58, 138, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
-.video-review-card:hover .video-play-button {
+.video-review-card:hover .video-play-overlay {
     transform: translate(-50%, -50%) scale(1.1);
+    background: linear-gradient(135deg, rgba(30, 58, 138, 1), rgba(59, 130, 246, 1));
+    box-shadow: 0 12px 35px rgba(30, 58, 138, 0.4);
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 .video-review-card__info {
-    padding: 1.5rem;
+    padding: 2rem;
 }
 
 .video-review-card__info h4 {
-    margin: 0 0 0.5rem 0;
-    font-size: 1.1rem;
-    font-weight: 600;
+    margin: 0 0 1rem 0;
+    font-size: 1.3rem;
+    font-weight: 700;
     color: var(--text-primary);
 }
 
 .video-review-card__info p {
     margin: 0;
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: var(--text-secondary);
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
 /* Модальное окно для видео */
@@ -3359,20 +3372,40 @@ img, svg, .consumer-solution-card__image, .consumer-solution-card__image img {
     width: 56px; 
     height: 56px; 
     border-radius: 12px; 
-    display: grid; 
-    place-items: center; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
     margin-bottom: 10px; 
     color: #fff; 
     background: rgba(255,255,255,0.1);
 }
 .social-card__name { font-weight: 600; color: var(--primary); }
 
-.social-card--instagram .social-card__icon { background: linear-gradient(135deg,#F58529,#DD2A7B,#8134AF,#515BD4); }
-.social-card--whatsapp .social-card__icon { background: linear-gradient(135deg,#25D366,#128C7E); }
-.social-card--tiktok .social-card__icon { background: linear-gradient(135deg,#000000,#25F4EE,#FE2C55); }
+.social-card--instagram .social-card__icon { 
+    background: linear-gradient(135deg,#F58529,#DD2A7B,#8134AF,#515BD4); 
+}
+.social-card--whatsapp .social-card__icon { 
+    background: linear-gradient(135deg,#25D366,#128C7E); 
+}
+.social-card--tiktok .social-card__icon { 
+    background: linear-gradient(135deg,#000000,#25F4EE,#FE2C55); 
+}
+
+.social-card--whatsapp .social-card__icon img,
+.social-card--tiktok .social-card__icon img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
 .social-card--brand { background: linear-gradient(145deg, #ffffff, #edf2ff); }
 .social-card__logo { width: 96px; height: 96px; margin-bottom: 12px; }
-.social-card__logo-img { width: 64px; height: 64px; object-fit: contain; }
+.social-card__logo-img { 
+    width: 64px; 
+    height: 64px; 
+    object-fit: contain; 
+    display: block;
+}
 
 @media (max-width: 768px) { .social-cards { grid-template-columns: repeat(2, 1fr); } }
 
