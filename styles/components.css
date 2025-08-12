@@ -1321,12 +1321,17 @@
     max-width: 300px;
 }
 
-.footer__brand .logo__image {
+.footer__logo {
+    margin-bottom: 1rem;
+}
+
+.footer__logo-image {
     height: 35px;
+    width: auto;
 }
 
 @media (min-width: 768px) {
-    .footer__brand .logo__image {
+    .footer__logo-image {
         height: 40px;
     }
 }
