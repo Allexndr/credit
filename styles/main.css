@@ -1683,23 +1683,34 @@ section {
 }
 
 .partners-grid {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0;
-    flex-wrap: nowrap;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
     width: 100%;
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 2rem;
-    overflow-x: auto;
+    padding: 2rem;
+    align-items: center;
+    justify-items: center;
 }
 
 .partner-logo {
     width: 140px;
     height: 90px;
     object-fit: contain;
-    flex-shrink: 0;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    filter: grayscale(100%);
+}
+
+.partner-logo:hover {
+    transform: scale(1.05);
+    filter: grayscale(0%);
+}
+
+.partner-logo--large {
+    width: 180px;
+    height: 120px;
+    grid-column: span 1;
 }
 
 /* Адаптивность для банков-партнеров */
@@ -1709,73 +1720,60 @@ section {
     }
     
     .partners-grid {
-        justify-content: center;
-        gap: 0;
-        flex-wrap: wrap;
-        overflow-x: visible;
-        padding: 0 1rem;
-        display: grid;
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: auto auto auto;
-        gap: 0;
-        max-width: 400px;
-        margin: 0 auto;
+        gap: 1.5rem;
+        padding: 1.5rem;
+        max-width: 500px;
     }
     
     .partner-logo {
         width: 120px;
         height: 80px;
-        flex-shrink: 0;
-        margin: 0 auto;
     }
     
-    /* Последний банк по центру снизу */
-    .partner-logo:last-child {
-        grid-column: 1 / -1;
-        justify-self: center;
+    .partner-logo--large {
+        width: 140px;
+        height: 100px;
     }
 }
 
 @media (max-width: 480px) {
     .partners-grid {
-        justify-content: center;
-        gap: 0;
-        overflow-x: visible;
-        padding: 0 0.5rem;
-        flex-wrap: wrap;
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: auto auto auto;
-        gap: 0;
+        gap: 1rem;
+        padding: 1rem;
         max-width: 350px;
     }
     
     .partner-logo {
         width: 100px;
         height: 70px;
-        flex-shrink: 0;
-        margin: 0 auto;
     }
     
-    .partner-logo:last-child {
-        grid-column: 1 / -1;
-        justify-self: center;
+    .partner-logo--large {
+        width: 120px;
+        height: 85px;
     }
 }
 
 @media (max-width: 360px) {
     .partners-grid {
-        gap: 1rem;
-        padding: 0 0.25rem;
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: auto auto auto;
+        gap: 0.75rem;
+        padding: 0.75rem;
         max-width: 300px;
     }
     
     .partner-logo {
         width: 90px;
         height: 65px;
-        margin: 0 auto;
     }
+    
+    .partner-logo--large {
+        width: 100px;
+        height: 75px;
+    }
+}
     
     .partner-logo:last-child {
         grid-column: 1 / -1;
