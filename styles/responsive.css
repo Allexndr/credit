@@ -140,11 +140,11 @@ body {
         padding: 0 1rem;
         flex-wrap: wrap !important;
         display: grid !important;
-        grid-template-columns: repeat(2, 1fr) !important;
-        grid-template-rows: auto auto auto !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        grid-template-rows: repeat(3, 1fr) !important;
         gap: 1.5rem !important;
         width: 100% !important;
-        max-width: 400px !important;
+        max-width: 600px !important;
     }
     
     /* Дополнительные стили для банков на мобильных */
@@ -155,19 +155,20 @@ body {
         margin: 0 auto !important;
     }
     
-    /* Последний банк по центру снизу */
+    /* Убираем специальное правило для последнего банка */
     .partners-grid .partner-logo:last-child {
-        grid-column: 1 / -1 !important;
+        grid-column: 3 !important;
+        grid-row: 3 !important;
         justify-self: center !important;
     }
     
     /* Стили для очень маленьких экранов */
     @media (max-width: 480px) {
         .partners-grid {
-            grid-template-columns: repeat(2, 1fr) !important;
-            grid-template-rows: auto auto auto !important;
+            grid-template-columns: repeat(3, 1fr) !important;
+            grid-template-rows: repeat(3, 1fr) !important;
             gap: 1.25rem !important;
-            max-width: 350px !important;
+            max-width: 450px !important;
         }
         
         .partners-grid .partner-logo {
