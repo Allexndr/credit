@@ -955,6 +955,29 @@
     letter-spacing: 0.5px;
 }
 
+.special-offer__partners .partner-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.special-offer__partners .partner-logo:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.special-offer__partners .partner-logo__image {
+    height: 40px;
+    width: auto;
+    max-width: 120px;
+    object-fit: contain;
+}
+
 .special-offer__rate {
     text-align: right;
     display: flex;
@@ -1059,6 +1082,15 @@
     
     .special-offer__partners {
         justify-content: center;
+    }
+    
+    .special-offer__partners .partner-logo {
+        padding: 8px;
+    }
+    
+    .special-offer__partners .partner-logo__image {
+        height: 32px;
+        max-width: 100px;
     }
     
     .partner-badge {
