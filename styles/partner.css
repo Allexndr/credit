@@ -1113,6 +1113,7 @@
 .partners-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
     gap: 2rem;
     margin-top: 60px;
     align-items: center;
@@ -1120,6 +1121,7 @@
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
+    grid-auto-flow: row;
 }
 
 .partner-logo {
@@ -1165,9 +1167,11 @@
     
     .partners-grid {
         grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
         gap: 1.5rem;
         margin-top: 40px;
         max-width: 700px;
+        grid-auto-flow: row;
     }
     
     .partner-logo {
@@ -1187,8 +1191,10 @@
 @media (max-width: 480px) {
     .partners-grid {
         grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
         gap: 1rem;
         max-width: 450px;
+        grid-auto-flow: row;
     }
     
     .partner-logo {
