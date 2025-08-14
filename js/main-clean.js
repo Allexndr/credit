@@ -536,7 +536,7 @@ class Forms {
     }
     
     sendToWhatsApp(form, formData, customMessage = null) {
-        const phoneNumber = '77011061039';
+        const phoneNumber = '77780067772';
         let message = customMessage || 'Здравствуйте! Меня интересует кредит. Пожалуйста, свяжитесь со мной.';
         
         // Добавляем данные из формы к сообщению

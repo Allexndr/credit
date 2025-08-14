@@ -1377,9 +1377,7 @@
 }
 
 .footer__social {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
+    display: none;
 }
 
 .footer__social-link {

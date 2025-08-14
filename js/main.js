@@ -90,7 +90,7 @@ function selectService(serviceName) {
     // Формируем сообщение для WhatsApp
     const message = `Здравствуйте! Меня интересует услуга: ${serviceName}. Хотел бы получить консультацию.`;
     const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/77011061039?text=${encodedMessage}`;
+    const whatsappUrl = `https://wa.me/77780067772?text=${encodedMessage}`;
     
     // Открываем WhatsApp
     window.open(whatsappUrl, '_blank');
@@ -190,7 +190,7 @@ function selectPartnership(type) {
     // Формируем сообщение для WhatsApp
     const message = `Здравствуйте! Меня интересует партнёрство типа: ${type}. Хотел бы получить подробную информацию о сотрудничестве.`;
     const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/77011061039?text=${encodedMessage}`;
+    const whatsappUrl = `https://wa.me/77780067772?text=${encodedMessage}`;
     
     // Открываем WhatsApp
     window.open(whatsappUrl, '_blank');
@@ -804,7 +804,7 @@ class Forms {
     
     handleHeroForm(form, formData) {
         // Номер WhatsApp для чата
-        const phoneNumber = '77011061039';
+        const phoneNumber = '77780067772';
         
         // Формируем сообщение для hero формы
         let message = '=== 🚀 НОВАЯ ЗАЯВКА С ГЛАВНОЙ СТРАНИЦЫ ===\n';
@@ -852,7 +852,7 @@ class Forms {
     
     handleAssessmentForm(form, formData) {
         // Номер WhatsApp для чата
-        const phoneNumber = '77011061039';
+        const phoneNumber = '77780067772';
         
         // Формируем сообщение для формы оценки кредитоспособности
         let message = '=== 📊 НОВАЯ ЗАЯВКА НА ОЦЕНКУ КРЕДИТОСПОСОБНОСТИ ===\n';
@@ -908,7 +908,7 @@ class Forms {
     
     sendToWhatsApp(form, formData) {
         // Номер WhatsApp для чата
-        const phoneNumber = '77011061039';
+        const phoneNumber = '77780067772';
         
         // Определяем тип формы для правильного заголовка
         let formType = 'credit';
@@ -1579,7 +1579,7 @@ window.selectService = function(serviceType) {
     const encodedMessage = encodeURIComponent(message);
     
     // Отправляем в WhatsApp
-    const whatsappUrl = `https://wa.me/77011061039?text=${encodedMessage}`;
+    const whatsappUrl = `https://wa.me/77780067772?text=${encodedMessage}`;
     window.open(whatsappUrl, '_blank');
 }
 
@@ -1917,7 +1917,7 @@ window.submitPartnerApplication = function(event) {
     const formData = new FormData(form);
     
     // Номер WhatsApp для чата
-    const phoneNumber = '77011061039';
+    const phoneNumber = '77780067772';
     
     // Формируем сообщение для заявки на партнёрство
     let message = '=== 🤝 НОВАЯ ЗАЯВКА НА ПАРТНЁРСТВО ===\n';
@@ -1983,7 +1983,7 @@ window.submitBusinessConsultation = function(event) {
     const formData = new FormData(form);
     
     // Номер WhatsApp для чата
-    const phoneNumber = '77011061039';
+    const phoneNumber = '77780067772';
     
     // Формируем сообщение для консультации по бизнесу
     let message = '=== 🏢 НОВАЯ ЗАЯВКА НА КОНСУЛЬТАЦИЮ ПО БИЗНЕСУ ===\n';
