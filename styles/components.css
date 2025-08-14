@@ -732,6 +732,17 @@
     font-size: 1.3125rem; /* Увеличиваем размер в 1.5 раза (0.875 * 1.5) */
 }
 
+.contact-numbers {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.contact-numbers span {
+    color: var(--text-secondary);
+    font-size: 1.3125rem;
+}
+
 .offices-list {
     margin-bottom: 0.5rem;
 }
